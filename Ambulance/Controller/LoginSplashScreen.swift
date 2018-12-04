@@ -11,7 +11,6 @@ class LoginSplashScreen: UIViewController {
         view.addSubview(TitleLabel)
         view.addSubview(IconImage)
         
-        
         SignUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 15, bottom: 20, right: 15),size: CGSize(width: 0, height: 50))
         
         SignInButton.anchor(top: nil, leading: view.leadingAnchor, bottom: SignUpButton.topAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 15, bottom: 15, right: 15),size: CGSize(width: 0, height: 50))
