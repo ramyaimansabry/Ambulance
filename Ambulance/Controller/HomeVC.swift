@@ -158,7 +158,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate  {
         let ref = Database.database().reference()
         let usersReference = ref.child("waiting Emergencies").child(userID)
         
-        let values = ["Patients Number": String(numberOfPatients),"Emergency Type": selectedEmergencyType, "Emergency For Owner?": EmergencyForOwnerId,"Latitude": Latitude, "Longitude": Longitude]
+        let values = ["Patients Number": String(numberOfPatients),"Emergency Type": selectedEmergencyType, "Emergency For Owner?": EmergencyForOwnerId,"User Latitude": Latitude, "User Longitude": Longitude, "Accepted by?": "NONE"]
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             if let err = err {
                 print("*************************")
