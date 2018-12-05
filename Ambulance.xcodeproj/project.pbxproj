@@ -18,7 +18,7 @@
 		2D19433121AEBC5D0054556C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D19433021AEBC5D0054556C /* GoogleService-Info.plist */; };
 		2D19433321AEBD940054556C /* LoginSplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19433221AEBD940054556C /* LoginSplashScreen.swift */; };
 		2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19433421B2FB130054556C /* MedicalInfoOne.swift */; };
-		2D41C53021B4664C0073BF90 /* FirstViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D41C52F21B4664C0073BF90 /* FirstViewInfo.swift */; };
+		2D41C53021B4664C0073BF90 /* ViewInfoOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D41C52F21B4664C0073BF90 /* ViewInfoOne.swift */; };
 		2D41C53221B48DF90073BF90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D41C53121B48DF90073BF90 /* Assets.xcassets */; };
 		5D56D64A1B8BDDEF2D2C2CFC /* Pods_Ambulance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12960EC0FA51D63CDD32103C /* Pods_Ambulance.framework */; };
 /* End PBXBuildFile section */
@@ -38,7 +38,7 @@
 		2D19433021AEBC5D0054556C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D19433221AEBD940054556C /* LoginSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSplashScreen.swift; sourceTree = "<group>"; };
 		2D19433421B2FB130054556C /* MedicalInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInfoOne.swift; sourceTree = "<group>"; };
-		2D41C52F21B4664C0073BF90 /* FirstViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewInfo.swift; sourceTree = "<group>"; };
+		2D41C52F21B4664C0073BF90 /* ViewInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInfoOne.swift; sourceTree = "<group>"; };
 		2D41C53121B48DF90073BF90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2BFF1C54A7C2788AC60CAE2 /* Pods-Ambulance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ambulance.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance.release.xcconfig"; sourceTree = "<group>"; };
 		F897BDC490A1D6BE3F9DA40C /* Pods-Ambulance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ambulance.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 		2D19432521AEB6790054556C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2D41C52F21B4664C0073BF90 /* FirstViewInfo.swift */,
+				2D41C52F21B4664C0073BF90 /* ViewInfoOne.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +255,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -265,6 +267,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -289,7 +293,7 @@
 				2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */,
 				2D19432D21AEB7EA0054556C /* SignUpController.swift in Sources */,
 				2D19431021AEB51B0054556C /* AppDelegate.swift in Sources */,
-				2D41C53021B4664C0073BF90 /* FirstViewInfo.swift in Sources */,
+				2D41C53021B4664C0073BF90 /* ViewInfoOne.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

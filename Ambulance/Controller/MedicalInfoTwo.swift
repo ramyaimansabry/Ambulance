@@ -8,17 +8,62 @@
 
 import UIKit
 import Firebase
+import SCLAlertView
 
 class MedicalInfoTwo: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        
         setupConstrains()
 }
+   
     
-     private func setupConstrains(){
+    //   MARK :-  Main Methods
+    /**********************************************************************************************/
+    @objc func SignUpButtonAction(sender: UIButton!) {
+        checkEmptyFields()
+    }
+    
+    func SaveMedicalInfo(){
+        guard let diseasses = DiseasesTextView.text,let surgery = SurgeryTextView.text, let notes = NotesTextView.text  else {
+            print("Form is not valid")
+            return
+        }
+        let userID = (Auth.auth().currentUser?.uid)!
+        let ref = Database.database().reference()
+        let usersReference = ref.child("users").child(userID)
+        let values = ["Any Diseases?": diseasses,"Had Surgery?": surgery, "Notes?": notes]
+        usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
+            if error != nil {
+                let showError:String = error?.localizedDescription ?? ""
+                SCLAlertView().showError("Error", subTitle: showError)
+                return
+            }
+           //  success ..
+            print("Saved user successfully into Firebase db")
+            UserDefaults.standard.set(true, forKey: "IsLoggedIn")
+            UserDefaults.standard.synchronize()
+             SCLAlertView().showSuccess("Done", subTitle: "Successfully Signed up")
+                let homeController = HomeVC()
+                 self.present(homeController, animated: true, completion: nil)
+        })
+    }
+    
+    
+    
+    func checkEmptyFields(){
+        if DiseasesTextView.text?.isEmpty == true  || SurgeryTextView.text?.isEmpty == true || NotesTextView.text?.isEmpty == true  {
+            SCLAlertView().showError("Error", subTitle: "Fill All Fields!")
+            return
+        }
+        
+        SaveMedicalInfo()
+    }
+    
+    //   MARK :- Constrains
+    /**********************************************************************************************/
+    private func setupConstrains(){
         view.addSubview(IconImage)
         view.addSubview(LogInLabel)
         view.addSubview(SignUpButton)
@@ -37,31 +82,26 @@ class MedicalInfoTwo: UIViewController {
         
         FirstQuestionLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 30, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
         DiseasesTextView.anchor(top: FirstQuestionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 20, bottom: 0, right: 20),size: CGSize(width: 110, height: 110))
-
         
         SecandQuestionLabel.anchor(top: DiseasesTextView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
         SurgeryTextView.anchor(top: SecandQuestionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 20, bottom: 0, right: 20),size: CGSize(width: 110, height: 110))
         
-        
-        
         ThirdQuestionLabel.anchor(top: SurgeryTextView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
         NotesTextView.anchor(top: ThirdQuestionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 20, bottom: 0, right: 20),size: CGSize(width: 110, height: 110))
-        
-        
         
         SignUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
     }
     
     
-    
+    // MARK :-  Setup Component
+    /********************************************************************************************/
     let FirstQuestionLabel : UILabel = {
         var label = UILabel()
         label.text = "Do you suffer from any diseases?"
         label.tintColor = UIColor.black
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        //  label.font = UIFont (name: "Rockwell-Bold", size: 30)
         label.backgroundColor = UIColor.white
-         label.textColor = UIColor.darkGray
+        label.textColor = UIColor.darkGray
         label.textAlignment = .center
         return label
     }()
@@ -71,7 +111,6 @@ class MedicalInfoTwo: UIViewController {
         label.tintColor = UIColor.black
         label.textColor = UIColor.darkGray
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        //  label.font = UIFont (name: "Rockwell-Bold", size: 30)
         label.backgroundColor = UIColor.white
         label.textAlignment = .center
         return label
@@ -80,15 +119,13 @@ class MedicalInfoTwo: UIViewController {
         var label = UILabel()
         label.text = "Any notes about your overall health condition?"
         label.tintColor = UIColor.black
-//        label.font = UIFont.boldSystemFont(ofSize: 14)
-        //  label.font = UIFont (name: "Rockwell-Bold", size: 30)
         label.backgroundColor = UIColor.white
-         label.textColor = UIColor.darkGray
+        label.textColor = UIColor.darkGray
         label.textAlignment = .center
         return label
     }()
     let DiseasesTextView: UITextView = {
-       let tv = UITextView(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+        let tv = UITextView(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tv.textAlignment = NSTextAlignment.justified
         tv.textColor = UIColor.black
         tv.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
@@ -114,20 +151,6 @@ class MedicalInfoTwo: UIViewController {
         tv.isEditable = true
         return tv
     }()
-    
-    
-//    let SexTextField: UITextField = {
-//        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
-//        tx.placeholder = "Sex"
-//        tx.font = UIFont.systemFont(ofSize: 15)
-//        tx.borderStyle = UITextField.BorderStyle.roundedRect
-//        tx.autocorrectionType = UITextAutocorrectionType.no
-//        tx.keyboardType = UIKeyboardType.default
-//        tx.returnKeyType = UIReturnKeyType.done
-//        tx.clearButtonMode = UITextField.ViewMode.whileEditing;
-//        tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-//        return tx
-//    }()
     let IconImage : UIImageView = {
         var image = UIImageView()
         image.image = UIImage(named: "MedicalICON")
@@ -141,7 +164,6 @@ class MedicalInfoTwo: UIViewController {
         label.text = "Medical Information"
         label.tintColor = UIColor.black
         label.font = UIFont.boldSystemFont(ofSize: 30)
-        //  label.font = UIFont (name: "Rockwell-Bold", size: 30)
         label.backgroundColor = UIColor.white
         label.textAlignment = .center
         return label
@@ -160,38 +182,4 @@ class MedicalInfoTwo: UIViewController {
         return button
     }()
     
-    @objc func SignUpButtonAction(sender: UIButton!) {
-        SaveMedicalInfo()
-  //      self.dismiss(animated: true, completion: nil)
-    }
-    func SaveMedicalInfo(){
-        guard let diseasses = DiseasesTextView.text,let surgery = SurgeryTextView.text, let notes = NotesTextView.text  else {
-            print("Form is not valid")
-            return
-        }
-        let userID = (Auth.auth().currentUser?.uid)!
-        
-        let ref = Database.database().reference()
-        let usersReference = ref.child("users").child(userID)
-        let values = ["Any Diseases?": diseasses,"Had Surgery?": surgery, "Notes?": notes]
-        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-            if let err = err {
-                print("*************************")
-                print("*************************")
-                
-                print(err.localizedDescription)
-                return
-            }
-            print("Saved user successfully into Firebase db****************************************************************")
-            UserDefaults.standard.set(true, forKey: "IsLoggedIn")
-            UserDefaults.standard.synchronize()
-           // self.dismiss(animated: true, completion: nil)
-            
-                let homeController = HomeVC()
-                 self.present(homeController, animated: true, completion: nil)
-            
-        })
-        
-    }
-
 }

@@ -10,5 +10,7 @@ pod 'Firebase'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
+pod 'SCLAlertView'
+pod 'NVActivityIndicatorView'
 
 end

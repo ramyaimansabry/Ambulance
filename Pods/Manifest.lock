@@ -68,6 +68,10 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NVActivityIndicatorView (4.4.0):
+    - NVActivityIndicatorView/Presenter (= 4.4.0)
+  - NVActivityIndicatorView/Presenter (4.4.0)
+  - SCLAlertView (0.8)
 
 DEPENDENCIES:
   - Firebase
@@ -75,6 +79,8 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - IQKeyboardManagerSwift (= 6.0.4)
+  - NVActivityIndicatorView
+  - SCLAlertView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -91,6 +97,8 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - leveldb-library
     - nanopb
+    - NVActivityIndicatorView
+    - SCLAlertView
 
 SPEC CHECKSUMS:
   Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
@@ -106,7 +114,9 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 36dbe324b4f9793f5f41ba5227f3e7c76dfefd50
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NVActivityIndicatorView: ec7440a57af2450319d3a4181cca7da6fc127064
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
 
-PODFILE CHECKSUM: 32d3e336f2641d3327d1112bc3dc20e7bfe71817
+PODFILE CHECKSUM: 0bb3f4da1fd4e69e803dfa1319d26e5a9c476b46
 
 COCOAPODS: 1.5.3

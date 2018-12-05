@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SCLAlertView
 
 class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource {
     private var datePicker: UIDatePicker?
@@ -21,18 +22,114 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         self.navigationController?.isNavigationBarHidden = true
-        
         SetupPickerViewsForTextFields()
         DateOfBirthTextFieldPickerView()
-       setupConstrains()
-        
+        setupConstrains()
+    }
+    
+    //   MARK :-  Main Methods
+    /**********************************************************************************************/
+    @objc func SignUpButtonAction(sender: UIButton!) {
+        checkEmptyFields()
     }
     
     
+    func SaveMedicalInfo(){
+        guard let weight = WeightTextField.text,let height = HeightTextField.text, let date = DateOfBirthTextField.text, let blood = BloodTypeField.text, let sex = SexTextField.text  else {
+            print("Form is not valid")
+            return
+        }
+         let userID = (Auth.auth().currentUser?.uid)!
+        let ref = Database.database().reference()
+        let usersReference = ref.child("users").child(userID)
+        let values = ["Weight": weight,"Height": height, "Date Of Birth": date, "Blood Type": blood, "Sex": sex]
+        usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
+            if error != nil {
+                let showError:String = error?.localizedDescription ?? ""
+                SCLAlertView().showError("Error", subTitle: showError)
+                return
+            }
+             // succeed ..
+            let more = MedicalInfoTwo()
+            self.navigationController?.pushViewController(more, animated: true)
+        })
+        
+    }
+    
+    func checkEmptyFields(){
+        if WeightTextField.text?.isEmpty == true  || HeightTextField.text?.isEmpty == true || SexTextField.text?.isEmpty == true , BloodTypeField.text?.isEmpty == true || DateOfBirthTextField.text?.isEmpty == true {
+            SCLAlertView().showError("Error", subTitle: "Fill All Fields!")
+            return
+        }
+       
+        SaveMedicalInfo()
+    }
+    
+    //    MARK:- PickerView Methods
+    /**********************************************************************************************/
+    @objc func DateChanged(datePicker: UIDatePicker){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        DateOfBirthTextField.text = dateFormatter.string(from: datePicker.date)
+    }
+    func DateOfBirthTextFieldPickerView(){
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .date
+        DateOfBirthTextField.inputView = datePicker
+        datePicker?.addTarget(self, action: #selector(DateChanged(datePicker:)), for: .valueChanged)
+    }
+    func SetupPickerViewsForTextFields(){
+        pickerView1 = UIPickerView()
+        pickerView2 = UIPickerView()
+        self.pickerView1?.delegate = self
+        self.pickerView1!.dataSource = self
+        self.pickerView2?.delegate = self
+        self.pickerView2!.dataSource = self
+        BloodTypeField.inputView = pickerView1
+        SexTextField.inputView = pickerView2
+        
+    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == pickerView1 {
+            return dataSource1.count
+        }
+        else if pickerView == pickerView2 {
+            return dataSource2.count
+        }
+        else {
+            return dataSource1.count
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == pickerView1 {
+            return dataSource1[row]
+        }
+        if pickerView == pickerView2 {
+            return dataSource2[row]
+        }
+        else {
+            return dataSource1[row]
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == pickerView1{
+            BloodTypeField.text = dataSource1[pickerView1!.selectedRow(inComponent: 0)]
+        }
+        else if pickerView == pickerView2{
+            SexTextField.text = dataSource2[pickerView2!.selectedRow(inComponent: 0)]
+        }
+    }
+    
+    
+    //   MARK :- Constrains
+    /**********************************************************************************************/
     private func setupConstrains(){
         
         [SignUpButton,IconImage,LogInLabel,titleLabel,subTitleLabel].forEach { view.addSubview($0) }
-         [WeightTextField,HeightTextField,DateOfBirthTextField,BloodTypeField,SexTextField].forEach { view.addSubview($0) }
+        [WeightTextField,HeightTextField,DateOfBirthTextField,BloodTypeField,SexTextField].forEach { view.addSubview($0) }
         
         LogInLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 40, left: 0, bottom: 0, right: 0))
         
@@ -48,8 +145,6 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         subTitleLabel.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
         subTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
-        
-        
         WeightTextField.anchor(top: subTitleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 50, left: 20, bottom: 0, right: 0),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
         
         HeightTextField.anchor(top: subTitleLabel.bottomAnchor, leading: WeightTextField.trailingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 50, left: 20, bottom: 0, right: 10),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
@@ -64,10 +159,10 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         SignUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
         
     }
+    
 
-    
-    
-    
+    //   MARK :- Setup Component
+    /**********************************************************************************************/
     let DateOfBirthTextField: UITextField = {
         let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Date of Birth"
@@ -128,7 +223,6 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-///***************************************************************************************************
     let IconImage : UIImageView = {
         var image = UIImageView()
         image.image = UIImage(named: "MedicalICON")
@@ -178,107 +272,7 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         button.addTarget(self, action: #selector(SignUpButtonAction), for: .touchUpInside)
         return button
     }()
-   
-    @objc func SignUpButtonAction(sender: UIButton!) {
-        print("Next Tapped")
-        SaveMedicalInfo()
-//      let more = MedicalInfoTwo()
-//      self.navigationController?.pushViewController(more, animated: true)
-    }
     
-    
-    func SaveMedicalInfo(){
-        guard let weight = WeightTextField.text,let height = HeightTextField.text, let date = DateOfBirthTextField.text, let blood = BloodTypeField.text, let sex = SexTextField.text  else {
-            print("Form is not valid")
-            return
-        }
-         let userID = (Auth.auth().currentUser?.uid)! 
-        
-        let ref = Database.database().reference()
-        let usersReference = ref.child("users").child(userID)
-        let values = ["Weight": weight,"Height": height, "Date Of Birth": date, "Blood Type": blood, "Sex": sex]
-        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-            if let err = err {
-                print("*************************")
-                print("*************************")
-                
-                print(err.localizedDescription)
-                return
-            }
-             print("Saved user successfully into Firebase db****************************************************************")
-            let more = MedicalInfoTwo()
-            self.navigationController?.pushViewController(more, animated: true)
-        })
-        
-    }
-    
-    
-    
-    // MARK:- PickerView Methods
-    //**********************************************************************************************
-    
-    
-    @objc func DateChanged(datePicker: UIDatePicker){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        DateOfBirthTextField.text = dateFormatter.string(from: datePicker.date)
-    }
-    func DateOfBirthTextFieldPickerView(){
-        datePicker = UIDatePicker()
-        datePicker?.datePickerMode = .date
-        DateOfBirthTextField.inputView = datePicker
-        datePicker?.addTarget(self, action: #selector(DateChanged(datePicker:)), for: .valueChanged)
-    }
-    
-    func SetupPickerViewsForTextFields(){
-        pickerView1 = UIPickerView()
-        pickerView2 = UIPickerView()
-        self.pickerView1?.delegate = self
-        self.pickerView1!.dataSource = self
-        self.pickerView2?.delegate = self
-        self.pickerView2!.dataSource = self
-        BloodTypeField.inputView = pickerView1
-        SexTextField.inputView = pickerView2
-        
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == pickerView1 {
-            return dataSource1.count
-        }
-        else if pickerView == pickerView2 {
-            return dataSource2.count
-        }
-        else {
-            return dataSource1.count
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == pickerView1 {
-            return dataSource1[row]
-        }
-        if pickerView == pickerView2 {
-            return dataSource2[row]
-        }
-        else {
-            return dataSource1[row]
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == pickerView1{
-            BloodTypeField.text = dataSource1[pickerView1!.selectedRow(inComponent: 0)]
-        }
-        else if pickerView == pickerView2{
-            SexTextField.text = dataSource2[pickerView2!.selectedRow(inComponent: 0)]
-        }
-    }
-    
-    
-    
-
 
     
     
