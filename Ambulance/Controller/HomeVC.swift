@@ -69,8 +69,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         let userID = (Auth.auth().currentUser?.uid)!
         let ref = Database.database().reference()
         let usersReference = ref.child("waiting Emergencies").child(userID)
+        let timeEmergency: String = String(NSDate().timeIntervalSince1970)
         
-        let values = ["Patients Number": String(numberOfPatients),"Emergency Type": selectedEmergencyType, "Emergency For Owner?": EmergencyForOwnerId,"User Latitude": Latitude, "User Longitude": Longitude, "Accepted by?": "NONE"]
+        let values = ["Patients Number": String(numberOfPatients),"Emergency Type": selectedEmergencyType, "Emergency For Owner?": EmergencyForOwnerId,"User Latitude": Latitude, "User Longitude": Longitude, "Accepted by?": "NONE", "Time Created": timeEmergency]
         usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
                 let showError:String = error?.localizedDescription ?? ""
@@ -84,14 +85,41 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         })
         
     }
+    var ResponserID = ""
     
     func readIfEmergencyAccepted(){
-          let userID = (Auth.auth().currentUser?.uid)!
+        let userID = (Auth.auth().currentUser?.uid)!
         let ref = Database.database().reference().child("waiting Emergencies").child(userID).child("Accepted by?")
         ref.observe(.value, with: { (snapshot) in
-            print(snapshot)
+            let answers: String = snapshot.value as! String
+             if answers != "NONE" {
+                self.ResponserID = answers
+                print(self.ResponserID)
+                DispatchQueue.main.async {
+                    self.stopAnimating()
+                    self.readResponserinformation()
+                    return
+                }
+             }
+            
         }, withCancel: nil)
     }
+    func readResponserinformation(){
+          print("***************************************************")
+        let ref = Database.database().reference().child("drivers").child(ResponserID)
+       ref.observe(.value, with: { (snapshot) in
+        print(snapshot)
+            if let dictionary = snapshot.value as? [String: Any] {
+                
+                print("*******************")
+                print(dictionary)
+                
+            }
+        
+         }, withCancel: nil)
+    }
+    
+    
     @objc func MenuButtonAction(){
         // menu stuff
         
@@ -123,6 +151,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
             break
         case 4:
             // save to database and return every thing to start
+             CallAmbulanceButton.setTitle("Confirm Request", for: .normal)
              handleViewInfoThreeDismiss()
              ShowMapCenteredPen()
              RequestEmergencyCounter += 1
