@@ -79,7 +79,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
                 return
             }
             //  success ..
-            print("******************** User Requested Emergency Sucessfully ********************")
+            print("User Requested Emergency Sucessfully ")
             self.startAnimating()
             self.readIfEmergencyAccepted()
         })
@@ -583,6 +583,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor = UIColor.darkGray
         label.textAlignment = .center
+        
         return label
     }()
     let ButtonInfo1: UIButton = {
