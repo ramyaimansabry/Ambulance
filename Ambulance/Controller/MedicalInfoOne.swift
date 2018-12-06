@@ -31,6 +31,8 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
     /**********************************************************************************************/
     @objc func SignUpButtonAction(sender: UIButton!) {
         checkEmptyFields()
+//        let more = MedicalInfoTwo()
+      //  self.navigationController?.pushViewController(more, animated: true)
     }
     
     
@@ -57,11 +59,26 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func checkEmptyFields(){
-        if WeightTextField.text?.isEmpty == true  || HeightTextField.text?.isEmpty == true || SexTextField.text?.isEmpty == true , BloodTypeField.text?.isEmpty == true || DateOfBirthTextField.text?.isEmpty == true {
-            SCLAlertView().showError("Error", subTitle: "Fill All Fields!")
+        guard let weight = WeightTextField.text,  WeightTextField.text?.characters.count != 0 else {
+            SCLAlertView().showError("Error", subTitle: "Enter your Weight!")
             return
         }
-       
+        guard let height = HeightTextField.text,  HeightTextField.text?.characters.count != 0 else {
+            SCLAlertView().showError("Error", subTitle: "Enter your Height!")
+            return
+        }
+        guard let sex = SexTextField.text,  SexTextField.text?.characters.count != 0 else {
+            SCLAlertView().showError("Error", subTitle: "Sex is Empty!")
+            return
+        }
+        guard let blood = BloodTypeField.text,  BloodTypeField.text?.characters.count != 0 else {
+            SCLAlertView().showError("Error", subTitle: "Enter Blood Type, or Select 'not set'!")
+            return
+        }
+        guard let date = DateOfBirthTextField.text,  DateOfBirthTextField.text?.characters.count != 0 else {
+            SCLAlertView().showError("Error", subTitle: "Enter your Date of Birth!")
+            return
+        }
         SaveMedicalInfo()
     }
     
@@ -128,41 +145,142 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
     /**********************************************************************************************/
     private func setupConstrains(){
         
-        [SignUpButton,IconImage,LogInLabel,titleLabel,subTitleLabel].forEach { view.addSubview($0) }
-        [WeightTextField,HeightTextField,DateOfBirthTextField,BloodTypeField,SexTextField].forEach { view.addSubview($0) }
+//        [SignUpButton,IconImage,LogInLabel,titleLabel,subTitleLabel].forEach { view.addSubview($0) }
+//        [WeightTextField,HeightTextField,DateOfBirthTextField,BloodTypeField,SexTextField].forEach { view.addSubview($0) }
+//
+        view.addSubview(stackView5)
+        view.addSubview(stackView4)
+        view.addSubview(stackView3)
+        view.addSubview(stackView2)
+        view.addSubview(stackView1)
         
-        LogInLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 40, left: 0, bottom: 0, right: 0))
+        stackView4.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 10, right: 0))
         
-        
-        IconImage.anchor(top: LogInLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 50, left: 0, bottom: 0, right: 0),size: CGSize(width: 110, height: 110))
-        IconImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        
-        
-        titleLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 0))
-        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        
-        
-        subTitleLabel.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
-        subTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        
-        WeightTextField.anchor(top: subTitleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 50, left: 20, bottom: 0, right: 0),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
-        
-        HeightTextField.anchor(top: subTitleLabel.bottomAnchor, leading: WeightTextField.trailingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 50, left: 20, bottom: 0, right: 10),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
-        
-        DateOfBirthTextField.anchor(top: WeightTextField.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 15, left: 20, bottom: 0, right: 10),size: CGSize(width: 0, height: 45))
-        
-        BloodTypeField.anchor(top: DateOfBirthTextField.bottomAnchor, leading: DateOfBirthTextField.leadingAnchor, bottom: nil, trailing: DateOfBirthTextField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 45))
-        
-        SexTextField.anchor(top: BloodTypeField.bottomAnchor, leading: BloodTypeField.leadingAnchor, bottom: nil, trailing: BloodTypeField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 45))
+        stackView3.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor,padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: stackView4.frame.height/3) )
         
         
-        SignUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
+        stackView2.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30))
         
+        
+        
+        
+        
+         stackView5.addArrangedSubview(WeightTextField)
+         stackView5.addArrangedSubview(HeightTextField)
+        
+         stackView1.addArrangedSubview(titleLabel)
+         stackView1.addArrangedSubview(subTitleLabel)
+        
+         stackView2.addArrangedSubview(stackView5)
+         stackView2.addArrangedSubview(DateOfBirthTextField)
+         stackView2.addArrangedSubview(BloodTypeField)
+         stackView2.addArrangedSubview(SexTextField)
+        
+         stackView3.addArrangedSubview(LogInLabel)
+         stackView3.addArrangedSubview(IconImage)
+         stackView3.addArrangedSubview(stackView1)
+        
+          stackView4.addArrangedSubview(stackView3)
+          stackView4.addArrangedSubview(stackView2)
+          stackView4.addArrangedSubview(SignUpButton)
+        
+        
+        WeightTextField.anchor(top: stackView5.topAnchor, leading: nil, bottom: stackView5.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
+        HeightTextField.anchor(top: stackView5.topAnchor, leading: nil, bottom: stackView5.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
+        
+        
+        
+        
+        
+        stackView5.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
+        DateOfBirthTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
+        BloodTypeField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
+        SexTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
+
+        
+        
+        
+        
+        
+        SignUpButton.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
+        //-------------
+//        
+//        LogInLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 40, left: 0, bottom: 0, right: 0))
+//        
+//        
+//        IconImage.anchor(top: LogInLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 50, left: 0, bottom: 0, right: 0),size: CGSize(width: 110, height: 110))
+//        IconImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        
+//        
+//        titleLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 0))
+//        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        
+//        
+//        subTitleLabel.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
+//        subTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        
+//        WeightTextField.anchor(top: subTitleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 50, left: 20, bottom: 0, right: 0),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
+//        
+//        HeightTextField.anchor(top: subTitleLabel.bottomAnchor, leading: WeightTextField.trailingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 50, left: 20, bottom: 0, right: 10),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
+//        
+//        DateOfBirthTextField.anchor(top: WeightTextField.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 15, left: 20, bottom: 0, right: 10),size: CGSize(width: 0, height: 45))
+//        
+//        BloodTypeField.anchor(top: DateOfBirthTextField.bottomAnchor, leading: DateOfBirthTextField.leadingAnchor, bottom: nil, trailing: DateOfBirthTextField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 45))
+//        
+//        SexTextField.anchor(top: BloodTypeField.bottomAnchor, leading: BloodTypeField.leadingAnchor, bottom: nil, trailing: BloodTypeField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 45))
+//        
+//        
+//        SignUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
+//        
     }
     
 
     //   MARK :- Setup Component
     /**********************************************************************************************/
+    let stackView2: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.fillEqually
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing   = 15
+        return sv
+    }()
+    let stackView1: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.equalSpacing
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing   = 2.0
+        return sv
+    }()
+    let stackView3: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.fill
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing   = 20.0
+        return sv
+    }()
+    let stackView4: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.equalCentering
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing  = 30
+        return sv
+    }()
+    
+    let stackView5: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.horizontal
+        sv.distribution  = UIStackView.Distribution.fillEqually
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing  = 20
+        return sv
+    }()
+    
+    
+    
     let DateOfBirthTextField: UITextField = {
         let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Date of Birth"

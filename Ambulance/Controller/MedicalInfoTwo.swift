@@ -53,8 +53,16 @@ class MedicalInfoTwo: UIViewController {
     
     
     func checkEmptyFields(){
-        if DiseasesTextView.text?.isEmpty == true  || SurgeryTextView.text?.isEmpty == true || NotesTextView.text?.isEmpty == true  {
-            SCLAlertView().showError("Error", subTitle: "Fill All Fields!")
+        guard let diseases = DiseasesTextView.text,  DiseasesTextView.text?.characters.count != 0 else {
+            SCLAlertView().showError("Error", subTitle: "Please, Fill all Fields!")
+            return
+        }
+        guard let surgery = SurgeryTextView.text,  SurgeryTextView.text?.characters.count != 0 else {
+           SCLAlertView().showError("Error", subTitle: "Please, Fill all Fields!")
+            return
+        }
+        guard let notes = NotesTextView.text,  NotesTextView.text?.characters.count != 0 else {
+           SCLAlertView().showError("Error", subTitle: "Please, Fill all Fields!")
             return
         }
         
@@ -64,37 +72,137 @@ class MedicalInfoTwo: UIViewController {
     //   MARK :- Constrains
     /**********************************************************************************************/
     private func setupConstrains(){
-        view.addSubview(IconImage)
-        view.addSubview(LogInLabel)
-        view.addSubview(SignUpButton)
-        view.addSubview(DiseasesTextView)
-        view.addSubview(SurgeryTextView)
-        view.addSubview(NotesTextView)
-        view.addSubview(FirstQuestionLabel)
-        view.addSubview(SecandQuestionLabel)
-        view.addSubview(ThirdQuestionLabel)
-        
-        LogInLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 40, left: 0, bottom: 0, right: 0))
-        
-        IconImage.anchor(top: LogInLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 50, left: 0, bottom: 0, right: 0),size: CGSize(width: 110, height: 110))
-        IconImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        view.addSubview(stackView1)
+        view.addSubview(stackView2)
+        view.addSubview(stackView3)
+        view.addSubview(stackView4)
+        view.addSubview(stackView5)
         
         
-        FirstQuestionLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 30, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
-        DiseasesTextView.anchor(top: FirstQuestionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 20, bottom: 0, right: 20),size: CGSize(width: 110, height: 110))
+        stackView1.addArrangedSubview(LogInLabel)
+        stackView1.addArrangedSubview(IconImage)
         
-        SecandQuestionLabel.anchor(top: DiseasesTextView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
-        SurgeryTextView.anchor(top: SecandQuestionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 20, bottom: 0, right: 20),size: CGSize(width: 110, height: 110))
+        stackView2.addArrangedSubview(FirstQuestionLabel)
+        stackView2.addArrangedSubview(DiseasesTextView)
         
-        ThirdQuestionLabel.anchor(top: SurgeryTextView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
-        NotesTextView.anchor(top: ThirdQuestionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 20, bottom: 0, right: 20),size: CGSize(width: 110, height: 110))
+        stackView3.addArrangedSubview(SecandQuestionLabel)
+        stackView3.addArrangedSubview(SurgeryTextView)
         
-        SignUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
+        stackView4.addArrangedSubview(ThirdQuestionLabel)
+        stackView4.addArrangedSubview(NotesTextView)
+        
+        stackView5.addArrangedSubview(stackView1)
+        stackView5.addArrangedSubview(stackView2)
+         stackView5.addArrangedSubview(stackView3)
+         stackView5.addArrangedSubview(stackView4)
+         stackView5.addArrangedSubview(SignUpButton)
+        
+        
+        
+        stackView2.anchor(top: nil, leading: stackView5.leadingAnchor, bottom: nil, trailing: stackView5.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
+
+        stackView3.anchor(top: nil, leading: stackView5.leadingAnchor, bottom: nil, trailing: stackView5.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
+
+        stackView4.anchor(top: nil, leading: stackView5.leadingAnchor, bottom: nil, trailing: stackView5.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
+
+        
+        
+         stackView5.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 10, right: 0))
+        
+      DiseasesTextView.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 90))
+
+         SurgeryTextView.anchor(top: nil, leading: stackView3.leadingAnchor, bottom: nil, trailing: stackView3.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 90))
+
+        
+         NotesTextView.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 90))
+
+        
+        
+        
+        
+        
+        
+        SignUpButton.anchor(top: nil, leading: stackView5.leadingAnchor, bottom: nil, trailing: stackView5.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
+
+        
+        
+        
+//
+//
+//        view.addSubview(IconImage)
+//        view.addSubview(LogInLabel)
+//        view.addSubview(SignUpButton)
+//        view.addSubview(DiseasesTextView)
+//        view.addSubview(SurgeryTextView)
+//        view.addSubview(NotesTextView)
+//        view.addSubview(FirstQuestionLabel)
+//        view.addSubview(SecandQuestionLabel)
+//        view.addSubview(ThirdQuestionLabel)
+//
+//        LogInLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 40, left: 0, bottom: 0, right: 0))
+//
+//        IconImage.anchor(top: LogInLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 50, left: 0, bottom: 0, right: 0),size: CGSize(width: 110, height: 110))
+//        IconImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//
+//
+//        FirstQuestionLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 30, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
+//        DiseasesTextView.anchor(top: FirstQuestionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 20, bottom: 0, right: 20),size: CGSize(width: 110, height: 110))
+//
+//        SecandQuestionLabel.anchor(top: DiseasesTextView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
+//        SurgeryTextView.anchor(top: SecandQuestionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 20, bottom: 0, right: 20),size: CGSize(width: 110, height: 110))
+//
+//        ThirdQuestionLabel.anchor(top: SurgeryTextView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 0))
+//        NotesTextView.anchor(top: ThirdQuestionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 20, bottom: 0, right: 20),size: CGSize(width: 110, height: 110))
+//
+//        SignUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
+//    }
+        
+        
+        
     }
-    
     
     // MARK :-  Setup Component
     /********************************************************************************************/
+    let stackView1: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.equalCentering
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing  = 20
+        return sv
+    }()
+    let stackView2: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.equalCentering
+        sv.alignment = UIStackView.Alignment.leading
+        sv.spacing  = 5
+        return sv
+    }()
+    let stackView3: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.equalCentering
+        sv.alignment = UIStackView.Alignment.leading
+        sv.spacing  = 5
+        return sv
+    }()
+    let stackView4: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.equalCentering
+        sv.alignment = UIStackView.Alignment.leading
+        sv.spacing  = 5
+        return sv
+    }()
+    let stackView5: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.equalSpacing
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing  = 0
+        return sv
+    }()
     let FirstQuestionLabel : UILabel = {
         var label = UILabel()
         label.text = "Do you suffer from any diseases?"
@@ -120,12 +228,13 @@ class MedicalInfoTwo: UIViewController {
         label.text = "Any notes about your overall health condition?"
         label.tintColor = UIColor.black
         label.backgroundColor = UIColor.white
+         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = UIColor.darkGray
         label.textAlignment = .center
         return label
     }()
     let DiseasesTextView: UITextView = {
-        let tv = UITextView(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+        let tv = UITextView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         tv.textAlignment = NSTextAlignment.justified
         tv.textColor = UIColor.black
         tv.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
@@ -134,7 +243,8 @@ class MedicalInfoTwo: UIViewController {
         return tv
     }()
     let SurgeryTextView: UITextView = {
-        let tv = UITextView(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+       // let tv = UITextView(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+         let tv = UITextView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         tv.textAlignment = NSTextAlignment.justified
         tv.textColor = UIColor.black
         tv.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
@@ -143,7 +253,7 @@ class MedicalInfoTwo: UIViewController {
         return tv
     }()
     let NotesTextView: UITextView = {
-        let tv = UITextView(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+        let tv = UITextView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         tv.textAlignment = NSTextAlignment.justified
         tv.textColor = UIColor.black
         tv.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
