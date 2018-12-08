@@ -72,6 +72,7 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 4.4.0)
   - NVActivityIndicatorView/Presenter (4.4.0)
   - SCLAlertView (0.8)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Firebase
@@ -81,6 +82,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (= 6.0.4)
   - NVActivityIndicatorView
   - SCLAlertView
+  - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -99,6 +101,7 @@ SPEC REPOS:
     - nanopb
     - NVActivityIndicatorView
     - SCLAlertView
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
@@ -116,7 +119,8 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: ec7440a57af2450319d3a4181cca7da6fc127064
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 0bb3f4da1fd4e69e803dfa1319d26e5a9c476b46
+PODFILE CHECKSUM: 8506bac13025c39a0e41132401064265c0a39947
 
 COCOAPODS: 1.5.3

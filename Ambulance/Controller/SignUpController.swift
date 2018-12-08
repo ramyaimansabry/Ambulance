@@ -5,6 +5,7 @@ import Firebase
 import FirebaseAuth
 import NotificationCenter
 import SCLAlertView
+import SVProgressHUD
 
 class SignUpController: UIViewController,UITextFieldDelegate {
     
@@ -12,6 +13,8 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
          self.navigationController?.isNavigationBarHidden = true
+        SVProgressHUD.setForegroundColor(UIColor.red)
+
         setupConstrains()
        SetupComponentDelegetes()
     }
@@ -34,8 +37,6 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     // MARK :-   Main Methods
     /********************************************************************************************/
     @objc func SignUpButtonAction(sender: UIButton!) {
-//        let new = MedicalInfoOne()
-//        self.navigationController?.pushViewController(new, animated: true)
          checkEmptyFields()
     }
     
@@ -44,13 +45,15 @@ class SignUpController: UIViewController,UITextFieldDelegate {
             print("Form is not valid")
             return
         }
+        SVProgressHUD.show()
+        SVProgressHUD.setDefaultMaskType(.clear)
         Auth.auth().createUser(withEmail: email, password: password) { (res, error) in
             if let error = error {
                 print(error)
+                self.dismissRingIndecator()
                 SCLAlertView().showError("Error", subTitle: error.localizedDescription)
                 return
             }
-            
             guard let uid = res?.user.uid else {
                 return
             }
@@ -65,6 +68,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
                     SCLAlertView().showError("Error", subTitle: showError)
                     return
                 }
+               self.dismissRingIndecator()
                 // succeed ..
                 let new = MedicalInfoOne()
                 self.navigationController?.pushViewController(new, animated: true)
@@ -110,7 +114,12 @@ class SignUpController: UIViewController,UITextFieldDelegate {
 
        AddNewuser()
     }
-    
+    func dismissRingIndecator(){
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+            SVProgressHUD.setDefaultMaskType(.none)
+        }
+    }
     
     //   MARK :- Constrains
     /**********************************************************************************************/

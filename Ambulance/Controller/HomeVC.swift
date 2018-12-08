@@ -13,19 +13,23 @@ import CoreLocation
 import AudioToolbox
 import NVActivityIndicatorView
 import SCLAlertView
+import SVProgressHUD
 
 class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVActivityIndicatorViewable{
   let locationManager = CLLocationManager()
     let firstView = HomeVCViewInfoOne()
     let secandView = HomeVCViewInfoTwo()
     let thirdView = HomeCVViewInfoThree()
-
+    let fourthView = HomeVCInfoFour()
+    
     var RequestEmergencyCounter: Int = 1
     var centerLocation: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.red
+        SVProgressHUD.setForegroundColor(UIColor.red)
+        SVProgressHUD.setBackgroundColor(UIColor.clear)
         
         // if user not logged in
             if Auth.auth().currentUser?.uid == nil {
@@ -49,6 +53,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
     }
     
     func SaveToDatabase(){
+        SVProgressHUD.show()
+        SVProgressHUD.setDefaultMaskType(.clear)
         
          let numberOfPatients = firstView.numberOfPatients
         let selectedEmergencyType = secandView.selectedEmergencyType
@@ -61,8 +67,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         }
         guard let EmergencyLocation = centerLocation else{
             print("Cant get location")
+            self.dismissRingIndecator()
+            SCLAlertView().showError("Error", subTitle: "Cant get location")
             return
         }
+       
+        
         let Longitude: String = String(EmergencyLocation.coordinate.longitude)
         let Latitude: String = String(EmergencyLocation.coordinate.latitude)
         let userID = (Auth.auth().currentUser?.uid)!
@@ -74,10 +84,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
                 let showError:String = error?.localizedDescription ?? ""
+                 self.dismissRingIndecator()
                 SCLAlertView().showError("Error", subTitle: showError)
                 return
             }
             //  success ..
+            self.dismissRingIndecator()
             print("User Requested Emergency Sucessfully ***********************")
             self.startAnimating()
             self.readIfEmergencyAccepted()
@@ -96,6 +108,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
                 print(self.ResponserID)
                 DispatchQueue.main.async {
                     self.stopAnimating()
+                    self.fourthView.show()
                     self.readResponserinformation()
                     return
                 }
@@ -234,6 +247,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         
         
         // hide the two views....
+    }
+    func dismissRingIndecator(){
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+            SVProgressHUD.setDefaultMaskType(.none)
+        }
     }
     
     

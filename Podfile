@@ -12,5 +12,6 @@ pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'SCLAlertView'
 pod 'NVActivityIndicatorView'
+pod 'SVProgressHUD'
 
 end

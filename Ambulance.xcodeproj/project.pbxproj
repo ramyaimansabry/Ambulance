@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D04CFDE21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFDD21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift */; };
 		2D04CFE021BC02A4008BFA9F /* HomeCVViewInfoThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFDF21BC02A4008BFA9F /* HomeCVViewInfoThree.swift */; };
+		2D04CFE421BC2DA9008BFA9F /* HomeVCInfoFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFE321BC2DA9008BFA9F /* HomeVCInfoFour.swift */; };
 		2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */; };
 		2D19431021AEB51B0054556C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19430F21AEB51B0054556C /* AppDelegate.swift */; };
 		2D19431A21AEB51B0054556C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D19431821AEB51B0054556C /* LaunchScreen.storyboard */; };
@@ -29,6 +30,7 @@
 		12960EC0FA51D63CDD32103C /* Pods_Ambulance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ambulance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D04CFDD21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCViewInfoTwo.swift; sourceTree = "<group>"; };
 		2D04CFDF21BC02A4008BFA9F /* HomeCVViewInfoThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCVViewInfoThree.swift; sourceTree = "<group>"; };
+		2D04CFE321BC2DA9008BFA9F /* HomeVCInfoFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCInfoFour.swift; sourceTree = "<group>"; };
 		2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInfoTwo.swift; sourceTree = "<group>"; };
 		2D19430C21AEB51A0054556C /* Ambulance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ambulance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D19430F21AEB51B0054556C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				2D41C52F21B4664C0073BF90 /* HomeVCViewInfoOne.swift */,
 				2D04CFDD21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift */,
 				2D04CFDF21BC02A4008BFA9F /* HomeCVViewInfoThree.swift */,
+				2D04CFE321BC2DA9008BFA9F /* HomeVCInfoFour.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -275,6 +279,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -293,6 +298,7 @@
 				2D19432921AEB7480054556C /* StartScreen.swift in Sources */,
 				2D19433321AEBD940054556C /* LoginSplashScreen.swift in Sources */,
 				2D19432721AEB6B00054556C /* Extentions.swift in Sources */,
+				2D04CFE421BC2DA9008BFA9F /* HomeVCInfoFour.swift in Sources */,
 				2D19432B21AEB79A0054556C /* SignInController.swift in Sources */,
 				2D19432F21AEB8330054556C /* HomeVC.swift in Sources */,
 				2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */,

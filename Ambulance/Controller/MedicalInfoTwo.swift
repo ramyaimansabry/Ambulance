@@ -9,12 +9,13 @@
 import UIKit
 import Firebase
 import SCLAlertView
-
+import SVProgressHUD
 class MedicalInfoTwo: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        SVProgressHUD.setForegroundColor(UIColor.red)
         setupConstrains()
 }
    
@@ -30,6 +31,9 @@ class MedicalInfoTwo: UIViewController {
             print("Form is not valid")
             return
         }
+        SVProgressHUD.show()
+        SVProgressHUD.setDefaultMaskType(.clear)
+        
         let userID = (Auth.auth().currentUser?.uid)!
         let ref = Database.database().reference()
         let usersReference = ref.child("users").child(userID)
@@ -37,10 +41,12 @@ class MedicalInfoTwo: UIViewController {
         usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
                 let showError:String = error?.localizedDescription ?? ""
+                self.dismissRingIndecator()
                 SCLAlertView().showError("Error", subTitle: showError)
                 return
             }
            //  success ..
+            self.dismissRingIndecator()
             print("Saved user successfully into Firebase db")
             UserDefaults.standard.set(true, forKey: "IsLoggedIn")
             UserDefaults.standard.synchronize()
@@ -67,6 +73,13 @@ class MedicalInfoTwo: UIViewController {
         }
         
         SaveMedicalInfo()
+    }
+    
+    func dismissRingIndecator(){
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+            SVProgressHUD.setDefaultMaskType(.none)
+        }
     }
     
     //   MARK :- Constrains

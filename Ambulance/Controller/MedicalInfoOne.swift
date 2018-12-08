@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SCLAlertView
+import SVProgressHUD
 
 class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource {
     private var datePicker: UIDatePicker?
@@ -22,6 +23,8 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         self.navigationController?.isNavigationBarHidden = true
+        SVProgressHUD.setForegroundColor(UIColor.red)
+        
         SetupPickerViewsForTextFields()
         DateOfBirthTextFieldPickerView()
         setupConstrains()
@@ -31,8 +34,6 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
     /**********************************************************************************************/
     @objc func SignUpButtonAction(sender: UIButton!) {
         checkEmptyFields()
-//        let more = MedicalInfoTwo()
-      //  self.navigationController?.pushViewController(more, animated: true)
     }
     
     
@@ -41,16 +42,20 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
             print("Form is not valid")
             return
         }
-         let userID = (Auth.auth().currentUser?.uid)!
+        SVProgressHUD.show()
+        SVProgressHUD.setDefaultMaskType(.clear)
+        let userID = (Auth.auth().currentUser?.uid)!
         let ref = Database.database().reference()
         let usersReference = ref.child("users").child(userID)
         let values = ["Weight": weight,"Height": height, "Date Of Birth": date, "Blood Type": blood, "Sex": sex]
         usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
                 let showError:String = error?.localizedDescription ?? ""
+                self.dismissRingIndecator()
                 SCLAlertView().showError("Error", subTitle: showError)
                 return
             }
+            self.dismissRingIndecator()
              // succeed ..
             let more = MedicalInfoTwo()
             self.navigationController?.pushViewController(more, animated: true)
@@ -80,6 +85,13 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
             return
         }
         SaveMedicalInfo()
+    }
+    
+    func dismissRingIndecator(){
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+            SVProgressHUD.setDefaultMaskType(.none)
+        }
     }
     
     //    MARK:- PickerView Methods

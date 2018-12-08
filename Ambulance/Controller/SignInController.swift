@@ -3,12 +3,14 @@
 import UIKit
 import Firebase
 import SCLAlertView
+import SVProgressHUD
 
 class SignInController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+         SVProgressHUD.setForegroundColor(UIColor.red)
         setupViews()
         ShowVisibleButton()
         SetupComponentDelegetes()
@@ -24,31 +26,39 @@ class SignInController: UIViewController,UITextFieldDelegate {
     @objc func SignInButtonAction(sender: UIButton!) {
          checkEmptyFields()
     }
+    func checkEmptyFields(){
+        if EmailTextField.text?.isEmpty == true  || PasswordTextField.text?.isEmpty == true{
+            SCLAlertView().showError("Error", subTitle: "Fill All Fields!")
+            return
+        }
+        handelLogin()
+    }
+    
     func handelLogin(){
         guard let email = EmailTextField.text, let password = PasswordTextField.text else {
             print("form is not valid *****ERROR*****")
             return
         }
+       
+        SVProgressHUD.show()
+        SVProgressHUD.setDefaultMaskType(.clear)
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 print(error)
                 let showError:String = error?.localizedDescription ?? ""
+                self.dismissRingIndecator()
                 SCLAlertView().showError("Error", subTitle: showError)
                 return
             }
+            // suceess
+           self.dismissRingIndecator()
             UserDefaults.standard.set(true, forKey: "IsLoggedIn")
             UserDefaults.standard.synchronize()
             let homeController = HomeVC()
             self.present(homeController, animated: true, completion: nil)
         }
     }
-    func checkEmptyFields(){
-        if EmailTextField.text?.isEmpty == true  || PasswordTextField.text?.isEmpty == true{
-             SCLAlertView().showError("Error", subTitle: "Fill All Fields!")
-            return
-        }
-          handelLogin()
-    }
+  
     @objc func backButtonAction(sender: UIButton!) {
         print("Back")
         dismiss(animated: true, completion: nil)
@@ -57,7 +67,12 @@ class SignInController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
+    func dismissRingIndecator(){
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+            SVProgressHUD.setDefaultMaskType(.none)
+        }
+    }
     
 //     MARK :- eye button on textfield
    /**********************************************************************************************/
