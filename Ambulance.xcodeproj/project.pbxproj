@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D04CFDE21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFDD21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift */; };
+		2D04CFE021BC02A4008BFA9F /* HomeCVViewInfoThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFDF21BC02A4008BFA9F /* HomeCVViewInfoThree.swift */; };
 		2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */; };
 		2D19431021AEB51B0054556C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19430F21AEB51B0054556C /* AppDelegate.swift */; };
 		2D19431A21AEB51B0054556C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D19431821AEB51B0054556C /* LaunchScreen.storyboard */; };
@@ -18,13 +20,15 @@
 		2D19433121AEBC5D0054556C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D19433021AEBC5D0054556C /* GoogleService-Info.plist */; };
 		2D19433321AEBD940054556C /* LoginSplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19433221AEBD940054556C /* LoginSplashScreen.swift */; };
 		2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19433421B2FB130054556C /* MedicalInfoOne.swift */; };
-		2D41C53021B4664C0073BF90 /* ViewInfoOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D41C52F21B4664C0073BF90 /* ViewInfoOne.swift */; };
+		2D41C53021B4664C0073BF90 /* HomeVCViewInfoOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D41C52F21B4664C0073BF90 /* HomeVCViewInfoOne.swift */; };
 		2D41C53221B48DF90073BF90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D41C53121B48DF90073BF90 /* Assets.xcassets */; };
 		5D56D64A1B8BDDEF2D2C2CFC /* Pods_Ambulance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12960EC0FA51D63CDD32103C /* Pods_Ambulance.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		12960EC0FA51D63CDD32103C /* Pods_Ambulance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ambulance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D04CFDD21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCViewInfoTwo.swift; sourceTree = "<group>"; };
+		2D04CFDF21BC02A4008BFA9F /* HomeCVViewInfoThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCVViewInfoThree.swift; sourceTree = "<group>"; };
 		2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInfoTwo.swift; sourceTree = "<group>"; };
 		2D19430C21AEB51A0054556C /* Ambulance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ambulance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D19430F21AEB51B0054556C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +42,7 @@
 		2D19433021AEBC5D0054556C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D19433221AEBD940054556C /* LoginSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSplashScreen.swift; sourceTree = "<group>"; };
 		2D19433421B2FB130054556C /* MedicalInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInfoOne.swift; sourceTree = "<group>"; };
-		2D41C52F21B4664C0073BF90 /* ViewInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInfoOne.swift; sourceTree = "<group>"; };
+		2D41C52F21B4664C0073BF90 /* HomeVCViewInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCViewInfoOne.swift; sourceTree = "<group>"; };
 		2D41C53121B48DF90073BF90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2BFF1C54A7C2788AC60CAE2 /* Pods-Ambulance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ambulance.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance.release.xcconfig"; sourceTree = "<group>"; };
 		F897BDC490A1D6BE3F9DA40C /* Pods-Ambulance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ambulance.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,7 +134,9 @@
 		2D19432521AEB6790054556C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2D41C52F21B4664C0073BF90 /* ViewInfoOne.swift */,
+				2D41C52F21B4664C0073BF90 /* HomeVCViewInfoOne.swift */,
+				2D04CFDD21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift */,
+				2D04CFDF21BC02A4008BFA9F /* HomeCVViewInfoThree.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,9 +297,11 @@
 				2D19432F21AEB8330054556C /* HomeVC.swift in Sources */,
 				2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */,
 				2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */,
+				2D04CFDE21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift in Sources */,
 				2D19432D21AEB7EA0054556C /* SignUpController.swift in Sources */,
+				2D04CFE021BC02A4008BFA9F /* HomeCVViewInfoThree.swift in Sources */,
 				2D19431021AEB51B0054556C /* AppDelegate.swift in Sources */,
-				2D41C53021B4664C0073BF90 /* ViewInfoOne.swift in Sources */,
+				2D41C53021B4664C0073BF90 /* HomeVCViewInfoOne.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
