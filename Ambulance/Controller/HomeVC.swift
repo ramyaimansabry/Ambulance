@@ -38,7 +38,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         SetupComponentDelegetes()
         setupConstrains()
         SetupLoadingActivity()
-        checkLocationServices()
+    //    checkLocationServices()
         LeftMenuGestureRecognizer()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -144,10 +144,13 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
     }
 
     func ShowMyProfileViewController(){
-        let viewController = MyProfileController()
+        let viewController = EditProfileController()
        navigationController?.pushViewController(viewController, animated: true)
     }
-    
+    func ShowMyMediicalInfoController(){
+        let viewController = EditMedicalInfoController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
     func logMeOut(){
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false

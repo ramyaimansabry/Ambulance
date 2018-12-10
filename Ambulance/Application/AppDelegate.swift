@@ -32,8 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // window?.rootViewController = CustomTabBarController()
         //UINavigationController(rootViewController: HomeDataSourceController())
         
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barStyle = .black
+       // UINavigationBar.appearance().isTranslucent = false
+      //  UINavigationBar.appearance().barStyle = .black
         
         
         window?.rootViewController = StartScreen()

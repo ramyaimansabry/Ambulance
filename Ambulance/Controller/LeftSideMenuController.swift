@@ -136,7 +136,8 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
             self.homeController?.ShowMyProfileViewController()
             break
         case 1:
-            
+            self.hide()
+            self.homeController?.ShowMyMediicalInfoController()
             break
         case 2:
             self.hide()

@@ -13,8 +13,9 @@
 		2D04CFE621BC4DEE008BFA9F /* LeftSideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFE521BC4DEE008BFA9F /* LeftSideMenuController.swift */; };
 		2D04CFE921BD2A1E008BFA9F /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFE821BD2A1E008BFA9F /* MenuRow.swift */; };
 		2D04CFEB21BD2A49008BFA9F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEA21BD2A49008BFA9F /* MenuCell.swift */; };
-		2D04CFED21BD4C51008BFA9F /* MyProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEC21BD4C51008BFA9F /* MyProfileController.swift */; };
+		2D04CFED21BD4C51008BFA9F /* EditMedicalInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEC21BD4C51008BFA9F /* EditMedicalInfoController.swift */; };
 		2D04CFEF21BD8A9C008BFA9F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEE21BD8A9C008BFA9F /* SettingController.swift */; };
+		2D04CFF121BED844008BFA9F /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFF021BED844008BFA9F /* EditProfileController.swift */; };
 		2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */; };
 		2D19431021AEB51B0054556C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19430F21AEB51B0054556C /* AppDelegate.swift */; };
 		2D19431A21AEB51B0054556C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D19431821AEB51B0054556C /* LaunchScreen.storyboard */; };
@@ -39,8 +40,9 @@
 		2D04CFE521BC4DEE008BFA9F /* LeftSideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideMenuController.swift; sourceTree = "<group>"; };
 		2D04CFE821BD2A1E008BFA9F /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
 		2D04CFEA21BD2A49008BFA9F /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
-		2D04CFEC21BD4C51008BFA9F /* MyProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileController.swift; sourceTree = "<group>"; };
+		2D04CFEC21BD4C51008BFA9F /* EditMedicalInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMedicalInfoController.swift; sourceTree = "<group>"; };
 		2D04CFEE21BD8A9C008BFA9F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
+		2D04CFF021BED844008BFA9F /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInfoTwo.swift; sourceTree = "<group>"; };
 		2D19430C21AEB51A0054556C /* Ambulance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ambulance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D19430F21AEB51B0054556C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,7 +151,8 @@
 				2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */,
 				2D19432E21AEB8330054556C /* HomeVC.swift */,
 				2D04CFE521BC4DEE008BFA9F /* LeftSideMenuController.swift */,
-				2D04CFEC21BD4C51008BFA9F /* MyProfileController.swift */,
+				2D04CFF021BED844008BFA9F /* EditProfileController.swift */,
+				2D04CFEC21BD4C51008BFA9F /* EditMedicalInfoController.swift */,
 				2D04CFEE21BD8A9C008BFA9F /* SettingController.swift */,
 			);
 			path = Controller;
@@ -325,11 +328,12 @@
 				2D04CFE421BC2DA9008BFA9F /* HomeVCInfoFour.swift in Sources */,
 				2D19432B21AEB79A0054556C /* SignInController.swift in Sources */,
 				2D19432F21AEB8330054556C /* HomeVC.swift in Sources */,
+				2D04CFF121BED844008BFA9F /* EditProfileController.swift in Sources */,
 				2D04CFE621BC4DEE008BFA9F /* LeftSideMenuController.swift in Sources */,
 				2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */,
 				2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */,
 				2D04CFDE21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift in Sources */,
-				2D04CFED21BD4C51008BFA9F /* MyProfileController.swift in Sources */,
+				2D04CFED21BD4C51008BFA9F /* EditMedicalInfoController.swift in Sources */,
 				2D19432D21AEB7EA0054556C /* SignUpController.swift in Sources */,
 				2D04CFE021BC02A4008BFA9F /* HomeCVViewInfoThree.swift in Sources */,
 				2D19431021AEB51B0054556C /* AppDelegate.swift in Sources */,
