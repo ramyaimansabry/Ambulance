@@ -39,6 +39,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         setupConstrains()
         SetupLoadingActivity()
         checkLocationServices()
+        LeftMenuGestureRecognizer()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -48,6 +49,11 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
     
     //   MARK :-  Main Methods
     /**********************************************************************************************/
+    lazy var LeftMenu: LeftSideMenuController = {
+        let vc = LeftSideMenuController()
+        vc.homeController = self
+        return vc
+    }()
     func callEmergencyOverDatabase(){
         SaveToDatabase()
     }
@@ -134,10 +140,43 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
     
     @objc func MenuButtonAction(){
         // menu stuff
-        
-        
-        
+        LeftMenu.show()
     }
+
+    func ShowMyProfileViewController(){
+        let viewController = MyProfileController()
+       navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func logMeOut(){
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Logout", target: self, selector: #selector(handleLogout))
+        alertView.addButton("Cancel") {    }
+        alertView.showError("Warning!", subTitle: "Logout ?")
+    }
+    
+    func Call123(){
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Call"){
+            guard let number = URL(string: "tel://123") else { return }
+            UIApplication.shared.open(number)
+        }
+        alertView.addButton("Cancel") {    }
+        alertView.showError("Warning!", subTitle: "Call 123 ?")
+       
+    }
+    
+    func ShowSettingController(){
+        let viewController = SettingController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     @objc func CallAmbulanceButtonAction(sender: UIButton!) {
         switch RequestEmergencyCounter {
         case 0:
@@ -209,6 +248,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
     @objc func  handleLogout() {
         do{
             try Auth.auth().signOut()
+            UserDefaults.standard.set(false, forKey: "IsLoggedIn")
+            UserDefaults.standard.synchronize()
         }catch let logError{
             print(logError)
         }
@@ -217,11 +258,19 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         present(AddNewviewController, animated: true, completion: nil)
         
     }
+    
     func SetupLoadingActivity(){
         NVActivityIndicatorView.DEFAULT_TYPE = .ballScaleRippleMultiple
         NVActivityIndicatorView.DEFAULT_COLOR = UIColor.red
         NVActivityIndicatorView.DEFAULT_BLOCKER_SIZE = CGSize(width: 250, height: 250)
     }
+    
+    func LeftMenuGestureRecognizer(){
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(MenuButtonAction))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+    }
+    
     
     func setViewToDefault(){
         CallAmbulanceButton.setTitle("Request Ambulance", for: .normal)

@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //UINavigationController(rootViewController: HomeDataSourceController())
         
         UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barStyle = .blackOpaque
+        UINavigationBar.appearance().barStyle = .black
         
         
         window?.rootViewController = StartScreen()

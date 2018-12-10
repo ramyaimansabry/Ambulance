@@ -19,8 +19,8 @@ class LoginSplashScreen: UIViewController{
         let SignUp = SignUpController()
         let SignUpNavigationController = UINavigationController(rootViewController: SignUp)
         self.present(SignUpNavigationController, animated: true, completion: nil)
-        let AddNewviewController = SignUpController()
-        present(AddNewviewController, animated: true, completion: nil)
+//        let AddNewviewController = SignUpController()
+//        present(AddNewviewController, animated: true, completion: nil)
     }
     
     // MARK :-  Setup Component

@@ -29,7 +29,6 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        print("1111111111")
         return true
     }
 

@@ -60,7 +60,6 @@ class SignInController: UIViewController,UITextFieldDelegate {
     }
   
     @objc func backButtonAction(sender: UIButton!) {
-        print("Back")
         dismiss(animated: true, completion: nil)
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

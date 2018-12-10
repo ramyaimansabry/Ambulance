@@ -10,6 +10,11 @@
 		2D04CFDE21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFDD21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift */; };
 		2D04CFE021BC02A4008BFA9F /* HomeCVViewInfoThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFDF21BC02A4008BFA9F /* HomeCVViewInfoThree.swift */; };
 		2D04CFE421BC2DA9008BFA9F /* HomeVCInfoFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFE321BC2DA9008BFA9F /* HomeVCInfoFour.swift */; };
+		2D04CFE621BC4DEE008BFA9F /* LeftSideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFE521BC4DEE008BFA9F /* LeftSideMenuController.swift */; };
+		2D04CFE921BD2A1E008BFA9F /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFE821BD2A1E008BFA9F /* MenuRow.swift */; };
+		2D04CFEB21BD2A49008BFA9F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEA21BD2A49008BFA9F /* MenuCell.swift */; };
+		2D04CFED21BD4C51008BFA9F /* MyProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEC21BD4C51008BFA9F /* MyProfileController.swift */; };
+		2D04CFEF21BD8A9C008BFA9F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEE21BD8A9C008BFA9F /* SettingController.swift */; };
 		2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */; };
 		2D19431021AEB51B0054556C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19430F21AEB51B0054556C /* AppDelegate.swift */; };
 		2D19431A21AEB51B0054556C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D19431821AEB51B0054556C /* LaunchScreen.storyboard */; };
@@ -31,6 +36,11 @@
 		2D04CFDD21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCViewInfoTwo.swift; sourceTree = "<group>"; };
 		2D04CFDF21BC02A4008BFA9F /* HomeCVViewInfoThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCVViewInfoThree.swift; sourceTree = "<group>"; };
 		2D04CFE321BC2DA9008BFA9F /* HomeVCInfoFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCInfoFour.swift; sourceTree = "<group>"; };
+		2D04CFE521BC4DEE008BFA9F /* LeftSideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideMenuController.swift; sourceTree = "<group>"; };
+		2D04CFE821BD2A1E008BFA9F /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
+		2D04CFEA21BD2A49008BFA9F /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		2D04CFEC21BD4C51008BFA9F /* MyProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileController.swift; sourceTree = "<group>"; };
+		2D04CFEE21BD8A9C008BFA9F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInfoTwo.swift; sourceTree = "<group>"; };
 		2D19430C21AEB51A0054556C /* Ambulance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ambulance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D19430F21AEB51B0054556C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D04CFE721BD29E7008BFA9F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D04CFE821BD2A1E008BFA9F /* MenuRow.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2D19430321AEB51A0054556C = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +101,7 @@
 		2D19430E21AEB51A0054556C /* Ambulance */ = {
 			isa = PBXGroup;
 			children = (
+				2D04CFE721BD29E7008BFA9F /* Model */,
 				2D19432521AEB6790054556C /* View */,
 				2D19432421AEB6730054556C /* Controller */,
 				2D19432321AEB6680054556C /* Application */,
@@ -129,6 +148,9 @@
 				2D19433421B2FB130054556C /* MedicalInfoOne.swift */,
 				2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */,
 				2D19432E21AEB8330054556C /* HomeVC.swift */,
+				2D04CFE521BC4DEE008BFA9F /* LeftSideMenuController.swift */,
+				2D04CFEC21BD4C51008BFA9F /* MyProfileController.swift */,
+				2D04CFEE21BD8A9C008BFA9F /* SettingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -140,6 +162,7 @@
 				2D04CFDD21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift */,
 				2D04CFDF21BC02A4008BFA9F /* HomeCVViewInfoThree.swift */,
 				2D04CFE321BC2DA9008BFA9F /* HomeVCInfoFour.swift */,
+				2D04CFEA21BD2A49008BFA9F /* MenuCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -295,19 +318,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D04CFEF21BD8A9C008BFA9F /* SettingController.swift in Sources */,
 				2D19432921AEB7480054556C /* StartScreen.swift in Sources */,
 				2D19433321AEBD940054556C /* LoginSplashScreen.swift in Sources */,
 				2D19432721AEB6B00054556C /* Extentions.swift in Sources */,
 				2D04CFE421BC2DA9008BFA9F /* HomeVCInfoFour.swift in Sources */,
 				2D19432B21AEB79A0054556C /* SignInController.swift in Sources */,
 				2D19432F21AEB8330054556C /* HomeVC.swift in Sources */,
+				2D04CFE621BC4DEE008BFA9F /* LeftSideMenuController.swift in Sources */,
 				2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */,
 				2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */,
 				2D04CFDE21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift in Sources */,
+				2D04CFED21BD4C51008BFA9F /* MyProfileController.swift in Sources */,
 				2D19432D21AEB7EA0054556C /* SignUpController.swift in Sources */,
 				2D04CFE021BC02A4008BFA9F /* HomeCVViewInfoThree.swift in Sources */,
 				2D19431021AEB51B0054556C /* AppDelegate.swift in Sources */,
 				2D41C53021B4664C0073BF90 /* HomeVCViewInfoOne.swift in Sources */,
+				2D04CFEB21BD2A49008BFA9F /* MenuCell.swift in Sources */,
+				2D04CFE921BD2A1E008BFA9F /* MenuRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
