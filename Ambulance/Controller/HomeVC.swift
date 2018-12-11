@@ -30,7 +30,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         view.backgroundColor = UIColor.red
         SVProgressHUD.setForegroundColor(UIColor.red)
         SVProgressHUD.setBackgroundColor(UIColor.clear)
-        
         // if user not logged in
             if Auth.auth().currentUser?.uid == nil {
                 perform(#selector(handleLogout), with: nil, afterDelay: 0)
@@ -38,7 +37,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         SetupComponentDelegetes()
         setupConstrains()
         SetupLoadingActivity()
-    //    checkLocationServices()
+         checkLocationServices()
         LeftMenuGestureRecognizer()
     }
     override func viewDidAppear(_ animated: Bool) {

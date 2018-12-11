@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
         
-     FirebaseApp.configure()
+        FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
+
         IQKeyboardManager.shared.enable = true
 
         
@@ -28,20 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        
-        // window?.rootViewController = CustomTabBarController()
-        //UINavigationController(rootViewController: HomeDataSourceController())
-        
-       // UINavigationBar.appearance().isTranslucent = false
-      //  UINavigationBar.appearance().barStyle = .black
-        
-        
         window?.rootViewController = StartScreen()
-        
-        
-        
-        
-        
         return true
     }
 
