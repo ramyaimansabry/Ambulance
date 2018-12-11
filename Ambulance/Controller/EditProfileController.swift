@@ -16,10 +16,8 @@ class EditProfileController: UIViewController {
     var changed: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = UIColor.white
-//        backButton.isEnabled=true
-//        SaveButtonn.isEnabled = false
+        
         setupViews()
         LoadUserInfo()
         AddtextfieldDelegete()
@@ -86,18 +84,26 @@ class EditProfileController: UIViewController {
         }
         SVProgressHUD.show()
         SVProgressHUD.setDefaultMaskType(.clear)
+        Auth.auth().currentUser?.updateEmail(to: email) { (error) in
+            if let error = error {
+                print(error)
+                self.dismissRingIndecator()
+                SCLAlertView().showError("Error", subTitle: error.localizedDescription)
+                return
+            }
+        }
         let userID = (Auth.auth().currentUser?.uid)!
         let ref = Database.database().reference().child("users").child(userID)
-        
+
         let values = ["First Name": name,"Last Name": lastName, "Email": email, "Phone": phone]
         ref.updateChildValues(values, withCompletionBlock: { (error, ref) in
-            
+
             if error != nil {
                 let showError:String = error?.localizedDescription ?? ""
                 SCLAlertView().showError("Error", subTitle: showError)
                 return
             }
-          
+
             // succeed ..
             self.dismissRingIndecator()
             SCLAlertView().showSuccess("Done", subTitle: "Info Saved Correctly")
@@ -177,7 +183,10 @@ class EditProfileController: UIViewController {
         PhoneTextField.isEnabled = false
         EmailTextField.isEnabled = false
     }
-
+    @objc func ChangePasswordButtonAction(){
+        let viewController = ChanagePasswordController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
     
     //   MARK :- Constrains
     /**********************************************************************************************/
@@ -204,8 +213,8 @@ class EditProfileController: UIViewController {
         stackView2.addArrangedSubview(stackView5)
         stackView2.addArrangedSubview(EmailTextField)
         stackView2.addArrangedSubview(PhoneTextField)
-//        stackView2.addArrangedSubview(PasswordTextField)
-//        stackView2.addArrangedSubview(ConfirmPasswordTextField)
+        stackView2.addArrangedSubview(ChangePasswordButton)
+
         
         stackView7.addArrangedSubview(TitleLabel)
         stackView7.addArrangedSubview(subTitleLabel)
@@ -233,10 +242,8 @@ class EditProfileController: UIViewController {
         stackView5.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         EmailTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         PhoneTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
-//        PasswordTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
-//        ConfirmPasswordTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
-        
-        
+        ChangePasswordButton.anchor(top: nil, leading: nil, bottom: nil, trailing: stackView2.trailingAnchor)
+
               IconImage.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 85, height: 85))
     
     }
@@ -316,12 +323,9 @@ class EditProfileController: UIViewController {
         button.addTarget(self, action: #selector(SaveButtonAction), for: .touchUpInside)
         return button
     }()
-    
-    
-    
     let TitleLabel : UILabel = {
         var label = UILabel()
-        label.text = "Edit Profile"
+        label.text = "Error"
         label.tintColor = UIColor.black
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.backgroundColor = UIColor.white
@@ -341,30 +345,6 @@ class EditProfileController: UIViewController {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-//    let PasswordTextField: UITextField = {
-//        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
-//        tx.placeholder = "Password"
-//        tx.font = UIFont.systemFont(ofSize: 15)
-//        tx.borderStyle = UITextField.BorderStyle.roundedRect
-//        tx.autocorrectionType = UITextAutocorrectionType.no
-//        tx.keyboardType = UIKeyboardType.default
-//        tx.returnKeyType = UIReturnKeyType.done
-//        tx.clearButtonMode = UITextField.ViewMode.whileEditing;
-//        tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-//        return tx
-//    }()
-//    let ConfirmPasswordTextField: UITextField = {
-//        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
-//        tx.placeholder = "Confirm Password"
-//        tx.font = UIFont.systemFont(ofSize: 15)
-//        tx.borderStyle = UITextField.BorderStyle.roundedRect
-//        tx.autocorrectionType = UITextAutocorrectionType.no
-//        tx.keyboardType = UIKeyboardType.default
-//        tx.returnKeyType = UIReturnKeyType.done
-//        tx.clearButtonMode = UITextField.ViewMode.whileEditing;
-//        tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-//        return tx
-//    }()
     let PhoneTextField: UITextField = {
         let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Phone"
@@ -406,7 +386,7 @@ class EditProfileController: UIViewController {
     }()
     let subTitleLabel : UILabel = {
         var label = UILabel()
-        label.text = "Updating your info makes it easy for healping you"
+        label.text = "Error"
         label.font = UIFont.boldSystemFont(ofSize: 17)
         //   label.backgroundColor = UIColor.gray
         label.textAlignment = .center
@@ -447,7 +427,17 @@ class EditProfileController: UIViewController {
         button.addTarget(self, action: #selector(EditButtonAction), for: .touchUpInside)
         return button
     }()
-    
+    let ChangePasswordButton: UIButton = {
+        let button = UIButton.init(type: .system)
+        button.setTitle("Change Password", for: .normal)
+        button.frame.size = CGSize(width: 35, height: 35)
+        button.layer.cornerRadius = 3
+        button.backgroundColor = UIColor.white
+        button.setTitleColor(UIColor.blue, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(ChangePasswordButtonAction), for: .touchUpInside)
+        return button
+    }()
     
     
     

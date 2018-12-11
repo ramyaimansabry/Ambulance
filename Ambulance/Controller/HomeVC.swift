@@ -180,6 +180,13 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    
+    // ****************************************************************************************************************
+    func hideAllRequestViews(){
+        firstView.hide()
+        secandView.hide()
+        thirdView.hide()
+    }
     @objc func CallAmbulanceButtonAction(sender: UIButton!) {
         switch RequestEmergencyCounter {
         case 0:
