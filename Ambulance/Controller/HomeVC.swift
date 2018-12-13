@@ -20,7 +20,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
     let firstView = HomeVCViewInfoOne()
     let secandView = HomeVCViewInfoTwo()
     let thirdView = HomeCVViewInfoThree()
-    let fourthView = HomeVCInfoFour()
+   // let fourthView = HomeVCInfoFour()
     
     var RequestEmergencyCounter: Int = 1
     var centerLocation: CLLocation?
@@ -30,15 +30,17 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         view.backgroundColor = UIColor.red
         SVProgressHUD.setForegroundColor(UIColor.red)
         SVProgressHUD.setBackgroundColor(UIColor.clear)
+        
         // if user not logged in
             if Auth.auth().currentUser?.uid == nil {
                 perform(#selector(handleLogout), with: nil, afterDelay: 0)
             }
+        
         SetupComponentDelegetes()
         setupConstrains()
         SetupLoadingActivity()
          checkLocationServices()
-        LeftMenuGestureRecognizer()
+       
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -48,11 +50,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
     
     //   MARK :-  Main Methods
     /**********************************************************************************************/
-    lazy var LeftMenu: LeftSideMenuController = {
-        let vc = LeftSideMenuController()
-        vc.homeController = self
-        return vc
-    }()
     func callEmergencyOverDatabase(){
         SaveToDatabase()
     }
@@ -85,7 +82,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         let usersReference = ref.child("waiting Emergencies").child(userID)
         let timeEmergency: String = String(NSDate().timeIntervalSince1970)
         
-        let values = ["Patients Number": String(numberOfPatients),"Emergency Type": selectedEmergencyType, "Emergency For Owner?": EmergencyForOwnerId,"User Latitude": Latitude, "User Longitude": Longitude, "Accepted by?": "NONE", "Time Created": timeEmergency]
+        let values = ["PatientsNumber": String(numberOfPatients),"EmergencyType": selectedEmergencyType, "EmergencyForOwner": EmergencyForOwnerId,"UserLatitude": Latitude, "UserLongitude": Longitude, "AcceptedBy": "NONE", "TimeCreated": timeEmergency, "FromId": String(userID)]
         usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
                 let showError:String = error?.localizedDescription ?? ""
@@ -102,10 +99,11 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         
     }
     var ResponserID = ""
-    
+    var DriverLatitude: String =  ""
+    var DriverLongitude: String =  ""
     func readIfEmergencyAccepted(){
         let userID = (Auth.auth().currentUser?.uid)!
-        let ref = Database.database().reference().child("waiting Emergencies").child(userID).child("Accepted by?")
+        let ref = Database.database().reference().child("waiting Emergencies").child(userID).child("AcceptedBy")
         ref.observe(.value, with: { (snapshot) in
             let answers: String = snapshot.value as! String
              if answers != "NONE" {
@@ -122,26 +120,55 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         }, withCancel: nil)
     }
     func readResponserinformation(){
-          print("***************************************************")
-        let ref = Database.database().reference().child("drivers").child(ResponserID)
+        let ref = Database.database().reference().child("drivers").child(ResponserID).child("Phone")
        ref.observe(.value, with: { (snapshot) in
-        print(snapshot)
-            if let dictionary = snapshot.value as? [String: Any] {
-                
-                print("*******************")
-                print(dictionary)
+        self.driverPhoneNumber = snapshot.value as! String
+          print(self.driverPhoneNumber)
+         }, withCancel: nil)
+        
+         let userID = (Auth.auth().currentUser?.uid)!
+        let ref2 = Database.database().reference().child("waiting Emergencies").child(userID)
+        ref2.observe(.value, with: { (snapshot) in
+            if let Long: String = snapshot.childSnapshot(forPath: "DriverLongitude").value as? String {
+                print(Long)
+                DispatchQueue.main.async {
+                  self.DriverLongitude = Long
+                }
                 
             }
+            if let Lat: String = snapshot.childSnapshot(forPath: "DriverLatitude").value as? String {
+                print(Lat)
+                DispatchQueue.main.async {
+                    self.DriverLatitude = Lat
+                }
+            }
+            
+        }, withCancel: nil)
         
-         }, withCancel: nil)
+        
     }
-    
+    var driverPhoneNumber: String = "000"
+    func callAcceptedDriver(){
+        print("Call Driver Function Called")
+        guard let number = URL(string: "tel://\(driverPhoneNumber)") else { return }
+        UIApplication.shared.open(number)
+    }
     
     @objc func MenuButtonAction(){
         // menu stuff
         LeftMenu.show()
     }
-
+    lazy var LeftMenu: LeftSideMenuController = {
+        let vc = LeftSideMenuController()
+        vc.homeController = self
+        return vc
+    }()
+    lazy var fourthView: HomeVCInfoFour = {
+        let vc = HomeVCInfoFour()
+        vc.homeController = self
+        return vc
+    }()
+    
     func ShowMyProfileViewController(){
         let viewController = EditProfileController()
        navigationController?.pushViewController(viewController, animated: true)
@@ -161,16 +188,19 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
     }
     
     func Call123(){
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: false
-        )
-        let alertView = SCLAlertView(appearance: appearance)
-        alertView.addButton("Call"){
-            guard let number = URL(string: "tel://123") else { return }
-            UIApplication.shared.open(number)
-        }
-        alertView.addButton("Cancel") {    }
-        alertView.showError("Warning!", subTitle: "Call 123 ?")
+        guard let number = URL(string: "tel://123") else { return }
+        UIApplication.shared.open(number)
+        
+//        let appearance = SCLAlertView.SCLAppearance(
+//            showCloseButton: false
+//        )
+//        let alertView = SCLAlertView(appearance: appearance)
+//        alertView.addButton("Call"){
+//            guard let number = URL(string: "tel://123") else { return }
+//            UIApplication.shared.open(number)
+//        }
+//        alertView.addButton("Cancel") {    }
+//        alertView.showError("Warning!", subTitle: "Call 123 ?")
        
     }
     
@@ -272,12 +302,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate, NVA
         NVActivityIndicatorView.DEFAULT_TYPE = .ballScaleRippleMultiple
         NVActivityIndicatorView.DEFAULT_COLOR = UIColor.red
         NVActivityIndicatorView.DEFAULT_BLOCKER_SIZE = CGSize(width: 250, height: 250)
-    }
-    
-    func LeftMenuGestureRecognizer(){
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(MenuButtonAction))
-        swipeLeft.direction = .left
-        self.view.addGestureRecognizer(swipeLeft)
     }
     
     

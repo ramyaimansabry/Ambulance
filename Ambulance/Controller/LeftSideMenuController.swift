@@ -85,11 +85,13 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
                 self.collectionView.frame = CGRect(x: 0, y: 0, width: 0, height: self.leftView.frame.height-70)
             }) { (Completed: Bool) in
                 // do stuff her ...........
-                print("+++++")
+                print("completion block")
+               
                 
             }
         }
     }
+   
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizer.Direction.left {
             print("Swipe Left")
@@ -122,7 +124,7 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: leftView.frame.width-5, height: 65)
+        return CGSize(width: collectionView.frame.width-10, height: 65)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let Rows = rows[indexPath.item]
@@ -132,8 +134,9 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
         }
         switch indexPath.item {
         case 0:
-            self.hide()
             self.homeController?.ShowMyProfileViewController()
+            self.hide()
+           
             break
         case 1:
             self.hide()

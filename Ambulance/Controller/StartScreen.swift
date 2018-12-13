@@ -14,14 +14,6 @@ class StartScreen: UINavigationController {
         
         setupViews()
         
-        // MARK:- reemove later for onboarding screens
-        // ***************************************************************************
-        //        let homeController = CustomTabBarController()
-        //        viewControllers = [homeController]
-        
-//        UserDefaults.standard.set(true, forKey: "IsLoggedIn")
-//        UserDefaults.standard.synchronize()
-        
         if isLoggedIn() {
             let homeController = HomeVC()
             viewControllers = [homeController]

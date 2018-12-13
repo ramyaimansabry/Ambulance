@@ -10,7 +10,7 @@ import UIKit
 
 class HomeVCInfoFour: NSObject {
     let ViewFour = UIView()
-    
+     var homeController: HomeVC?
     
     override init() {
         super.init()
@@ -50,8 +50,8 @@ class HomeVCInfoFour: NSObject {
     }
     @objc func CallButtonTapped(){
       print("Call Button Tapped")
-        
-    
+        homeController?.callAcceptedDriver()
+       
     }
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizer.Direction.up {
