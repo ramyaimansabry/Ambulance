@@ -33,6 +33,11 @@ class HomeVCViewInfoOne: NSObject {
             self.ViewOne.alpha = 0
         }
     }
+    func hideAndResetToDefualt(){
+        self.ViewOne.alpha = 0
+            self.numberOfPatients = 1
+            self.NumberLabel.text = String(self.numberOfPatients)
+    }
     @objc func PlusButtonAction(){
         if numberOfPatients < 10 {
             numberOfPatients += 1

@@ -199,6 +199,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     }
     @objc func MenuButtonAction(){
         // menu stuff
+        setViewToDefault()
         LeftMenu.show()
     }
     lazy var LeftMenu: LeftSideMenuController = {
@@ -354,28 +355,13 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     func setViewToDefault(){
         CallAmbulanceButton.setTitle("Request Ambulance", for: .normal)
         RequestEmergencyCounter = 1
-        
-   //     numberOfPatients = 1
-  //      selectedEmergencyType = "Accident"
-        
-        
-//        ButtonInfoThree2.backgroundColor = UIColor.red
-//        ButtonInfoThree2.setTitleColor(UIColor.white, for: .normal)
-//        ButtonInfoThree1.backgroundColor = UIColor.white
-//        ButtonInfoThree1.setTitleColor(UIColor.gray, for: .normal)
-//        requestOwner = false
-        
-       // buttons?.forEach { $0.isSelected = false }
-        
-        
-        
-     //   ButtonInfo2.isSelected = true
-        
-    //    NumberLabel.text = String(numberOfPatients)
-        
+        firstView.hideAndResetToDefualt()
+        secandView.hideAndResetToDefualt()
+        thirdView.hideAndResetToDefualt()
+  
         
         // hide the two views....
-    }
+   }
     func dismissRingIndecator(){
         DispatchQueue.main.async {
             SVProgressHUD.dismiss()
@@ -433,198 +419,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         view.addSubview(mapView)
         mapView.delegate = self
         mapView.isHidden = false
-        
-        
-        
-//        do {
-//            // Set the map style by passing the URL of the local file.
-//            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
-//                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-//            } else {
-//                NSLog("Unable to find style.json")
-//            }
-//        } catch {
-//            NSLog("One or more of the map styles failed to load. \(error)")
-//        }
-        
-       
-        
+ 
     }
-    var NightMode: Bool = false
-    @objc func mapStyle(){
-        NightMode = !NightMode
-        if NightMode {
-            mapDarkMode()
-        }
-        else {
-          mapLightMode()
-        }
-    }
-    
-    func setupAppStyle(){
-        if UserDefaults.standard.bool(forKey: "NightMode"){
-           mapDarkMode()
-        }
-        else {
-            mapLightMode()
-        }
-    }
-  
-    func mapLightMode(){
-        UserDefaults.standard.set(false, forKey: "NightMode")
-        UserDefaults.standard.synchronize()
-        DispatchQueue.main.async {
-            self.TitleLabel.textColor = UIColor.darkGray
-            self.MapStyleButton.setBackgroundImage(UIImage(named: "EarthICONBlack"), for: .normal)
-            self.MenuButton.setBackgroundImage(UIImage(named: "MenuICON"), for: .normal)
-            self.MyLocationButton.setBackgroundImage(UIImage(named: "GPS-ICON"), for: .normal)
-            do {
-                if let styleURL = Bundle.main.url(forResource: "LightStyle", withExtension: "json") {
-                    self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
-        }
-    }
-    
-    func mapDarkMode(){
-        UserDefaults.standard.set(true, forKey: "NightMode")
-        UserDefaults.standard.synchronize()
-         UINavigationBar.appearance().barStyle = .blackOpaque
-        DispatchQueue.main.async {
-            UINavigationBar.appearance().barStyle = .blackOpaque
-            self.TitleLabel.textColor = UIColor.white
-            self.MapStyleButton.setBackgroundImage(UIImage(named: "EarthICONWhite"), for: .normal)
-            self.MenuButton.setBackgroundImage(UIImage(named: "MenuICONWhite"), for: .normal)
-            self.MyLocationButton.setBackgroundImage(UIImage(named: "LocationICONWhite"), for: .normal)
-            do {
-                if let styleURL = Bundle.main.url(forResource: "DarkStyle", withExtension: "json") {
-                    self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
-        }
-    
-    }
-    
-    
-    
-    // ***********************************************************************************************************
-    // ***********************************************************************************************************
-    // ***********************************************************************************************************
-    // ***********************************************************************************************************
-    func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
-        
-        
-        DispatchQueue.main.async {
-  
-            let london = GMSMarker(position: source)
-            london.title = "Emergency Location"
-            london.icon = UIImage(named: "EmergencyLocation")
-            london.map = self.mapView
-        }
-        
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        mapView.clear()
-        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&key=AIzaSyCLoZloFvbwIYIluj1gDNP3zg9teOHvR4Q")!
-        print(url)
-        let task = session.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            if error != nil {
-                print(error!.localizedDescription)
-                print(error)
-                print("error")
-            }
-            else {
-                do {
-                    if let json : [String:Any] = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]{
-                        
-                        guard let routes = json["routes"] as? NSArray else {
-                            DispatchQueue.main.async {
-                            }
-                            return
-                        }
-                        
-                        if (routes.count > 0) {
-                            let overview_polyline = routes[0] as? NSDictionary
-                            let dictPolyline = overview_polyline?["overview_polyline"] as? NSDictionary
-                            
-                            let points = dictPolyline?.object(forKey: "points") as? String
-                            
-                           
-                            
-                            DispatchQueue.main.async {
-                                
-                                 self.showPath(polyStr: points!)
-                               let bounds = GMSCoordinateBounds(coordinate: source, coordinate: destination)
-                               let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 170, left: 30, bottom: 30, right: 30))
-                                self.mapView!.moveCamera(update)
-                                
-                                
-                              //  let position = CLLocationCoordinate2D(latitude: 51.5, longitude: -0.127)
-                                let london = GMSMarker(position: destination)
-                                london.title = "Ambulance"
-                                london.icon = UIImage(named: "AmbulanceLocation")
-                                london.map = self.mapView
-                            }
-                        }
-                        else {
-                            DispatchQueue.main.async {
-                               
-                            }
-                        }
-                    }
-                    
-                }
-                catch {
-                    print("error in JSONSerialization")
-                    DispatchQueue.main.async {
-                       
-                    }
-                }
-            }
-        })
-        task.resume()
-    }
-    
-    func showPath(polyStr :String){
-        let path = GMSPath(fromEncodedPath: polyStr)
-        let polyline = GMSPolyline(path: path)
-        polyline.strokeWidth = 4.0
-        polyline.strokeColor = UIColor.red
-        polyline.map = mapView // Your map view
-    }
-    
-    // ***********************************************************************************************************
-    // ***********************************************************************************************************
-    // ***********************************************************************************************************
-    // ***********************************************************************************************************
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -651,14 +447,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         centerLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
  
     }
- 
-
-    
-    
-    
-    
-    
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
     }
@@ -667,9 +455,159 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         SCLAlertView().showError("Error", subTitle: "Location Unavailable!")
     }
     
-
+    // MARK: - Map Directions
+    /**************************************************************************************************/
     
+    func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
+        DispatchQueue.main.async {
+            
+            let london = GMSMarker(position: source)
+            london.title = "Emergency Location"
+            london.icon = UIImage(named: "EmergencyLocation")
+            london.map = self.mapView
+        }
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        mapView.clear()
+        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&key=AIzaSyCLoZloFvbwIYIluj1gDNP3zg9teOHvR4Q")!
+        print(url)
+        let task = session.dataTask(with: url, completionHandler: {
+            (data, response, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+                print("error")
+            }
+            else {
+                do {
+                    if let json : [String:Any] = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]{
+                        
+                        guard let routes = json["routes"] as? NSArray else {
+                            DispatchQueue.main.async {
+                            }
+                            return
+                        }
+                        
+                        if (routes.count > 0) {
+                            let overview_polyline = routes[0] as? NSDictionary
+                            let dictPolyline = overview_polyline?["overview_polyline"] as? NSDictionary
+                            
+                            let points = dictPolyline?.object(forKey: "points") as? String
+                            
+                            
+                            
+                            DispatchQueue.main.async {
+                                
+                                self.showPath(polyStr: points!)
+                                let bounds = GMSCoordinateBounds(coordinate: source, coordinate: destination)
+                                let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 170, left: 30, bottom: 30, right: 30))
+                                self.mapView!.moveCamera(update)
+                                
+                                
+                                let london = GMSMarker(position: destination)
+                                london.title = "Ambulance"
+                                london.icon = UIImage(named: "AmbulanceLocation")
+                                london.map = self.mapView
+                            }
+                        }
+                        else {
+                            DispatchQueue.main.async {
+                                
+                            }
+                        }
+                    }
+                    
+                }
+                catch {
+                    print("error in JSONSerialization")
+                    DispatchQueue.main.async {
+                        
+                    }
+                }
+            }
+        })
+        task.resume()
+    }
+    
+    func showPath(polyStr :String){
+        let path = GMSPath(fromEncodedPath: polyStr)
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeWidth = 4.0
+        polyline.strokeColor = UIColor.red
+        polyline.map = mapView // Your map view
+    }
 
+    // MARK: - Map Style
+    /**************************************************************************************************/
+    
+    var NightMode: Bool = false
+    @objc func mapStyle(){
+        NightMode = !NightMode
+        if NightMode {
+            mapDarkMode()
+        }
+        else {
+            mapLightMode()
+        }
+    }
+    
+    func setupAppStyle(){
+        if UserDefaults.standard.bool(forKey: "NightMode"){
+            mapDarkMode()
+            NightMode = true
+        }
+        else {
+            mapLightMode()
+            NightMode = false
+        }
+    }
+    
+    func mapLightMode(){
+        UserDefaults.standard.set(false, forKey: "NightMode")
+        UserDefaults.standard.synchronize()
+        DispatchQueue.main.async {
+            self.TitleLabel.textColor = UIColor.darkGray
+            self.MapStyleButton.setBackgroundImage(UIImage(named: "EarthICONBlack"), for: .normal)
+            self.MenuButton.setBackgroundImage(UIImage(named: "MenuICON"), for: .normal)
+            self.MyLocationButton.setBackgroundImage(UIImage(named: "GPS-ICON"), for: .normal)
+            do {
+                if let styleURL = Bundle.main.url(forResource: "LightStyle", withExtension: "json") {
+                    self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
+            }
+        }
+    }
+    
+    func mapDarkMode(){
+        UserDefaults.standard.set(true, forKey: "NightMode")
+        UserDefaults.standard.synchronize()
+        UINavigationBar.appearance().barStyle = .blackOpaque
+        DispatchQueue.main.async {
+            UINavigationBar.appearance().barStyle = .blackOpaque
+            self.TitleLabel.textColor = UIColor.white
+            self.MapStyleButton.setBackgroundImage(UIImage(named: "EarthICONWhite"), for: .normal)
+            self.MenuButton.setBackgroundImage(UIImage(named: "MenuICONWhite"), for: .normal)
+            self.MyLocationButton.setBackgroundImage(UIImage(named: "LocationICONWhite"), for: .normal)
+            do {
+                if let styleURL = Bundle.main.url(forResource: "DarkStyle", withExtension: "json") {
+                    self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
+            }
+        }
+        
+    }
+    
+    
+    
+    
     // MARK: - Setup Constrains
     /**************************************************************************************************/
     private func setupConstrains(){

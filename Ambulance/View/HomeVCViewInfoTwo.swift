@@ -54,6 +54,13 @@ class HomeVCViewInfoTwo: NSObject {
         }
     }
     
+    func hideAndResetToDefualt(){
+         self.ViewTwo.alpha = 0
+            self.selectedEmergencyType = "Accident"
+            self.buttons?.forEach { $0.isSelected = false }
+            self.ButtonInfo2.isSelected = true
+    }
+    
     @objc func EmergencyTypeButtonTapped(sender:UIButton){
         buttons?.forEach { $0.isSelected = false }
         sender.isSelected = true
@@ -81,7 +88,6 @@ class HomeVCViewInfoTwo: NSObject {
         default:
             break
         }
-        print(selectedEmergencyType)
     }
     
     

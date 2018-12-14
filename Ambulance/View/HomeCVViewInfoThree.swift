@@ -45,6 +45,11 @@ class HomeCVViewInfoThree: NSObject {
         }
     }
     
+    func hideAndResetToDefualt(){
+          self.ViewThree.alpha = 0
+            self.requestOwner = false
+    }
+    
     @objc func  ButtonInfoThreeTapped(sender: UIButton!){
         switch sender {
         case ButtonInfoThree1:
@@ -64,7 +69,6 @@ class HomeCVViewInfoThree: NSObject {
         default:
             break
         }
-        print(requestOwner)
     }
     
     private func setupConstrains(){
