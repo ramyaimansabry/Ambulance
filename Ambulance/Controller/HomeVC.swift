@@ -252,6 +252,31 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         let viewController = SettingController()
         navigationController?.pushViewController(viewController, animated: true)
     }
+    @objc func backButtonAction(){
+        setViewToDefault()
+        hideBackButton()
+    }
+    func showBackButton(){
+       let yValue =  self.view.safeAreaInsets.top+20
+        MenuButton.isEnabled = false
+        MenuButton.isHidden = true
+        view.addSubview(backButton)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.backButton.alpha = 1
+            self.backButton.frame = CGRect(x: 30, y: yValue, width: 40, height: 40)
+        })
+        
+    }
+    func hideBackButton(){
+        MenuButton.isEnabled = true
+        MenuButton.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.backButton.alpha = 0
+            self.backButton.frame = CGRect(x: 30, y: 0, width: 40, height: 40)
+        })
+        
+    }
+    
     
     
     // ****************************************************************************************************************
@@ -266,6 +291,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             break
         case 1:
             CallAmbulanceButton.setTitle("Next", for: .normal)
+            showBackButton()
             firstView.show()
             RequestEmergencyCounter += 1
             break
@@ -290,6 +316,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             break
         case 5:
             HideUnnecessaryView()
+            hideBackButton()
             callEmergencyOverDatabase()
              //    setViewToDefault()
             break
@@ -696,6 +723,20 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         label.backgroundColor = UIColor.clear
         label.textAlignment = .center
         return label
+    }()
+    let backButton: UIButton = {
+        let button = UIButton.init(type: .system)
+        button.setTitle("", for: .normal)
+        button.frame.size = CGSize(width: 35, height: 35)
+        button.layer.cornerRadius = 3
+        button.backgroundColor = UIColor.clear
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.setBackgroundImage(UIImage(named: "backICON"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.isEnabled = true
+        button.alpha = 0
+        button.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        return button
     }()
     let MapPinICON : UIImageView = {
         var image = UIImageView()

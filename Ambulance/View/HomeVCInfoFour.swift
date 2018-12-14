@@ -55,7 +55,6 @@ class HomeVCInfoFour: NSObject {
     }
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizer.Direction.up {
-            print("Swipe Up")
             let window = UIApplication.shared.keyWindow!
             UIView.animate(withDuration: 0.3, animations: {
                 let y = window.frame.height-250-self.ViewFour.safeAreaInsets.bottom
@@ -65,7 +64,6 @@ class HomeVCInfoFour: NSObject {
             
         }
          else if gesture.direction == UISwipeGestureRecognizer.Direction.down {
-            print("Swipe Down")
             let window = UIApplication.shared.keyWindow!
             UIView.animate(withDuration: 0.3, animations: {
                 let y = window.frame.height-self.ViewFour.safeAreaInsets.bottom-70
