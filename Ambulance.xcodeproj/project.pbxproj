@@ -30,6 +30,9 @@
 		2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19433421B2FB130054556C /* MedicalInfoOne.swift */; };
 		2D41C53021B4664C0073BF90 /* HomeVCViewInfoOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D41C52F21B4664C0073BF90 /* HomeVCViewInfoOne.swift */; };
 		2D41C53221B48DF90073BF90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D41C53121B48DF90073BF90 /* Assets.xcassets */; };
+		2DAFFE8B21C2F93F00D53962 /* DarkStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DAFFE8A21C2F93F00D53962 /* DarkStyle.json */; };
+		2DAFFE8D21C2FFF300D53962 /* LightStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DAFFE8C21C2FFF300D53962 /* LightStyle.json */; };
+		2DAFFE8F21C3F4D100D53962 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFFE8E21C3F4D100D53962 /* Location.swift */; };
 		5D56D64A1B8BDDEF2D2C2CFC /* Pods_Ambulance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12960EC0FA51D63CDD32103C /* Pods_Ambulance.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +63,9 @@
 		2D19433421B2FB130054556C /* MedicalInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInfoOne.swift; sourceTree = "<group>"; };
 		2D41C52F21B4664C0073BF90 /* HomeVCViewInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCViewInfoOne.swift; sourceTree = "<group>"; };
 		2D41C53121B48DF90073BF90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2DAFFE8A21C2F93F00D53962 /* DarkStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DarkStyle.json; sourceTree = "<group>"; };
+		2DAFFE8C21C2FFF300D53962 /* LightStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LightStyle.json; sourceTree = "<group>"; };
+		2DAFFE8E21C3F4D100D53962 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		F2BFF1C54A7C2788AC60CAE2 /* Pods-Ambulance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ambulance.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance.release.xcconfig"; sourceTree = "<group>"; };
 		F897BDC490A1D6BE3F9DA40C /* Pods-Ambulance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ambulance.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				2D04CFE821BD2A1E008BFA9F /* MenuRow.swift */,
+				2DAFFE8E21C3F4D100D53962 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -122,6 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				2D41C53121B48DF90073BF90 /* Assets.xcassets */,
+				2DAFFE8A21C2F93F00D53962 /* DarkStyle.json */,
+				2DAFFE8C21C2FFF300D53962 /* LightStyle.json */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -202,6 +211,7 @@
 				2D19430921AEB51A0054556C /* Frameworks */,
 				2D19430A21AEB51A0054556C /* Resources */,
 				9E3C4D58198951B05F835A2A /* [CP] Embed Pods Frameworks */,
+				6C56AB22CD8FEA750177AD2A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -251,14 +261,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D19431A21AEB51B0054556C /* LaunchScreen.storyboard in Resources */,
+				2DAFFE8D21C2FFF300D53962 /* LightStyle.json in Resources */,
 				2D41C53221B48DF90073BF90 /* Assets.xcassets in Resources */,
 				2D19433121AEBC5D0054556C /* GoogleService-Info.plist in Resources */,
+				2DAFFE8B21C2F93F00D53962 /* DarkStyle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6C56AB22CD8FEA750177AD2A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7650FCD28A5431D5B82A117F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -337,6 +373,7 @@
 				2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */,
 				2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */,
 				2D04CFDE21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift in Sources */,
+				2DAFFE8F21C3F4D100D53962 /* Location.swift in Sources */,
 				2D04CFED21BD4C51008BFA9F /* EditMedicalInfoController.swift in Sources */,
 				2D19432D21AEB7EA0054556C /* SignUpController.swift in Sources */,
 				2D04CFE021BC02A4008BFA9F /* HomeCVViewInfoThree.swift in Sources */,

@@ -9,7 +9,8 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
-
+import GoogleMaps
+import GooglePlaces
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,16 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-       
         
+       
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
 
         IQKeyboardManager.shared.enable = true
 
-        
-        //        let db = Database.database().reference()
-        //        db.setValue("Hello Firebase")
+        GMSServices.provideAPIKey("AIzaSyCLoZloFvbwIYIluj1gDNP3zg9teOHvR4Q")
+        GMSPlacesClient.provideAPIKey("AIzaSyCLoZloFvbwIYIluj1gDNP3zg9teOHvR4Q")
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()

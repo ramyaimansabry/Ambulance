@@ -13,6 +13,7 @@ class HomeVCViewInfoTwo: NSObject {
      var selectedEmergencyType: String = "Accident"
       var buttons: [UIButton]?
     var width: CGFloat?
+     var height: CGFloat?
     override init() {
         super.init()
         buttons = [ButtonInfo1, ButtonInfo2, ButtonInfo3, ButtonInfo4, ButtonInfo5, ButtonInfo6]
@@ -33,6 +34,8 @@ class HomeVCViewInfoTwo: NSObject {
             
             width = (ViewTwo.frame.width-40)/3
             width = width!/1.8
+            height = (ViewTwo.frame.height-40)/3
+            height = height!/1.8
             setupConstrains()
             
             UIView.animate(withDuration: 0.5, animations: {
@@ -88,26 +91,26 @@ class HomeVCViewInfoTwo: NSObject {
         
         
         
-        ButtonInfo1.anchor(top: ViewTwo.topAnchor, leading: ButtonInfo2.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 25, left: 50, bottom: 0, right: 0),size: CGSize(width: width!, height: width!))
+        ButtonInfo1.anchor(top: ViewTwo.topAnchor, leading: ButtonInfo2.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 25, left: 50, bottom: 0, right: 0),size: CGSize(width: width!, height: height!))
         TitleButtonInfo1.anchor(top: ButtonInfo1.bottomAnchor, leading: ButtonInfo1.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         
         
-        ButtonInfo2.anchor(top: ViewTwo.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 25, left: 0, bottom: 0, right: 0),size: CGSize(width: width!, height: width!))
+        ButtonInfo2.anchor(top: ViewTwo.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 25, left: 0, bottom: 0, right: 0),size: CGSize(width: width!, height: height!))
         ButtonInfo2.centerXAnchor.constraint(equalTo: self.ViewTwo.centerXAnchor).isActive = true
         TitleButtonInfo2.anchor(top: ButtonInfo2.bottomAnchor, leading: ButtonInfo2.leadingAnchor, bottom: nil, trailing: ButtonInfo2.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         
-        ButtonInfo3.anchor(top: ViewTwo.topAnchor, leading: nil, bottom: nil, trailing: ButtonInfo2.leadingAnchor, padding: .init(top: 25, left: 0, bottom: 0, right: 50),size: CGSize(width: width!, height: width!))
+        ButtonInfo3.anchor(top: ViewTwo.topAnchor, leading: nil, bottom: nil, trailing: ButtonInfo2.leadingAnchor, padding: .init(top: 25, left: 0, bottom: 0, right: 50),size: CGSize(width: width!, height: height!))
         TitleButtonInfo3.anchor(top: ButtonInfo3.bottomAnchor, leading: ButtonInfo3.leadingAnchor, bottom: nil, trailing: ButtonInfo3.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         
         
-        ButtonInfo4.anchor(top: ButtonInfo1.bottomAnchor, leading: nil, bottom: nil, trailing: ButtonInfo1.trailingAnchor, padding: .init(top: 65, left: 0, bottom: 0, right: 0),size: CGSize(width: width!, height: width!))
+        ButtonInfo4.anchor(top: ButtonInfo1.bottomAnchor, leading: nil, bottom: nil, trailing: ButtonInfo1.trailingAnchor, padding: .init(top: 65, left: 0, bottom: 0, right: 0),size: CGSize(width: width!, height: height!))
         TitleButtonInfo4.anchor(top: ButtonInfo4.bottomAnchor, leading: ButtonInfo4.leadingAnchor, bottom: nil, trailing: ButtonInfo4.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         
-        ButtonInfo5.anchor(top: ButtonInfo2.bottomAnchor, leading: nil, bottom: nil, trailing: ButtonInfo2.trailingAnchor, padding: .init(top: 65, left: 0, bottom: 0, right: 0),size: CGSize(width: width!, height: width!))
+        ButtonInfo5.anchor(top: ButtonInfo2.bottomAnchor, leading: nil, bottom: nil, trailing: ButtonInfo2.trailingAnchor, padding: .init(top: 65, left: 0, bottom: 0, right: 0),size: CGSize(width: width!, height: height!))
         TitleButtonInfo5.anchor(top: ButtonInfo5.bottomAnchor, leading: ButtonInfo5.leadingAnchor, bottom: nil, trailing: ButtonInfo5.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         
         
-        ButtonInfo6.anchor(top: ButtonInfo3.bottomAnchor, leading: nil, bottom: nil, trailing: ButtonInfo3.trailingAnchor, padding: .init(top: 65, left: 0, bottom: 0, right: 0),size: CGSize(width: width!, height: width!))
+        ButtonInfo6.anchor(top: ButtonInfo3.bottomAnchor, leading: nil, bottom: nil, trailing: ButtonInfo3.trailingAnchor, padding: .init(top: 65, left: 0, bottom: 0, right: 0),size: CGSize(width: width!, height: height!))
         TitleButtonInfo6.anchor(top: ButtonInfo6.bottomAnchor, leading: ButtonInfo6.leadingAnchor, bottom: nil, trailing: ButtonInfo6.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         
         InfoTwoTitle.anchor(top: nil, leading: nil, bottom: ViewTwo.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 20, right: 0),size: CGSize(width: 0, height: 0))

@@ -13,5 +13,7 @@ pod 'Firebase/Auth'
 pod 'SCLAlertView'
 pod 'NVActivityIndicatorView'
 pod 'SVProgressHUD'
+pod 'GoogleMaps'
+pod 'GooglePlaces'
 
 end
