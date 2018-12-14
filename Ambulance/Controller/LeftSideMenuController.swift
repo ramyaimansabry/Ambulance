@@ -134,13 +134,13 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
         }
         switch indexPath.item {
         case 0:
-            self.homeController?.setViewToDefault()
+          //  self.homeController?.setViewToDefault()
             self.homeController?.ShowMyProfileViewController()
             self.hide()
            
             break
         case 1:
-            self.homeController?.setViewToDefault()
+           // self.homeController?.setViewToDefault()
             self.homeController?.ShowMyMediicalInfoController()
             self.hide()
             break
@@ -155,7 +155,7 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
             
             break
         case 5:
-             self.homeController?.setViewToDefault()
+            // self.homeController?.setViewToDefault()
              self.homeController?.ShowSettingController()
              self.hide()
             break

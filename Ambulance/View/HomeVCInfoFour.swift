@@ -48,6 +48,11 @@ class HomeVCInfoFour: NSObject {
             self.ViewFour.alpha = 0
         }
     }
+    func hideAndResetToDefualt(){
+         self.ViewFour.alpha = 0
+    }
+    
+    
     @objc func CallButtonTapped(){
       print("Call Button Tapped")
         homeController?.callAcceptedDriver()

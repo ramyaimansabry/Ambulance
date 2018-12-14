@@ -26,6 +26,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     var mapView: GMSMapView!
     var RequestEmergencyCounter: Int = 1
     var driverPhoneNumber: String = "000"
+    var isInEmergency: Bool = false
     var centerLocation: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
@@ -52,6 +53,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        if isInEmergency {
+            fourthView.show()
+        }
     }
     
 
@@ -214,21 +218,32 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     }()
     
     func ShowMyProfileViewController(){
+        if isInEmergency {
+            fourthView.hideAndResetToDefualt()
+        }
         let viewController = EditProfileController()
        navigationController?.pushViewController(viewController, animated: true)
     }
     func ShowMyMediicalInfoController(){
+        if isInEmergency {
+            fourthView.hideAndResetToDefualt()
+        }
         let viewController = EditMedicalInfoController()
         navigationController?.pushViewController(viewController, animated: true)
     }
     func logMeOut(){
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: false
-        )
-        let alertView = SCLAlertView(appearance: appearance)
-        alertView.addButton("Logout", target: self, selector: #selector(handleLogout))
-        alertView.addButton("Cancel") {    }
-        alertView.showError("Warning!", subTitle: "Logout ?")
+        if isInEmergency {
+            SCLAlertView().showError("Error", subTitle: "Your are calling emergency, Cant sign out!")
+        }
+        else {
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            let alertView = SCLAlertView(appearance: appearance)
+            alertView.addButton("Logout", target: self, selector: #selector(handleLogout))
+            alertView.addButton("Cancel") {    }
+            alertView.showError("Warning!", subTitle: "Logout ?")
+        }
     }
     
     func Call123(){
@@ -249,6 +264,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     }
     
     func ShowSettingController(){
+        if isInEmergency {
+            fourthView.hideAndResetToDefualt()
+        }
         let viewController = SettingController()
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -318,6 +336,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             HideUnnecessaryView()
             hideBackButton()
             callEmergencyOverDatabase()
+            isInEmergency = true
              //    setViewToDefault()
             break
         default:
