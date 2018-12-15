@@ -26,6 +26,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     var RequestEmergencyCounter: Int = 1
     var driverPhoneNumber: String = "000"
     var isInEmergency: Bool = false
+    var ResponserID = ""
     var centerLocation: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
@@ -113,9 +114,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         })
         
     }
-    var ResponserID = ""
-  //  var DriverLatitude: String =  ""
-  //  var DriverLongitude: String =  ""
+    
+    
     func readIfEmergencyAccepted(){
         let userID = (Auth.auth().currentUser?.uid)!
         let ref = Database.database().reference().child("waiting Emergencies").child(userID).child("AcceptedBy")
@@ -146,19 +146,17 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
                 ref2.observe(.value, with: { (snapshot) in
                     self.driverPhoneNumber = snapshot.value as! String
                     print(self.driverPhoneNumber)
-                    ref2.removeAllObservers()
+                   // ref2.removeAllObservers()
                 }, withCancel: nil)
                 
                 
-                
-                DispatchQueue.main.async {
-                    self.stopAnimating()
-                    self.fourthView.show()
-                   
-                }
-                 self.readResponserinformation()
-                ref.removeAllObservers()
-             }
+                        DispatchQueue.main.async {
+                            self.stopAnimating()
+                            self.fourthView.show()
+                           // ref.removeAllObservers()
+                        }
+                     self.readResponserinformation()
+                  }
         }, withCancel: nil)
     }
 
@@ -169,15 +167,22 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         
          let userID = (Auth.auth().currentUser?.uid)!
         let ref2 = Database.database().reference().child("waiting Emergencies").child(userID)
-        ref2.keepSynced(true)
+       // ref2.keepSynced(true)
         ref2.observe(.value, with: { (snapshot) in
             if !snapshot.exists() { return }
-
-            self.DriverLocation33.Longitude = snapshot.childSnapshot(forPath: "DriverLongitude").value as? String
-            self.DriverLocation33.Latitude = snapshot.childSnapshot(forPath: "DriverLatitude").value as? String
-
+            
+            if let Dlongitude: String = snapshot.childSnapshot(forPath: "DriverLongitude").value as? String {
+                print(Dlongitude)
+                self.DriverLocation33.Longitude = Dlongitude
+            }
+            if let Dlatitude: String = snapshot.childSnapshot(forPath: "DriverLatitude").value as? String {
+                print(Dlatitude)
+                self.DriverLocation33.Latitude = Dlatitude
+            }
+ 
+            
             var currentLocation:CLLocationCoordinate2D! //location object
-            currentLocation = CLLocationCoordinate2D(latitude: self.DriverLocation33.Latitude!.toDouble() ?? 0.0, longitude: self.DriverLocation33.Longitude!.toDouble() ?? 0.0)
+           currentLocation = CLLocationCoordinate2D(latitude: self.DriverLocation33.Latitude!.toDouble() ?? 0.0, longitude: self.DriverLocation33.Longitude!.toDouble() ?? 0.0)
 
            self.getPolylineRoute(from: self.centerLocation!, to: currentLocation)
 
