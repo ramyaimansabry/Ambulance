@@ -114,22 +114,39 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         
     }
     var ResponserID = ""
-    var DriverLatitude: String =  ""
-    var DriverLongitude: String =  ""
+  //  var DriverLatitude: String =  ""
+  //  var DriverLongitude: String =  ""
     func readIfEmergencyAccepted(){
         let userID = (Auth.auth().currentUser?.uid)!
         let ref = Database.database().reference().child("waiting Emergencies").child(userID).child("AcceptedBy")
+        
         ref.observe(.value, with: { (snapshot) in
             let answers: String = snapshot.value as! String
+            
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 15, repeats: false) {
+                (_) in
+                if !self.checkRequestTime(){
+                     print("Time out")
+                     ref.removeAllObservers()
+                    self.handleTimeOut()
+                    return
+                }else {
+                   print("Emergency Accepted!!!!!")
+                }
+            }
+          
+            
              if answers != "NONE" {
                 self.ResponserID = answers
                 print(self.ResponserID)
-                
-                
-                let ref = Database.database().reference().child("drivers").child(self.ResponserID).child("Phone")
-                ref.observe(.value, with: { (snapshot) in
+                self.isInEmergency = true
+    
+                let ref2 = Database.database().reference().child("drivers").child(self.ResponserID).child("Phone")
+                ref2.observe(.value, with: { (snapshot) in
                     self.driverPhoneNumber = snapshot.value as! String
                     print(self.driverPhoneNumber)
+                    ref2.removeAllObservers()
                 }, withCancel: nil)
                 
                 
@@ -137,18 +154,18 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
                 DispatchQueue.main.async {
                     self.stopAnimating()
                     self.fourthView.show()
-                    self.readResponserinformation()
-                    return
+                   
                 }
+                 self.readResponserinformation()
+                ref.removeAllObservers()
              }
-            
         }, withCancel: nil)
     }
 
+    
     let DriverLocation33 = Location()
 
     func readResponserinformation(){
-
         
          let userID = (Auth.auth().currentUser?.uid)!
         let ref2 = Database.database().reference().child("waiting Emergencies").child(userID)
@@ -158,25 +175,35 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
 
             self.DriverLocation33.Longitude = snapshot.childSnapshot(forPath: "DriverLongitude").value as? String
             self.DriverLocation33.Latitude = snapshot.childSnapshot(forPath: "DriverLatitude").value as? String
-            
-            
-            print("===============")
-            var currentLocation:CLLocationCoordinate2D! //location object
-            
-            currentLocation = CLLocationCoordinate2D(latitude: self.DriverLocation33.Latitude!.toDouble() ?? 0.0, longitude:   self.DriverLocation33.Longitude!.toDouble() ?? 0.0)
 
-            
-            print(currentLocation.longitude, "Pppppppppp")
-            print(currentLocation.latitude, "Pppppppppp")
-            
-          //  DispatchQueue.main.async {
-                 self.getPolylineRoute(from: self.centerLocation!, to: currentLocation)
-           // }
-            
-           
+            var currentLocation:CLLocationCoordinate2D! //location object
+            currentLocation = CLLocationCoordinate2D(latitude: self.DriverLocation33.Latitude!.toDouble() ?? 0.0, longitude: self.DriverLocation33.Longitude!.toDouble() ?? 0.0)
+
+           self.getPolylineRoute(from: self.centerLocation!, to: currentLocation)
+
         }, withCancel: nil)
     }
 
+    
+    func checkRequestTime() -> Bool{
+        if isInEmergency {
+            return true
+        }
+        else{
+            return false
+        }
+    }
+    func handleTimeOut(){
+        DispatchQueue.main.async {
+            self.stopAnimating()
+            self.setViewToDefault()
+            self.MyLocationButtonAction()
+            SCLAlertView().showError("Error", subTitle: "Request time out, try again!")
+        }
+        let userID = (Auth.auth().currentUser?.uid)!
+        let ref2 = Database.database().reference().child("waiting Emergencies").child(userID)
+        ref2.removeValue()
+    }
     
     func callAcceptedDriver(){
         guard let number = URL(string: "tel://\(driverPhoneNumber)") else { return }
@@ -364,6 +391,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
     func setViewToDefault(){
         CallAmbulanceButton.setTitle("Request Ambulance", for: .normal)
+        CallAmbulanceButton.isEnabled = true
+        CallAmbulanceButton.isHidden = false
         RequestEmergencyCounter = 1
         firstView.hideAndResetToDefualt()
         secandView.hideAndResetToDefualt()
