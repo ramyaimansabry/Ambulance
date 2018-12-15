@@ -466,6 +466,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         view.addSubview(mapView)
         mapView.delegate = self
         mapView.isHidden = false
+        mapView.settings.myLocationButton = false
+
  
     }
     
