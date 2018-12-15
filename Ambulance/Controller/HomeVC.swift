@@ -22,7 +22,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     let firstView = HomeVCViewInfoOne()
     let secandView = HomeVCViewInfoTwo()
     let thirdView = HomeCVViewInfoThree()
-   // let fourthView = HomeVCInfoFour()
     var mapView: GMSMapView!
     var RequestEmergencyCounter: Int = 1
     var driverPhoneNumber: String = "000"
@@ -40,7 +39,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
                 perform(#selector(handleLogout), with: nil, afterDelay: 0)
             }
         
-       // SetupComponentDelegetes()
         UINavigationBar.appearance().barStyle = .blackOpaque
 
          SetupLoadingActivity()
@@ -146,34 +144,17 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             
         }, withCancel: nil)
     }
- // var DriverLocation: CLLocationCoordinate2D?
-//    var Dlang: String = ""
-//    var Dlat: String = ""
+
     let DriverLocation33 = Location()
 
     func readResponserinformation(){
-//        let ref = Database.database().reference().child("drivers").child(ResponserID).child("Phone")
-//       ref.observe(.value, with: { (snapshot) in
-//        self.driverPhoneNumber = snapshot.value as! String
-//          print(self.driverPhoneNumber)
-//         }, withCancel: nil)
+
         
          let userID = (Auth.auth().currentUser?.uid)!
         let ref2 = Database.database().reference().child("waiting Emergencies").child(userID)
         ref2.keepSynced(true)
         ref2.observe(.value, with: { (snapshot) in
             if !snapshot.exists() { return }
-//
-//            if let Long: String = snapshot.childSnapshot(forPath: "DriverLongitude").value as? String {
-//                  self.Dlang = Long
-//                    print(Long,"Long Now")
-//                self.DriverLocation33.Longitude = Double(Long)
-//            }
-//            let Lat: String = (snapshot.childSnapshot(forPath: "DriverLatitude").value as? String)!
-//                  self.Dlat = Lat
-//                    print(Lat,"Lat Now")
-//            self.DriverLocation33.Latitude = Double(Lat)
-//
 
             self.DriverLocation33.Longitude = snapshot.childSnapshot(forPath: "DriverLongitude").value as? String
             self.DriverLocation33.Latitude = snapshot.childSnapshot(forPath: "DriverLatitude").value as? String
@@ -250,18 +231,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     func Call123(){
         guard let number = URL(string: "tel://123") else { return }
         UIApplication.shared.open(number)
-        
-//        let appearance = SCLAlertView.SCLAppearance(
-//            showCloseButton: false
-//        )
-//        let alertView = SCLAlertView(appearance: appearance)
-//        alertView.addButton("Call"){
-//            guard let number = URL(string: "tel://123") else { return }
-//            UIApplication.shared.open(number)
-//        }
-//        alertView.addButton("Cancel") {    }
-//        alertView.showError("Warning!", subTitle: "Call 123 ?")
-       
+
     }
     
     func ShowSettingController(){
@@ -299,11 +269,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
     
     // ****************************************************************************************************************
-    func hideAllRequestViews(){
-        firstView.hide()
-        secandView.hide()
-        thirdView.hide()
-    }
+
     @objc func CallAmbulanceButtonAction(sender: UIButton!) {
         switch RequestEmergencyCounter {
         case 0:
@@ -337,8 +303,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             HideUnnecessaryView()
             hideBackButton()
             callEmergencyOverDatabase()
-            isInEmergency = true
-             //    setViewToDefault()
             break
         default:
             break
@@ -351,7 +315,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
                                               longitude: sourceCoordinate.coordinate.longitude,
                                               zoom: 16.0)
         mapView.animate(to: camera)
-       // centerMapOnLocation(location: sourceCoordinate)
     }
     
   
@@ -406,8 +369,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         secandView.hideAndResetToDefualt()
         thirdView.hideAndResetToDefualt()
   
-        
-        // hide the two views....
    }
     func dismissRingIndecator(){
         DispatchQueue.main.async {
