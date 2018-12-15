@@ -160,6 +160,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         
          let userID = (Auth.auth().currentUser?.uid)!
         let ref2 = Database.database().reference().child("waiting Emergencies").child(userID)
+        ref2.keepSynced(true)
         ref2.observe(.value, with: { (snapshot) in
             if !snapshot.exists() { return }
 //

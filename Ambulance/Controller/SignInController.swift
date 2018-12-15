@@ -4,7 +4,7 @@ import UIKit
 import Firebase
 import SCLAlertView
 import SVProgressHUD
-
+import SkyFloatingLabelTextField
 class SignInController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
@@ -109,39 +109,128 @@ class SignInController: UIViewController,UITextFieldDelegate {
     /**********************************************************************************************/
     private func setupViews(){
         view.addSubview(backButton)
-        view.addSubview(LogInLabel)
-        view.addSubview(EmailTextField)
-        view.addSubview(PasswordTextField)
-        view.addSubview(SignInButton)
-        view.addSubview(IconImage)
-        view.addSubview(titleLabel)
-        view.addSubview(subTitleLabel)
+//        view.addSubview(LogInLabel)
+//        view.addSubview(EmailTextField)
+//        view.addSubview(PasswordTextField)
+//        view.addSubview(SignInButton)
+//        view.addSubview(IconImage)
+//        view.addSubview(titleLabel)
+//        view.addSubview(subTitleLabel)
+        
+        view.addSubview(stackView1)
+        view.addSubview(stackView2)
+        view.addSubview(stackView3)
+        view.addSubview(stackView4)
         
         backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 30, bottom: 0, right: 0),size: CGSize(width: 35, height: 35))
         
-        LogInLabel.anchor(top: backButton.bottomAnchor, leading: backButton.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 0, bottom: 0, right: 0))
-          LogInLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
-        EmailTextField.anchor(top: nil, leading: PasswordTextField.leadingAnchor, bottom: PasswordTextField.topAnchor, trailing: PasswordTextField.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 20, right: 0),size: CGSize(width: 0, height: 45))
-        
-        PasswordTextField.anchor(top: nil, leading: SignInButton.leadingAnchor, bottom: SignInButton.topAnchor, trailing: SignInButton.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 50, right: 0),size: CGSize(width: 0, height: 45))
-        
-        SignInButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
-        
-             IconImage.anchor(top: LogInLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 60, left: 0, bottom: 0, right: 0),size: CGSize(width: 110, height: 110))
-        
-        titleLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 0))
-         titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+         stackView4.anchor(top: backButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 20, right: 0))
         
         
-         subTitleLabel.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
-         subTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        stackView3.addArrangedSubview(EmailTextField)
+        stackView3.addArrangedSubview(PasswordTextField)
+     //   stackView3.addArrangedSubview(SignInButton)
+        
+        stackView2.addArrangedSubview(LogInLabel)
+        stackView2.addArrangedSubview(IconImage)
+        stackView2.addArrangedSubview(stackView1)
+        
+        stackView1.addArrangedSubview(titleLabel)
+        stackView1.addArrangedSubview(subTitleLabel)
+        
+        
+        stackView4.addArrangedSubview(stackView2)
+        stackView4.addArrangedSubview(stackView3)
+        stackView4.addArrangedSubview(SignInButton)
+        
+          stackView3.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 0))
+        
+            stackView2.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor,padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: stackView4.frame.height/3) )
+        
+        
+        EmailTextField.anchor(top: nil, leading: stackView3.leadingAnchor, bottom: nil, trailing: stackView3.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
+        PasswordTextField.anchor(top: nil, leading: stackView3.leadingAnchor, bottom: nil, trailing: stackView3.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
+        
+        
+  SignInButton.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        LogInLabel.anchor(top: backButton.bottomAnchor, leading: backButton.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 0, bottom: 0, right: 0))
+//          LogInLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//
+//        EmailTextField.anchor(top: nil, leading: PasswordTextField.leadingAnchor, bottom: PasswordTextField.topAnchor, trailing: PasswordTextField.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 20, right: 0),size: CGSize(width: 0, height: 45))
+//
+//        PasswordTextField.anchor(top: nil, leading: SignInButton.leadingAnchor, bottom: SignInButton.topAnchor, trailing: SignInButton.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 50, right: 0),size: CGSize(width: 0, height: 45))
+//
+//        SignInButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
+//
+//             IconImage.anchor(top: LogInLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 60, left: 0, bottom: 0, right: 0),size: CGSize(width: 110, height: 110))
+//
+//        titleLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 0))
+//         titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//
+//
+//         subTitleLabel.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
+//         subTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
     }
     
     
     
     // MARK :-  Setup Component
     /********************************************************************************************/
+    let stackView2: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.fill
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing   = 20.0
+        return sv
+    }()
+    let stackView1: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.equalSpacing
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing   = 2.0
+        return sv
+    }()
+    let stackView3: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.fillEqually
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing = 15
+        return sv
+    }()
+    let stackView4: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.equalCentering
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing  = 30
+        return sv
+    }()
+    
+    let stackView5: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.horizontal
+        sv.distribution  = UIStackView.Distribution.fillEqually
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing  = 20
+        return sv
+    }()
+    
+    
+    
     let backButton: UIButton = {
         let button = UIButton.init(type: .system)
         button.setTitle("", for: .normal)
@@ -203,11 +292,18 @@ class SignInController: UIViewController,UITextFieldDelegate {
         return label
     }()
     
-    let EmailTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let EmailTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Email"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Email"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.emailAddress
         tx.returnKeyType = UIReturnKeyType.done
@@ -215,11 +311,18 @@ class SignInController: UIViewController,UITextFieldDelegate {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let PasswordTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let PasswordTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Password"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Password"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done

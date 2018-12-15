@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import SCLAlertView
 import SVProgressHUD
+import SkyFloatingLabelTextField
 
 
 class EditProfileController: UIViewController {
@@ -317,6 +318,7 @@ class EditProfileController: UIViewController {
         button.setTitle("Save", for: .normal)
         //     button.frame.size = CGSize(width: 100, height: 40)
         button.layer.cornerRadius = 5
+        button.isEnabled = false
         button.backgroundColor = UIColor.red
         button.setTitleColor(UIColor.white, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
@@ -332,11 +334,18 @@ class EditProfileController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    let EmailTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let EmailTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Email"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Email"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.emailAddress
         tx.returnKeyType = UIReturnKeyType.done
@@ -345,11 +354,18 @@ class EditProfileController: UIViewController {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let PhoneTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let PhoneTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Phone"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Phone"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.numberPad
         tx.returnKeyType = UIReturnKeyType.done
@@ -358,11 +374,18 @@ class EditProfileController: UIViewController {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let NameTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let NameTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "First Name"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "First Name"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
@@ -371,11 +394,18 @@ class EditProfileController: UIViewController {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let lasrNameTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
-        tx.placeholder = "last Name"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+    let lasrNameTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+        tx.placeholder = "Last Name"
+        tx.title = "Last Name"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.isEnabled = false

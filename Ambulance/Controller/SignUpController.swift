@@ -6,6 +6,7 @@ import FirebaseAuth
 import NotificationCenter
 import SCLAlertView
 import SVProgressHUD
+import SkyFloatingLabelTextField
 
 class SignUpController: UIViewController,UITextFieldDelegate {
     
@@ -20,7 +21,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     }
     func SetupComponentDelegetes(){
         NameTextField.delegate = self
-        lasrNameTextField.delegate = self
+        lastNameTextField.delegate = self
         PasswordTextField.delegate = self
         ConfirmPasswordTextField.delegate = self
         PhoneTextField.delegate = self
@@ -40,7 +41,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     }
     
     func AddNewuser(){
-        guard let name = NameTextField.text,let email = EmailTextField.text, let password = PasswordTextField.text, let phone = PhoneTextField.text, let lastName = lasrNameTextField.text  else {
+        guard let name = NameTextField.text,let email = EmailTextField.text, let password = PasswordTextField.text, let phone = PhoneTextField.text, let lastName = lastNameTextField.text  else {
             print("Form is not valid")
             return
         }
@@ -90,7 +91,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
             SCLAlertView().showError("Error", subTitle: "Enter your Name!")
             return
         }
-        guard let lastname = lasrNameTextField.text,  lasrNameTextField.text?.characters.count != 0 else {
+        guard let lastname = lastNameTextField.text,  lastNameTextField.text?.characters.count != 0 else {
             SCLAlertView().showError("Error", subTitle: "Enter your Last Name!")
             return
         }
@@ -148,7 +149,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
 //        subTitleLabel.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
 //        subTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
-        stackView4.anchor(top: backButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 10, right: 0))
+        stackView4.anchor(top: backButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 20, right: 0))
         
        
         
@@ -159,7 +160,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         
         
         stackView5.addArrangedSubview(NameTextField)
-         stackView5.addArrangedSubview(lasrNameTextField)
+         stackView5.addArrangedSubview(lastNameTextField)
         
         
         stackView1.addArrangedSubview(titleLabel)
@@ -186,7 +187,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
        
         
          NameTextField.anchor(top: stackView5.topAnchor, leading: nil, bottom: stackView5.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
-         lasrNameTextField.anchor(top: stackView5.topAnchor, leading: nil, bottom: stackView5.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
+         lastNameTextField.anchor(top: stackView5.topAnchor, leading: nil, bottom: stackView5.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
 
 
          stackView5.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
@@ -276,11 +277,18 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         label.textAlignment = .center
         return label
     }()
-    let EmailTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let EmailTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Email"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Email"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.emailAddress
         tx.returnKeyType = UIReturnKeyType.done
@@ -288,11 +296,18 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let PasswordTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let PasswordTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Password"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Password"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
@@ -300,11 +315,18 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let ConfirmPasswordTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let ConfirmPasswordTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Confirm Password"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Confirm Password"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
@@ -312,11 +334,18 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let PhoneTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let PhoneTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Phone"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Phone"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.numberPad
         tx.returnKeyType = UIReturnKeyType.done
@@ -324,11 +353,18 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let NameTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let NameTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "First Name"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "First Name"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
@@ -336,11 +372,18 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let lasrNameTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
-        tx.placeholder = "last Name"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+    let lastNameTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+        tx.placeholder = "Last Name"
+        tx.title = "Last Name"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done

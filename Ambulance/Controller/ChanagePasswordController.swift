@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import SCLAlertView
 import SVProgressHUD
+import SkyFloatingLabelTextField
 
 
 class ChanagePasswordController: UIViewController {
@@ -187,11 +188,18 @@ class ChanagePasswordController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    let OldPasswordTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let OldPasswordTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Old Password"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Old Password"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.emailAddress
         tx.returnKeyType = UIReturnKeyType.done
@@ -200,11 +208,18 @@ class ChanagePasswordController: UIViewController {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let PasswordTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
-        tx.placeholder = "New Password"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+    let PasswordTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+        tx.placeholder = "Password"
+        tx.title = "Password"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
@@ -212,11 +227,18 @@ class ChanagePasswordController: UIViewController {
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let ConfirmPasswordTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let ConfirmPasswordTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Confirm Password"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Confirm Password"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done

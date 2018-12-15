@@ -50,7 +50,6 @@ class MedicalInfoTwo: UIViewController {
             print("Saved user successfully into Firebase db")
             UserDefaults.standard.set(true, forKey: "IsLoggedIn")
             UserDefaults.standard.synchronize()
-             SCLAlertView().showSuccess("Done", subTitle: "Successfully Signed up")
                 let homeController = HomeVC()
                  self.present(homeController, animated: true, completion: nil)
         })

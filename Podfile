@@ -15,5 +15,6 @@ pod 'NVActivityIndicatorView'
 pod 'SVProgressHUD'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'SkyFloatingLabelTextField'
 
 end

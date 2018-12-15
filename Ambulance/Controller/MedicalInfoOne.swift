@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import SCLAlertView
 import SVProgressHUD
+import SkyFloatingLabelTextField
 
 class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource {
     private var datePicker: UIDatePicker?
@@ -293,11 +294,18 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
     
     
     
-    let DateOfBirthTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let DateOfBirthTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Date of Birth"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Date of Birth"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
@@ -305,11 +313,18 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let WeightTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let WeightTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Weight"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Weight"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.numberPad
         tx.returnKeyType = UIReturnKeyType.done
@@ -317,11 +332,18 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let HeightTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let HeightTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Height"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Height"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.numberPad
         tx.returnKeyType = UIReturnKeyType.done
@@ -329,11 +351,18 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let BloodTypeField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let BloodTypeField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Blood Type"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Blood Type"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
@@ -341,11 +370,18 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
-    let SexTextField: UITextField = {
-        let tx = UITextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
+    let SexTextField: SkyFloatingLabelTextField = {
+        let tx = SkyFloatingLabelTextField(frame: CGRect(x: 20, y: 100, width: 250, height: 60))
         tx.placeholder = "Sex"
-        tx.font = UIFont.systemFont(ofSize: 15)
-        tx.borderStyle = UITextField.BorderStyle.roundedRect
+        tx.title = "Sex"
+        tx.lineHeight = 1.0
+        tx.selectedLineHeight = 2.0
+        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.textColor = UIColor.black
+        tx.lineColor = UIColor.lightGray
+        tx.selectedTitleColor = UIColor.red
+        tx.selectedLineColor = UIColor.red
+        tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
