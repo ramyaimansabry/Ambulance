@@ -17,10 +17,7 @@ class StartScreen: UINavigationController {
         
         
         // if user not logged in
-        if Auth.auth().currentUser?.uid == nil {
-            perform(#selector(handleLogout), with: nil, afterDelay: 0)
-        }
-        else if isLoggedIn() {
+         if isLoggedIn() {
             let homeController = HomeVC()
             viewControllers = [homeController]
         }
@@ -43,21 +40,6 @@ class StartScreen: UINavigationController {
             return false
         }
     }
-    
-    @objc func  handleLogout() {
-        do{
-            try Auth.auth().signOut()
-            UserDefaults.standard.set(false, forKey: "IsLoggedIn")
-            UserDefaults.standard.synchronize()
-        }catch let logError{
-            print(logError)
-        }
-        
-        let AddNewviewController = LoginSplashScreen()
-        present(AddNewviewController, animated: true, completion: nil)
-        
-    }
-    
-    
+ 
 }
 

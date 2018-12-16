@@ -124,8 +124,6 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     //   MARK :- Constrains
     /**********************************************************************************************/
     private func setupConstrains(){
-//        [NameTextField,lasrNameTextField,EmailTextField,PhoneTextField,PasswordTextField,ConfirmPasswordTextField].forEach { view.addSubview($0) }
-//        [IconImage,titleLabel,subTitleLabel,backButton,LogInLabel,SignUpButton].forEach { view.addSubview($0) }
         
         view.addSubview(backButton)
         view.addSubview(stackView2)
@@ -137,17 +135,6 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         
         backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 30, bottom: 0, right: 0),size: CGSize(width: 35, height: 35))
         
-//          LogInLabel.anchor(top: backButton.bottomAnchor, leading: backButton.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 0, bottom: 0, right: 0))
-//        LogInLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//
-//        IconImage.anchor(top: LogInLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 60, left: 0, bottom: 0, right: 0),size: CGSize(width: 110, height: 110))
-//
-//        titleLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 0))
-//        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//
-//
-//        subTitleLabel.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
-//        subTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
         stackView4.anchor(top: backButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 20, right: 0))
         
@@ -197,28 +184,9 @@ class SignUpController: UIViewController,UITextFieldDelegate {
          ConfirmPasswordTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         
         
-        
   
         SignUpButton.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
-        
-//        NameTextField.anchor(top: subTitleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 30, left: 20, bottom: 0, right: 0),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
-//
-//        lasrNameTextField.anchor(top: subTitleLabel.bottomAnchor, leading: NameTextField.trailingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: 20, bottom: 0, right: 10),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
-//
-//        EmailTextField.anchor(top: NameTextField.bottomAnchor, leading: NameTextField.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 10),size: CGSize(width: 0, height: 45))
-//
-//        PhoneTextField.anchor(top: EmailTextField.bottomAnchor, leading: EmailTextField.leadingAnchor, bottom: nil, trailing: EmailTextField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 45))
-//
-//        PasswordTextField.anchor(top: PhoneTextField.bottomAnchor, leading: PhoneTextField.leadingAnchor, bottom: nil, trailing: PhoneTextField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 45))
-//
-//        ConfirmPasswordTextField.anchor(top: PasswordTextField.bottomAnchor, leading: PasswordTextField.leadingAnchor, bottom: SignUpButton.topAnchor, trailing: PasswordTextField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 15, right: 0),size: CGSize(width: 0, height: 45))
-        
-        
-        
-        
-        
-//        SignUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 20, right: 20),size: CGSize(width: 0, height: 50))
-//
+
         
     }
     
@@ -237,7 +205,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     let stackView1: UIStackView = {
         let sv = UIStackView()
         sv.axis  = NSLayoutConstraint.Axis.vertical
-        sv.distribution  = UIStackView.Distribution.equalSpacing
+        sv.distribution  = UIStackView.Distribution.fillEqually
         sv.alignment = UIStackView.Alignment.center
         sv.spacing   = 2.0
         return sv

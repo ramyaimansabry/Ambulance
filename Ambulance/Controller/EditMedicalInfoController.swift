@@ -328,7 +328,7 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         
         EditButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 30),size: CGSize(width: 35, height: 35))
         
-        stackView1.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,size: CGSize(width: 0, height:stackView4.frame.height/5))
+        stackView1.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,size: CGSize(width: 0, height:stackView4.frame.height/6))
 
         stackView3.addArrangedSubview(CancelButton)
         stackView3.addArrangedSubview(SaveButtonn)
@@ -362,8 +362,8 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         
     //    stackView2.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30))
         
-        CancelButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 160, height: 35))
-        SaveButtonn.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 160, height: 35))
+        CancelButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 160, height: 40))
+        SaveButtonn.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 160, height: 40))
         
         stackView3.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 50))
         

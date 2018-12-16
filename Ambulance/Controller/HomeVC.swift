@@ -359,7 +359,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             let widthConstraint = NSLayoutConstraint(item: self.MapPinICON, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 55)
             let heightConstraint = NSLayoutConstraint(item: self.MapPinICON, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 55)
             let horizontalConstraint = NSLayoutConstraint(item: self.MapPinICON, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-            let verticalConstraint = NSLayoutConstraint(item: self.MapPinICON, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: -27.5)
+            let verticalConstraint = NSLayoutConstraint(item: self.MapPinICON, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: self.MapPinICON.frame.height/2)
             self.view.addConstraints([verticalConstraint,horizontalConstraint,widthConstraint,heightConstraint])
 
         })
@@ -462,7 +462,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         mapView.delegate = self
         mapView.isHidden = false
         mapView.settings.myLocationButton = false
-
+      //  MyLocationButtonAction()
  
     }
     
@@ -474,15 +474,15 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             UserDefaults.standard.set(location.coordinate.longitude, forKey: "LON")
             UserDefaults().synchronize()
             
-            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-                                                  longitude: location.coordinate.longitude,
-                                                  zoom: 16.0)
-            if mapView.isHidden {
-                mapView.isHidden = false
-                mapView.camera = camera
-            } else {
-                mapView.animate(to: camera)
-            }
+//            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+//                                                  longitude: location.coordinate.longitude,
+//                                                  zoom: 16.0)
+//            if mapView.isHidden {
+//                mapView.isHidden = false
+//                mapView.camera = camera
+//            } else {
+//                mapView.animate(to: camera)
+//            }
         }
     }
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
@@ -614,6 +614,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             self.MapStyleButton.setBackgroundImage(UIImage(named: "EarthICONBlack"), for: .normal)
             self.MenuButton.setBackgroundImage(UIImage(named: "MenuICON"), for: .normal)
             self.MyLocationButton.setBackgroundImage(UIImage(named: "GPS-ICON"), for: .normal)
+            self.backButton.setBackgroundImage(UIImage(named: "backICON"), for: .normal)
             do {
                 if let styleURL = Bundle.main.url(forResource: "LightStyle", withExtension: "json") {
                     self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
@@ -636,6 +637,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             self.MapStyleButton.setBackgroundImage(UIImage(named: "EarthICONWhite"), for: .normal)
             self.MenuButton.setBackgroundImage(UIImage(named: "MenuICONWhite"), for: .normal)
             self.MyLocationButton.setBackgroundImage(UIImage(named: "LocationICONWhite"), for: .normal)
+            self.backButton.setBackgroundImage(UIImage(named: "BackICONWhite"), for: .normal)
+
             do {
                 if let styleURL = Bundle.main.url(forResource: "DarkStyle", withExtension: "json") {
                     self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
@@ -656,13 +659,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     /**************************************************************************************************/
     private func setupConstrains(){
          [TitleLabel,CallAmbulanceButton,MenuButton,MyLocationButton,MapStyleButton].forEach { view.addSubview($0) }
-        
-      //  mapView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
+    
         
         TitleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 30, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         TitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
-        CallAmbulanceButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 5, right: 20),size: CGSize(width: 0, height: 60))
+        CallAmbulanceButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 10, right: 20),size: CGSize(width: 0, height: 60))
         
         MenuButton.anchor(top: TitleLabel.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 0, left: 25, bottom: 0, right: 0),size: CGSize(width: 30, height: 30))
         
@@ -761,7 +763,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         image.layer.cornerRadius = 1
         image.backgroundColor = UIColor.clear
         image.layer.masksToBounds = true
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         return image
     }()
     

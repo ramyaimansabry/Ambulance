@@ -1,10 +1,4 @@
-//
-//  ChanagePasswordController.swift
-//  Ambulance
-//
-//  Created by Ramy on 12/11/18.
-//  Copyright © 2018 Ramy. All rights reserved.
-//
+
 
 import UIKit
 import Firebase

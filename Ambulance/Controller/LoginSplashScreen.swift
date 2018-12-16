@@ -9,6 +9,8 @@ class LoginSplashScreen: UIViewController{
         self.view.backgroundColor = UIColor.white
         setupConstrains()
     }
+    
+    
     // MARK :-   Main Methods
     /********************************************************************************************/
     @objc func SignInButtonAction(sender: UIButton!) {
@@ -19,8 +21,7 @@ class LoginSplashScreen: UIViewController{
         let SignUp = SignUpController()
         let SignUpNavigationController = UINavigationController(rootViewController: SignUp)
         self.present(SignUpNavigationController, animated: true, completion: nil)
-//        let AddNewviewController = SignUpController()
-//        present(AddNewviewController, animated: true, completion: nil)
+
     }
     
     
