@@ -216,35 +216,7 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         
         
         SignUpButton.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
-        //-------------
-//        
-//        LogInLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 40, left: 0, bottom: 0, right: 0))
-//        
-//        
-//        IconImage.anchor(top: LogInLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 50, left: 0, bottom: 0, right: 0),size: CGSize(width: 110, height: 110))
-//        IconImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        
-//        
-//        titleLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 0))
-//        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        
-//        
-//        subTitleLabel.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
-//        subTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        
-//        WeightTextField.anchor(top: subTitleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 50, left: 20, bottom: 0, right: 0),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
-//        
-//        HeightTextField.anchor(top: subTitleLabel.bottomAnchor, leading: WeightTextField.trailingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 50, left: 20, bottom: 0, right: 10),size: CGSize(width: (self.view.frame.width/2)-20, height: 45))
-//        
-//        DateOfBirthTextField.anchor(top: WeightTextField.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 15, left: 20, bottom: 0, right: 10),size: CGSize(width: 0, height: 45))
-//        
-//        BloodTypeField.anchor(top: DateOfBirthTextField.bottomAnchor, leading: DateOfBirthTextField.leadingAnchor, bottom: nil, trailing: DateOfBirthTextField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 45))
-//        
-//        SexTextField.anchor(top: BloodTypeField.bottomAnchor, leading: BloodTypeField.leadingAnchor, bottom: nil, trailing: BloodTypeField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 45))
-//        
-//        
-//        SignUpButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
-//        
+      
     }
     
 

@@ -109,14 +109,6 @@ class SignInController: UIViewController,UITextFieldDelegate {
     /**********************************************************************************************/
     private func setupViews(){
         view.addSubview(backButton)
-//        view.addSubview(LogInLabel)
-//        view.addSubview(EmailTextField)
-//        view.addSubview(PasswordTextField)
-//        view.addSubview(SignInButton)
-//        view.addSubview(IconImage)
-//        view.addSubview(titleLabel)
-//        view.addSubview(subTitleLabel)
-        
         view.addSubview(stackView1)
         view.addSubview(stackView2)
         view.addSubview(stackView3)
@@ -155,32 +147,6 @@ class SignInController: UIViewController,UITextFieldDelegate {
         
   SignInButton.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        LogInLabel.anchor(top: backButton.bottomAnchor, leading: backButton.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 0, bottom: 0, right: 0))
-//          LogInLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//
-//        EmailTextField.anchor(top: nil, leading: PasswordTextField.leadingAnchor, bottom: PasswordTextField.topAnchor, trailing: PasswordTextField.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 20, right: 0),size: CGSize(width: 0, height: 45))
-//
-//        PasswordTextField.anchor(top: nil, leading: SignInButton.leadingAnchor, bottom: SignInButton.topAnchor, trailing: SignInButton.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 50, right: 0),size: CGSize(width: 0, height: 45))
-//
-//        SignInButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 20, bottom: 60, right: 20),size: CGSize(width: 0, height: 50))
-//
-//             IconImage.anchor(top: LogInLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 60, left: 0, bottom: 0, right: 0),size: CGSize(width: 110, height: 110))
-//
-//        titleLabel.anchor(top: IconImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 0))
-//         titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//
-//
-//         subTitleLabel.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
-//         subTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
     }
     
     
