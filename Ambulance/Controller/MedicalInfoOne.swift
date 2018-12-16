@@ -65,23 +65,23 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func checkEmptyFields(){
-        guard let weight = WeightTextField.text,  WeightTextField.text?.characters.count != 0 else {
+        guard let _ = WeightTextField.text,  !(WeightTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Enter your Weight!")
             return
         }
-        guard let height = HeightTextField.text,  HeightTextField.text?.characters.count != 0 else {
+        guard let _ = HeightTextField.text,  !(HeightTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Enter your Height!")
             return
         }
-        guard let sex = SexTextField.text,  SexTextField.text?.characters.count != 0 else {
+        guard let _ = SexTextField.text,  !(SexTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Sex is Empty!")
             return
         }
-        guard let blood = BloodTypeField.text,  BloodTypeField.text?.characters.count != 0 else {
+        guard let _ = BloodTypeField.text,  !(BloodTypeField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Enter Blood Type, or Select 'not set'!")
             return
         }
-        guard let date = DateOfBirthTextField.text,  DateOfBirthTextField.text?.characters.count != 0 else {
+        guard let _ = DateOfBirthTextField.text,  !(DateOfBirthTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Enter your Date of Birth!")
             return
         }

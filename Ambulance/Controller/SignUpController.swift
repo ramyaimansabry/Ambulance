@@ -83,23 +83,23 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     
    
     func checkEmptyFields(){
-        guard let password = PasswordTextField.text,  PasswordTextField.text?.characters.count != 0 else {
+        guard let _ = PasswordTextField.text,  !(PasswordTextField.text?.isEmpty)! else {
              SCLAlertView().showError("Error", subTitle: "Enter Password!")
             return
         }
-        guard let name = NameTextField.text,  NameTextField.text?.characters.count != 0 else {
+        guard let _ = NameTextField.text,  !(NameTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Enter your Name!")
             return
         }
-        guard let lastname = lastNameTextField.text,  lastNameTextField.text?.characters.count != 0 else {
+        guard let _ = lastNameTextField.text,  !(lastNameTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Enter your Last Name!")
             return
         }
-        guard let email = EmailTextField.text,  EmailTextField.text?.characters.count != 0 else {
+        guard let _ = EmailTextField.text,  !(EmailTextField.text?.isEmpty)!else {
             SCLAlertView().showError("Error", subTitle: "Enter your Email!")
             return
         }
-        guard let confirmPassword = ConfirmPasswordTextField.text,  ConfirmPasswordTextField.text?.characters.count != 0 else {
+        guard let _ = ConfirmPasswordTextField.text,  !(ConfirmPasswordTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Confirm Password!")
             return
         }
@@ -107,7 +107,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
             SCLAlertView().showError("Error", subTitle: "Password and Confirm Password not Match!")
             return
         }
-        guard let phone = PhoneTextField.text, (PhoneTextField.text?.characters.count)! == 11 else {
+        guard let _ = PhoneTextField.text, (PhoneTextField.text?.count)! == 11 else {
               SCLAlertView().showError("Error", subTitle: "Write Valid Phone Number!")
             return
         }

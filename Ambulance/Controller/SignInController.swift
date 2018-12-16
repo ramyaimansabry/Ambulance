@@ -44,7 +44,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
         SVProgressHUD.setDefaultMaskType(.clear)
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
-                print(error)
+                print(error as Any)
                 let showError:String = error?.localizedDescription ?? ""
                 self.dismissRingIndecator()
                 SCLAlertView().showError("Error", subTitle: showError)

@@ -58,15 +58,15 @@ class MedicalInfoTwo: UIViewController {
     
     
     func checkEmptyFields(){
-        guard let diseases = DiseasesTextView.text,  DiseasesTextView.text?.characters.count != 0 else {
+        guard let _ = DiseasesTextView.text,  !(DiseasesTextView.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Please, Fill all Fields!")
             return
         }
-        guard let surgery = SurgeryTextView.text,  SurgeryTextView.text?.characters.count != 0 else {
+        guard let _ = SurgeryTextView.text,  !(SurgeryTextView.text?.isEmpty)! else {
            SCLAlertView().showError("Error", subTitle: "Please, Fill all Fields!")
             return
         }
-        guard let notes = NotesTextView.text,  NotesTextView.text?.characters.count != 0 else {
+        guard let _ = NotesTextView.text,  !(NotesTextView.text?.isEmpty)! else {
            SCLAlertView().showError("Error", subTitle: "Please, Fill all Fields!")
             return
         }

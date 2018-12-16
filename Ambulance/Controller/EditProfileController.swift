@@ -133,19 +133,19 @@ class EditProfileController: UIViewController {
         }
     }
     func checkEmptyFields(){
-        guard let name = NameTextField.text,  NameTextField.text?.characters.count != 0 else {
+        guard let _ = NameTextField.text,  !(NameTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Enter your Name!")
             return
         }
-        guard let lastname = lasrNameTextField.text,  lasrNameTextField.text?.characters.count != 0 else {
+        guard let _ = lasrNameTextField.text,  !(lasrNameTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Enter your Last Name!")
             return
         }
-        guard let email = EmailTextField.text,  EmailTextField.text?.characters.count != 0 else {
+        guard let _ = EmailTextField.text,  !(EmailTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Enter your Email!")
             return
         }
-        guard let phone = PhoneTextField.text, (PhoneTextField.text?.characters.count)! == 11 else {
+        guard let _ = PhoneTextField.text, (PhoneTextField.text?.count)! == 11 else {
             SCLAlertView().showError("Error", subTitle: "Write Valid Phone Number!")
             return
         }

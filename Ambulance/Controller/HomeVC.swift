@@ -43,15 +43,16 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         UINavigationBar.appearance().barStyle = .blackOpaque
 
          SetupLoadingActivity()
-         checkLocationServices()
+        
          mapSetup()
+         checkLocationServices()
          setupConstrains()
          setupAppStyle()
        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+       // AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         if isInEmergency {
             fourthView.show()
         }
@@ -433,6 +434,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         case .authorizedWhenInUse:
             // do gps current location work
             locationManager.startUpdatingLocation()
+             MyLocationButtonAction()
             break
         case .denied:
             SCLAlertView().showError("Error", subTitle: "Location denied!, Check location permission")
@@ -503,8 +505,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     /**************************************************************************************************/
     
     func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
+        
         DispatchQueue.main.async {
-            
+            self.mapView.clear()
             let london = GMSMarker(position: source)
             london.title = "Emergency Location"
             london.icon = UIImage(named: "EmergencyLocation")
@@ -513,7 +516,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
-        mapView.clear()
+     //   mapView.clear()
         let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&key=AIzaSyCLoZloFvbwIYIluj1gDNP3zg9teOHvR4Q")!
         print(url)
         let task = session.dataTask(with: url, completionHandler: {

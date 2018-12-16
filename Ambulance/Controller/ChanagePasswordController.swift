@@ -21,7 +21,7 @@ class ChanagePasswordController: UIViewController {
     /********************************************************************************************/
   
     func updateUserInfo(){
-        guard  let newPassword = PasswordTextField.text, let confirmPassword = ConfirmPasswordTextField.text  else {
+        guard  let newPassword = PasswordTextField.text, let _ = ConfirmPasswordTextField.text  else {
             print("Form is not valid")
             return
         }
@@ -65,11 +65,11 @@ class ChanagePasswordController: UIViewController {
 //            SCLAlertView().showError("Error", subTitle: "Check old password!")
 //            return
 //        }
-        guard let password = PasswordTextField.text,  PasswordTextField.text?.characters.count != 0 else {
+        guard let _ = PasswordTextField.text,  !(PasswordTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Check New Password!")
             return
         }
-        guard let confirmPassword = ConfirmPasswordTextField.text,  ConfirmPasswordTextField.text?.characters.count != 0 else {
+        guard let _ = ConfirmPasswordTextField.text,  !(ConfirmPasswordTextField.text?.isEmpty)! else {
             SCLAlertView().showError("Error", subTitle: "Check New Password!")
             return
         }
