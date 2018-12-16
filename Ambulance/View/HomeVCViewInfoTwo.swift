@@ -129,41 +129,44 @@ class HomeVCViewInfoTwo: NSObject {
     let TitleButtonInfo1 : UILabel = {
         var label = UILabel()
         label.text = "Pregnency"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.gray
         label.textAlignment = .center
+         label.numberOfLines = 0
         return label
     }()
     let TitleButtonInfo2 : UILabel = {
         var label = UILabel()
         label.text = "Accident"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.gray
         label.textAlignment = .center
+         label.numberOfLines = 0
         return label
     }()
     let TitleButtonInfo3 : UILabel = {
         var label = UILabel()
         label.text = "Fire"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.gray
         label.textAlignment = .center
+         label.numberOfLines = 0
         return label
     }()
     let TitleButtonInfo4 : UILabel = {
         var label = UILabel()
         label.text = "Else"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.gray
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
     let TitleButtonInfo5 : UILabel = {
         var label = UILabel()
         label.text = "Head Injury"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.numberOfLines = 0
         label.textColor = UIColor.gray
         label.textAlignment = .center
         return label
@@ -171,9 +174,9 @@ class HomeVCViewInfoTwo: NSObject {
     let TitleButtonInfo6 : UILabel = {
         var label = UILabel()
         label.text = "Heart Attack"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.gray
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
@@ -182,6 +185,7 @@ class HomeVCViewInfoTwo: NSObject {
         label.text = "Choose Emergency Type"
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor = UIColor.darkGray
+         label.numberOfLines = 0
         label.textAlignment = .center
         
         return label

@@ -227,6 +227,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         //   label.backgroundColor = UIColor.gray
         label.textAlignment = .center
+         label.numberOfLines = 0
         label.textColor = UIColor.gray
         return label
     }()
@@ -235,6 +236,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
         label.text = "Login to continue using Ambulance"
         label.font = UIFont.systemFont(ofSize: 16)
         //   label.backgroundColor = UIColor.gray
+         label.numberOfLines = 0
         label.textColor = UIColor.gray
         label.textAlignment = .center
         return label
@@ -250,6 +252,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
     let LogInLabel : UILabel = {
         var label = UILabel()
         label.text = "Signin"
+         label.numberOfLines = 0
         label.tintColor = UIColor.black
         label.font = UIFont.boldSystemFont(ofSize: 30)
         //  label.font = UIFont (name: "Rockwell-Bold", size: 30)

@@ -26,6 +26,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     var RequestEmergencyCounter: Int = 1
     var driverPhoneNumber: String = "000"
     var isInEmergency: Bool = false
+    var isChooseLocation: Bool = false
     var ResponserID = ""
     var centerLocation: CLLocationCoordinate2D?
     
@@ -343,7 +344,19 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     }
     @objc func MyLocationButtonAction(){
         locationManager.startUpdatingLocation()
-        let sourceCoordinate =  CLLocation(latitude: UserDefaults.standard.value(forKey: "LAT") as! CLLocationDegrees, longitude: UserDefaults.standard.value(forKey: "LON") as! CLLocationDegrees)
+        guard let Lat = UserDefaults.standard.value(forKey: "LAT") as? CLLocationDegrees else{
+            SCLAlertView().showError("Error", subTitle: "Cant get your location!")
+            return
+        }
+        guard let Long = UserDefaults.standard.value(forKey: "LON") as? CLLocationDegrees else{
+            SCLAlertView().showError("Error", subTitle: "Cant get your location!")
+            return
+        }
+        
+        
+         let sourceCoordinate = CLLocation(latitude: Lat, longitude: Long)
+        
+     //   let sourceCoordinate =  CLLocation(latitude: UserDefaults.standard.value(forKey: "LAT") as! CLLocationDegrees, longitude: UserDefaults.standard.value(forKey: "LON") as! CLLocationDegrees)
         let camera = GMSCameraPosition.camera(withLatitude: sourceCoordinate.coordinate.latitude,
                                               longitude: sourceCoordinate.coordinate.longitude,
                                               zoom: 16.0)
@@ -352,6 +365,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
   
     func ShowMapCenteredPen(){
+        isChooseLocation = true
         view.addSubview(MapPinICON)
         MapPinICON.alpha = 0
         UIView.animate(withDuration: 0.5, animations: {
@@ -368,6 +382,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
     func HideUnnecessaryView(){
         UIView.animate(withDuration: 0.5, animations: {
+            self.isChooseLocation = false
             self.MapPinICON.alpha = 0
         })
         CallAmbulanceButton.isEnabled = false
@@ -396,13 +411,19 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
     
     func setViewToDefault(){
+        HideUnnecessaryView()
         CallAmbulanceButton.setTitle("Request Ambulance", for: .normal)
-        CallAmbulanceButton.isEnabled = true
-        CallAmbulanceButton.isHidden = false
+      
         RequestEmergencyCounter = 1
         firstView.hideAndResetToDefualt()
         secandView.hideAndResetToDefualt()
         thirdView.hideAndResetToDefualt()
+        
+        if !isInEmergency {
+            CallAmbulanceButton.isEnabled = true
+            CallAmbulanceButton.isHidden = false
+            MyLocationButtonAction()
+        }
   
    }
     func dismissRingIndecator(){
@@ -434,7 +455,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         case .authorizedWhenInUse:
             // do gps current location work
             locationManager.startUpdatingLocation()
-             MyLocationButtonAction()
+            
             break
         case .denied:
             SCLAlertView().showError("Error", subTitle: "Location denied!, Check location permission")
@@ -464,7 +485,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         mapView.delegate = self
         mapView.isHidden = false
         mapView.settings.myLocationButton = false
-      //  MyLocationButtonAction()
+        MyLocationButtonAction()
  
     }
     
@@ -475,16 +496,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             UserDefaults.standard.set(location.coordinate.latitude, forKey: "LAT")
             UserDefaults.standard.set(location.coordinate.longitude, forKey: "LON")
             UserDefaults().synchronize()
-            
-//            let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-//                                                  longitude: location.coordinate.longitude,
-//                                                  zoom: 16.0)
-//            if mapView.isHidden {
-//                mapView.isHidden = false
-//                mapView.camera = camera
-//            } else {
-//                mapView.animate(to: camera)
-//            }
+            if !isChooseLocation {
+                let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+                                                      longitude: location.coordinate.longitude,
+                                                      zoom: 16.0)
+               mapView.animate(to: camera)
+            }
         }
     }
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
@@ -713,7 +730,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         let button = UIButton.init(type: .system)
         button.setTitle("Request Ambulance", for: .normal)
         button.frame.size = CGSize(width: 80, height: 100)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 10
         button.backgroundColor = UIColor.red
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage(named: ""), for: .normal)

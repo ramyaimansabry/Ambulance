@@ -242,6 +242,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         label.tintColor = UIColor.black
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.backgroundColor = UIColor.white
+         label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
@@ -365,6 +366,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         //   label.backgroundColor = UIColor.gray
         label.textAlignment = .center
+         label.numberOfLines = 0
         label.textColor = UIColor.gray
         return label
     }()
@@ -374,6 +376,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         label.font = UIFont.systemFont(ofSize: 16)
         //   label.backgroundColor = UIColor.gray
         label.textColor = UIColor.gray
+         label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()

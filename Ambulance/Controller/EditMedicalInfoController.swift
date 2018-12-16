@@ -462,6 +462,7 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.backgroundColor = UIColor.white
         label.textColor = UIColor.darkGray
+        label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
@@ -472,6 +473,7 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         label.textColor = UIColor.darkGray
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.backgroundColor = UIColor.white
+         label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
@@ -482,6 +484,7 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         label.backgroundColor = UIColor.white
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = UIColor.darkGray
+         label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()

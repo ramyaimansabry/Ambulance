@@ -37,23 +37,51 @@ class MenuCell: UICollectionViewCell{
         setupViews()
     }
     func setupViews(){
-        addSubview(imageView)
-        addSubview(labelTitle)
-        addSubview(lineSeparatorView)
+      //  addSubview(imageView)
+       // addSubview(labelTitle)
+      //  addSubview(lineSeparatorView)
+        
+        addSubview(stackView5)
+        addSubview(stackView4)
+        
+        
+        stackView5.addArrangedSubview(imageView)
+        stackView5.addArrangedSubview(labelTitle)
+    
+        stackView4.addArrangedSubview(stackView5)
+        stackView4.addArrangedSubview(lineSeparatorView)
+        
+        
+        stackView4.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 0))
         
         
         
-        imageView.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 0, left: 20, bottom: 0, right: 0),size: CGSize(width: 25, height: 25))
-        imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        stackView5.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor)
+        
+        
+        
+        imageView.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 25, height: 25))
+        
 
-        
-        labelTitle.anchor(top: nil, leading: imageView.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 0, left: 20, bottom: 0, right: 0))
-        labelTitle.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-
-        
-        lineSeparatorView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: frame.width, height: 1))
         
     }
+    let stackView4: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.vertical
+        sv.distribution  = UIStackView.Distribution.fillProportionally
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing  = 0
+        return sv
+    }()
+    
+    let stackView5: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.horizontal
+        sv.distribution  = UIStackView.Distribution.fillProportionally
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing  = 20
+        return sv
+    }()
     var imageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = UIColor.clear
@@ -68,7 +96,7 @@ class MenuCell: UICollectionViewCell{
         titleL.numberOfLines = 0
         titleL.font = UIFont.systemFont(ofSize: 16)
         titleL.textColor = UIColor.black
-        titleL.textAlignment = .center
+        titleL.textAlignment = .left
         return titleL
     }()
     let lineSeparatorView: UIView = {

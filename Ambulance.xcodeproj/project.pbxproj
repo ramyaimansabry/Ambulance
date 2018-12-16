@@ -61,6 +61,7 @@
 		2D19433021AEBC5D0054556C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D19433221AEBD940054556C /* LoginSplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSplashScreen.swift; sourceTree = "<group>"; };
 		2D19433421B2FB130054556C /* MedicalInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInfoOne.swift; sourceTree = "<group>"; };
+		2D1A211E21C6C3C000E8EA48 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2D41C52F21B4664C0073BF90 /* HomeVCViewInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCViewInfoOne.swift; sourceTree = "<group>"; };
 		2D41C53121B48DF90073BF90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2DAFFE8A21C2F93F00D53962 /* DarkStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DarkStyle.json; sourceTree = "<group>"; };
@@ -393,6 +394,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2D19431921AEB51B0054556C /* Base */,
+				2D1A211E21C6C3C000E8EA48 /* ar */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -404,6 +406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -465,6 +468,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

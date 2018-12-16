@@ -55,10 +55,10 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
             window.addSubview(leftView)
             leftView.frame = CGRect(x: 0, y: 0, width: 0, height: window.frame.height)
             leftView.backgroundColor = UIColor.white
-            leftView.layer.cornerRadius = 10
+            leftView.layer.cornerRadius = 0
             
             
-            let collectionViewYValue = (window.frame.height/6)+self.leftView.safeAreaInsets.top
+            let collectionViewYValue = (window.frame.height/8)+self.leftView.safeAreaInsets.top
             leftView.addSubview(collectionView)
             setupConstrains()
             
