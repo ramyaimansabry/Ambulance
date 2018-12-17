@@ -55,10 +55,11 @@ class SignInController: UIViewController,UITextFieldDelegate {
             UserDefaults.standard.set(true, forKey: "IsLoggedIn")
             UserDefaults.standard.synchronize()
             let homeController = HomeVC()
-            self.present(homeController, animated: true, completion: nil)
+            let HomeNavigationController = UINavigationController(rootViewController: homeController)
+            self.present(HomeNavigationController, animated: true, completion: nil)
         }
     }
-  
+   
     @objc func backButtonAction(sender: UIButton!) {
         dismiss(animated: true, completion: nil)
     }

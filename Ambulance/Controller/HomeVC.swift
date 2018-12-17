@@ -19,9 +19,26 @@ import GoogleMaps
 
 class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NVActivityIndicatorViewable{
   let locationManager = CLLocationManager()
-    let firstView = HomeVCViewInfoOne()
-    let secandView = HomeVCViewInfoTwo()
-    let thirdView = HomeCVViewInfoThree()
+   // let firstView = HomeVCViewInfoOne()
+   // let secandView = HomeVCViewInfoTwo()
+    //let thirdView = HomeCVViewInfoThree()
+    
+    lazy var firstView: HomeVCViewInfoOne = {
+        let vc = HomeVCViewInfoOne()
+        return vc
+    }()
+    lazy var secandView: HomeVCViewInfoTwo = {
+        let vc = HomeVCViewInfoTwo()
+        return vc
+    }()
+    lazy var thirdView: HomeCVViewInfoThree = {
+        let vc = HomeCVViewInfoThree()
+        return vc
+    }()
+ 
+    
+    
+    
     var mapView: GMSMapView!
     var RequestEmergencyCounter: Int = 1
     var driverPhoneNumber: String = "000"
@@ -30,9 +47,24 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     var ResponserID = ""
     var centerLocation: CLLocationCoordinate2D?
     
+    func SetupNavBar(){
+        view.backgroundColor = UIColor.white
+        navigationItem.title = "Ambulance"
+        navigationController?.navigationBar.barTintColor = UIColor.darkGray
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(MenuButtonAction))
+        self.navigationController?.isNavigationBarHidden = true
+
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.yellow
+    
+       SetupNavBar()
+        
+        
+        
+        
         SVProgressHUD.setForegroundColor(UIColor.red)
         SVProgressHUD.setBackgroundColor(UIColor.clear)
         
@@ -41,7 +73,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
                 perform(#selector(handleLogout), with: nil, afterDelay: 0)
             }
         
-        UINavigationBar.appearance().barStyle = .blackOpaque
 
          SetupLoadingActivity()
         

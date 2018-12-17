@@ -28,9 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyCLoZloFvbwIYIluj1gDNP3zg9teOHvR4Q")
         GMSPlacesClient.provideAPIKey("AIzaSyCLoZloFvbwIYIluj1gDNP3zg9teOHvR4Q")
         
+        UINavigationBar.appearance().barStyle = .blackOpaque
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = StartScreen()
+        
         return true
     }
 

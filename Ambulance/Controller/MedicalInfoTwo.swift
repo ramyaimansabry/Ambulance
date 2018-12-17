@@ -50,8 +50,9 @@ class MedicalInfoTwo: UIViewController {
             print("Saved user successfully into Firebase db")
             UserDefaults.standard.set(true, forKey: "IsLoggedIn")
             UserDefaults.standard.synchronize()
-                let homeController = HomeVC()
-                 self.present(homeController, animated: true, completion: nil)
+            let homeController = HomeVC()
+            let HomeNavigationController = UINavigationController(rootViewController: homeController)
+            self.present(HomeNavigationController, animated: true, completion: nil)
         })
     }
     

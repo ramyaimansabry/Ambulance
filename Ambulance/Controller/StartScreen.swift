@@ -6,7 +6,8 @@ class StartScreen: UINavigationController {
     
     func setupViews(){
         view.backgroundColor = UIColor.white
-        navigationBar.isHidden = true
+        navigationController?.navigationBar.barTintColor = UIColor.white
+         navigationBar.isHidden = true
     }
     
     
@@ -18,8 +19,8 @@ class StartScreen: UINavigationController {
         
         // if user not logged in
          if isLoggedIn() {
-            let homeController = HomeVC()
-            viewControllers = [homeController]
+          let homeController = HomeVC()
+           viewControllers = [homeController]
         }
        
         else {                                                            // 0.01
