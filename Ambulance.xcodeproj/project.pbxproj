@@ -14,7 +14,6 @@
 		2D04CFE921BD2A1E008BFA9F /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFE821BD2A1E008BFA9F /* MenuRow.swift */; };
 		2D04CFEB21BD2A49008BFA9F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEA21BD2A49008BFA9F /* MenuCell.swift */; };
 		2D04CFED21BD4C51008BFA9F /* EditMedicalInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEC21BD4C51008BFA9F /* EditMedicalInfoController.swift */; };
-		2D04CFEF21BD8A9C008BFA9F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFEE21BD8A9C008BFA9F /* SettingController.swift */; };
 		2D04CFF121BED844008BFA9F /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFF021BED844008BFA9F /* EditProfileController.swift */; };
 		2D04CFF321BFD7C9008BFA9F /* ChanagePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04CFF221BFD7C9008BFA9F /* ChanagePasswordController.swift */; };
 		2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */; };
@@ -45,7 +44,6 @@
 		2D04CFE821BD2A1E008BFA9F /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
 		2D04CFEA21BD2A49008BFA9F /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		2D04CFEC21BD4C51008BFA9F /* EditMedicalInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMedicalInfoController.swift; sourceTree = "<group>"; };
-		2D04CFEE21BD8A9C008BFA9F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		2D04CFF021BED844008BFA9F /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		2D04CFF221BFD7C9008BFA9F /* ChanagePasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChanagePasswordController.swift; sourceTree = "<group>"; };
 		2D0D834521B328DB00968724 /* MedicalInfoTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInfoTwo.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 				2D04CFF021BED844008BFA9F /* EditProfileController.swift */,
 				2D04CFF221BFD7C9008BFA9F /* ChanagePasswordController.swift */,
 				2D04CFEC21BD4C51008BFA9F /* EditMedicalInfoController.swift */,
-				2D04CFEE21BD8A9C008BFA9F /* SettingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -363,7 +360,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D04CFEF21BD8A9C008BFA9F /* SettingController.swift in Sources */,
 				2D19432921AEB7480054556C /* StartScreen.swift in Sources */,
 				2D19433321AEBD940054556C /* LoginSplashScreen.swift in Sources */,
 				2D19432721AEB6B00054556C /* Extentions.swift in Sources */,

@@ -29,18 +29,14 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
     }
    func declareRows(){
     let Row1 = Row(title: "My profile", imageName: "MyProfileICON")
-    let Row2 = Row(title: "Settings", imageName: "SettingICON")
     let Row3 = Row(title: "Logout",  imageName: "LogoutICON")
-    let Row4 = Row(title: "Rate us", imageName: "RateusICON")
     let Row5 = Row(title: "Call 123", imageName: "PhoneCallICON")
     let Row6 = Row(title: "Refer your friends", imageName: "ShareICON")
     let Row7 = Row(title: "Medical information", imageName: "MedicalInfo2ICON")
     rows.append(Row1)
     rows.append(Row7)
     rows.append(Row5)
-    rows.append(Row4)
     rows.append(Row6)
-    rows.append(Row2)
     rows.append(Row3)
     }
     func show(){
@@ -85,7 +81,6 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
                 self.collectionView.frame = CGRect(x: 0, y: 0, width: 0, height: self.leftView.frame.height-70)
             }) { (Completed: Bool) in
                 // do stuff her ...........
-                print("completion block")
                
                 
             }
@@ -94,7 +89,6 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
    
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizer.Direction.left {
-            print("Swipe Left")
             hide()
         }
     }
@@ -147,17 +141,10 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
             self.homeController?.Call123()
             break
         case 3:
-            
-            break
-        case 4:
               self.homeController?.ReferFriends()
               self.hide()
             break
-        case 5:
-             self.homeController?.ShowSettingController()
-             self.hide()
-            break
-        case 6:
+        case 4:
             self.hide()
             self.homeController?.logMeOut()
             break

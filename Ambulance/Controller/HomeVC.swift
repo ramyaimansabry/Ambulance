@@ -15,7 +15,6 @@ import NVActivityIndicatorView
 import SCLAlertView
 import SVProgressHUD
 import GoogleMaps
-// AIzaSyCLoZloFvbwIYIluj1gDNP3zg9teOHvR4Q
 
 class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NVActivityIndicatorViewable{
   let locationManager = CLLocationManager()
@@ -54,7 +53,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       // AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         if isInEmergency {
             fourthView.show()
         }
@@ -102,12 +101,10 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         guard let EmergencyLocation = centerLocation else {
             print("Cant get location")
             self.dismissRingIndecator()
-            SCLAlertView().showError("Error", subTitle: "Cant get location")
+            SCLAlertView().showError("Error", subTitle: "Cant get location, try again!")
               self.isInEmergency = false
             return
         }
-        print(centerLocation?.longitude)
-        print(centerLocation?.latitude)
         
           self.isInEmergency = true
         
@@ -322,13 +319,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
 
     }
     
-    func ShowSettingController(){
-        if isInEmergency {
-            fourthView.hideAndResetToDefualt()
-        }
-        let viewController = SettingController()
-        navigationController?.pushViewController(viewController, animated: true)
-    }
     func share(message: String, link: String) {
         if let link = NSURL(string: link) {
             let objectsToShare = [message,link] as [Any]
@@ -339,7 +329,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     func ReferFriends(){
   
         
-       share(message: "Hello we4 fa5da", link: "")
+        share(message: "Try now #Ambulance app - the app that help you requesting ambulance in emergency!", link: "")
         
         
     }
@@ -369,8 +359,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     }
     
     
-    
-    // ****************************************************************************************************************
 
     @objc func CallAmbulanceButtonAction(sender: UIButton!) {
         switch RequestEmergencyCounter {
@@ -420,11 +408,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             SCLAlertView().showError("Error", subTitle: "Cant get your location!")
             return
         }
-        
-        
          let sourceCoordinate = CLLocation(latitude: Lat, longitude: Long)
-        
-     //   let sourceCoordinate =  CLLocation(latitude: UserDefaults.standard.value(forKey: "LAT") as! CLLocationDegrees, longitude: UserDefaults.standard.value(forKey: "LON") as! CLLocationDegrees)
         let camera = GMSCameraPosition.camera(withLatitude: sourceCoordinate.coordinate.latitude,
                                               longitude: sourceCoordinate.coordinate.longitude,
                                               zoom: 16.0)
@@ -563,12 +547,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             UserDefaults.standard.set(location.coordinate.latitude, forKey: "LAT")
             UserDefaults.standard.set(location.coordinate.longitude, forKey: "LON")
             UserDefaults().synchronize()
-//            if !isChooseLocation {
-//                let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-//                                                      longitude: location.coordinate.longitude,
-//                                                      zoom: 16.0)
-//               mapView.animate(to: camera)
-//            }
         }
     }
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
