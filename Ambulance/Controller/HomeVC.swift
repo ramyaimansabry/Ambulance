@@ -106,7 +106,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             return
         }
         
-          self.isInEmergency = true
+        //  self.isInEmergency = true
         
         let Longitude: String = String(EmergencyLocation.longitude)
         let Latitude: String = String(EmergencyLocation.latitude)
@@ -202,9 +202,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             // ref2.keepSynced(true)
             ref2.observe(.value, with: { (snapshot) in
                 if !snapshot.exists() { return }
-                print("**********************")
-                print(snapshot)
-                print("**********************")
+
                 guard let Dlatitude: String = snapshot.value as? String else {
                     print("Errorrrrrr")
                     return
@@ -216,28 +214,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
                            self.getPolylineRoute(from: self.centerLocation!, to: currentLocation)
                 
                   }, withCancel: nil)
-            
-            
-            
-            
-//            if let Dlongitude: String = snapshot.childSnapshot(forPath: "DriverLongitude").value as? String {
-//                print(Dlongitude)
-//                self.DriverLocation33.Longitude = Dlongitude
-//            }
-//            if let Dlatitude: String = snapshot.childSnapshot(forPath: "DriverLatitude").value as? String {
-//                print(Dlatitude)
-//                self.DriverLocation33.Latitude = Dlatitude
-//                print( self.DriverLocation33.Latitude,"+++++++++++++++++++++++++++++++")
-//
-//            }
-//            print( self.DriverLocation33.Latitude,"+++++++++++++++++++++++++++++++")
-//            print( self.DriverLocation33.Longitude,"+++++++++++++++++++++++++++++++")
-//
-//
-//            var currentLocation:CLLocationCoordinate2D! //location object
-//           currentLocation = CLLocationCoordinate2D(latitude: self.DriverLocation33.Latitude!.toDouble() ?? 0.0, longitude: self.DriverLocation33.Longitude!.toDouble() ?? 0.0)
-//
-//           self.getPolylineRoute(from: self.centerLocation!, to: currentLocation)
+      
 
         }, withCancel: nil)
     }
@@ -560,7 +537,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         checkLocationAuthorization()
-        SCLAlertView().showError("Error", subTitle: "Location Unavailable!")
+     //   SCLAlertView().showError("Error", subTitle: "Location Unavailable!")
     }
     
     // MARK: - Map Directions
