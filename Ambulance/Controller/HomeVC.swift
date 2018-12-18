@@ -19,51 +19,23 @@ import GoogleMaps
 
 class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NVActivityIndicatorViewable{
   let locationManager = CLLocationManager()
-   // let firstView = HomeVCViewInfoOne()
-   // let secandView = HomeVCViewInfoTwo()
-    //let thirdView = HomeCVViewInfoThree()
-    
-    lazy var firstView: HomeVCViewInfoOne = {
-        let vc = HomeVCViewInfoOne()
-        return vc
-    }()
-    lazy var secandView: HomeVCViewInfoTwo = {
-        let vc = HomeVCViewInfoTwo()
-        return vc
-    }()
-    lazy var thirdView: HomeCVViewInfoThree = {
-        let vc = HomeCVViewInfoThree()
-        return vc
-    }()
- 
-    
-    
-    
     var mapView: GMSMapView!
     var RequestEmergencyCounter: Int = 1
     var driverPhoneNumber: String = "000"
     var isInEmergency: Bool = false
-    var isChooseLocation: Bool = false
     var ResponserID = ""
     var centerLocation: CLLocationCoordinate2D?
     
     func SetupNavBar(){
+          self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = UIColor.white
-        navigationItem.title = "Ambulance"
-        navigationController?.navigationBar.barTintColor = UIColor.darkGray
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(MenuButtonAction))
-        self.navigationController?.isNavigationBarHidden = true
-
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-       SetupNavBar()
-        
-        
-        
+        SetupNavBar()
         
         SVProgressHUD.setForegroundColor(UIColor.red)
         SVProgressHUD.setBackgroundColor(UIColor.clear)
@@ -72,14 +44,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             if Auth.auth().currentUser?.uid == nil {
                 perform(#selector(handleLogout), with: nil, afterDelay: 0)
             }
-        
-
+    
          SetupLoadingActivity()
-        
          mapSetup()
          checkLocationServices()
          setupConstrains()
-         setupAppStyle()
+        
        
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -97,6 +67,19 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
     //   MARK :-  Main Methods
     /**********************************************************************************************/
+    
+    lazy var firstView: HomeVCViewInfoOne = {
+        let vc = HomeVCViewInfoOne()
+        return vc
+    }()
+    lazy var secandView: HomeVCViewInfoTwo = {
+        let vc = HomeVCViewInfoTwo()
+        return vc
+    }()
+    lazy var thirdView: HomeCVViewInfoThree = {
+        let vc = HomeCVViewInfoThree()
+        return vc
+    }()
     func callEmergencyOverDatabase(){
         SaveToDatabase()
     }
@@ -120,9 +103,13 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             print("Cant get location")
             self.dismissRingIndecator()
             SCLAlertView().showError("Error", subTitle: "Cant get location")
+              self.isInEmergency = false
             return
         }
-       
+        print(centerLocation?.longitude)
+        print(centerLocation?.latitude)
+        
+          self.isInEmergency = true
         
         let Longitude: String = String(EmergencyLocation.longitude)
         let Latitude: String = String(EmergencyLocation.latitude)
@@ -163,6 +150,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
                      print("Time out")
                      ref.removeAllObservers()
                     self.handleTimeOut()
+                    self.isInEmergency = false
                     return
                 }else {
                    print("Emergency Accepted!!!!!")
@@ -199,25 +187,60 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     func readResponserinformation(){
         
          let userID = (Auth.auth().currentUser?.uid)!
-        let ref2 = Database.database().reference().child("waiting Emergencies").child(userID)
+        let ref2 = Database.database().reference().child("waiting Emergencies").child(userID).child("DriverLongitude")
        // ref2.keepSynced(true)
         ref2.observe(.value, with: { (snapshot) in
             if !snapshot.exists() { return }
+            print("**********************")
+            print(snapshot)
+            print("**********************")
             
-            if let Dlongitude: String = snapshot.childSnapshot(forPath: "DriverLongitude").value as? String {
-                print(Dlongitude)
-                self.DriverLocation33.Longitude = Dlongitude
-            }
-            if let Dlatitude: String = snapshot.childSnapshot(forPath: "DriverLatitude").value as? String {
-                print(Dlatitude)
-                self.DriverLocation33.Latitude = Dlatitude
-            }
- 
             
-            var currentLocation:CLLocationCoordinate2D! //location object
-           currentLocation = CLLocationCoordinate2D(latitude: self.DriverLocation33.Latitude!.toDouble() ?? 0.0, longitude: self.DriverLocation33.Longitude!.toDouble() ?? 0.0)
-
-           self.getPolylineRoute(from: self.centerLocation!, to: currentLocation)
+            guard let Dlongitude: String = snapshot.value as? String else {
+                print("Errorrrrrr")
+                return
+            }
+            
+            let ref2 = Database.database().reference().child("waiting Emergencies").child(userID).child("DriverLatitude")
+            // ref2.keepSynced(true)
+            ref2.observe(.value, with: { (snapshot) in
+                if !snapshot.exists() { return }
+                print("**********************")
+                print(snapshot)
+                print("**********************")
+                guard let Dlatitude: String = snapshot.value as? String else {
+                    print("Errorrrrrr")
+                    return
+                }
+                
+                var currentLocation:CLLocationCoordinate2D!
+                           currentLocation = CLLocationCoordinate2D(latitude: Dlatitude.toDouble() ?? 0.0, longitude: Dlongitude.toDouble() ?? 0.0)
+                
+                           self.getPolylineRoute(from: self.centerLocation!, to: currentLocation)
+                
+                  }, withCancel: nil)
+            
+            
+            
+            
+//            if let Dlongitude: String = snapshot.childSnapshot(forPath: "DriverLongitude").value as? String {
+//                print(Dlongitude)
+//                self.DriverLocation33.Longitude = Dlongitude
+//            }
+//            if let Dlatitude: String = snapshot.childSnapshot(forPath: "DriverLatitude").value as? String {
+//                print(Dlatitude)
+//                self.DriverLocation33.Latitude = Dlatitude
+//                print( self.DriverLocation33.Latitude,"+++++++++++++++++++++++++++++++")
+//
+//            }
+//            print( self.DriverLocation33.Latitude,"+++++++++++++++++++++++++++++++")
+//            print( self.DriverLocation33.Longitude,"+++++++++++++++++++++++++++++++")
+//
+//
+//            var currentLocation:CLLocationCoordinate2D! //location object
+//           currentLocation = CLLocationCoordinate2D(latitude: self.DriverLocation33.Latitude!.toDouble() ?? 0.0, longitude: self.DriverLocation33.Longitude!.toDouble() ?? 0.0)
+//
+//           self.getPolylineRoute(from: self.centerLocation!, to: currentLocation)
 
         }, withCancel: nil)
     }
@@ -305,6 +328,20 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         }
         let viewController = SettingController()
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    func share(message: String, link: String) {
+        if let link = NSURL(string: link) {
+            let objectsToShare = [message,link] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+        }
+    }
+    func ReferFriends(){
+  
+        
+       share(message: "Hello we4 fa5da", link: "")
+        
+        
     }
     @objc func backButtonAction(){
         setViewToDefault()
@@ -396,7 +433,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
   
     func ShowMapCenteredPen(){
-        isChooseLocation = true
+       // isChooseLocation = true
         view.addSubview(MapPinICON)
         MapPinICON.alpha = 0
         UIView.animate(withDuration: 0.5, animations: {
@@ -413,7 +450,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
     func HideUnnecessaryView(){
         UIView.animate(withDuration: 0.5, animations: {
-            self.isChooseLocation = false
+           // self.isChooseLocation = false
             self.MapPinICON.alpha = 0
         })
         CallAmbulanceButton.isEnabled = false
@@ -509,7 +546,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         let camera = GMSCameraPosition.camera(withLatitude: defaultLocation.latitude,longitude: defaultLocation.longitude,
                                               zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
-        mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.isMyLocationEnabled = true
         view.addSubview(mapView)
@@ -527,12 +563,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             UserDefaults.standard.set(location.coordinate.latitude, forKey: "LAT")
             UserDefaults.standard.set(location.coordinate.longitude, forKey: "LON")
             UserDefaults().synchronize()
-            if !isChooseLocation {
-                let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-                                                      longitude: location.coordinate.longitude,
-                                                      zoom: 16.0)
-               mapView.animate(to: camera)
-            }
+//            if !isChooseLocation {
+//                let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+//                                                      longitude: location.coordinate.longitude,
+//                                                      zoom: 16.0)
+//               mapView.animate(to: camera)
+//            }
         }
     }
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
@@ -632,84 +668,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         polyline.map = mapView // Your map view
     }
 
-    // MARK: - Map Style
-    /**************************************************************************************************/
-    
-    var NightMode: Bool = false
-    @objc func mapStyle(){
-        NightMode = !NightMode
-        if NightMode {
-            mapDarkMode()
-        }
-        else {
-            mapLightMode()
-        }
-    }
-    
-    func setupAppStyle(){
-        if UserDefaults.standard.bool(forKey: "NightMode"){
-            mapDarkMode()
-            NightMode = true
-        }
-        else {
-            mapLightMode()
-            NightMode = false
-        }
-    }
-    
-    func mapLightMode(){
-        UserDefaults.standard.set(false, forKey: "NightMode")
-        UserDefaults.standard.synchronize()
-        DispatchQueue.main.async {
-            self.TitleLabel.textColor = UIColor.darkGray
-            self.MapStyleButton.setBackgroundImage(UIImage(named: "EarthICONBlack"), for: .normal)
-            self.MenuButton.setBackgroundImage(UIImage(named: "MenuICON"), for: .normal)
-            self.MyLocationButton.setBackgroundImage(UIImage(named: "GPS-ICON"), for: .normal)
-            self.backButton.setBackgroundImage(UIImage(named: "backICON"), for: .normal)
-            do {
-                if let styleURL = Bundle.main.url(forResource: "LightStyle", withExtension: "json") {
-                    self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
-        }
-    }
-    
-    func mapDarkMode(){
-        UserDefaults.standard.set(true, forKey: "NightMode")
-        UserDefaults.standard.synchronize()
-        UINavigationBar.appearance().barStyle = .blackOpaque
-        DispatchQueue.main.async {
-            UINavigationBar.appearance().barStyle = .blackOpaque
-            self.TitleLabel.textColor = UIColor.white
-            self.MapStyleButton.setBackgroundImage(UIImage(named: "EarthICONWhite"), for: .normal)
-            self.MenuButton.setBackgroundImage(UIImage(named: "MenuICONWhite"), for: .normal)
-            self.MyLocationButton.setBackgroundImage(UIImage(named: "LocationICONWhite"), for: .normal)
-            self.backButton.setBackgroundImage(UIImage(named: "BackICONWhite"), for: .normal)
-
-            do {
-                if let styleURL = Bundle.main.url(forResource: "DarkStyle", withExtension: "json") {
-                    self.mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
-        }
-        
-    }
-    
-    
     
     
     // MARK: - Setup Constrains
     /**************************************************************************************************/
     private func setupConstrains(){
-         [TitleLabel,CallAmbulanceButton,MenuButton,MyLocationButton,MapStyleButton].forEach { view.addSubview($0) }
+         [TitleLabel,CallAmbulanceButton,MenuButton,MyLocationButton].forEach { view.addSubview($0) }
     
         
         TitleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 30, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
@@ -719,11 +683,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         
         MenuButton.anchor(top: TitleLabel.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 0, left: 25, bottom: 0, right: 0),size: CGSize(width: 30, height: 30))
         
-        
-        
-        MapStyleButton.anchor(top: TitleLabel.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 25),size: CGSize(width: 30, height: 30))
-        
-        MyLocationButton.anchor(top: MapStyleButton.bottomAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 25),size: CGSize(width: 30, height: 30))
+        MyLocationButton.anchor(top: TitleLabel.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 25),size: CGSize(width: 30, height: 30))
         
      
     }
@@ -769,26 +729,11 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         button.addTarget(self, action: #selector(CallAmbulanceButtonAction), for: .touchUpInside)
         return button
     }()
-    let MapStyleButton: UIButton = {
-        let button = UIButton.init(type: .system)
-        button.setTitle("", for: .normal)
-        button.frame.size = CGSize(width: 25, height: 25)
-        button.layer.cornerRadius = 5
-        button.backgroundColor = UIColor.clear
-        button.setTitleColor(UIColor.white, for: .normal)
-         if UserDefaults.standard.bool(forKey: "NightMode"){
-             button.setBackgroundImage(UIImage(named: "EarthICONWhite"), for: .normal)
-         }else{
-              button.setBackgroundImage(UIImage(named: "EarthICONBlack"), for: .normal)
-        }
-        button.imageView?.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(mapStyle), for: .touchUpInside)
-        return button
-    }()
+
     let TitleLabel : UILabel = {
         var label = UILabel()
         label.text = "Ambulance"
-        label.tintColor = UIColor.gray
+        label.tintColor = UIColor.red
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.backgroundColor = UIColor.clear
         label.textAlignment = .center
@@ -831,3 +776,5 @@ extension String
         }
     }
 }
+
+

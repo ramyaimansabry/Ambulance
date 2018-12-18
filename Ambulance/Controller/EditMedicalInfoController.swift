@@ -23,6 +23,7 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        self.navigationController?.isNavigationBarHidden = true
         
         setupViews()
         setupViews()

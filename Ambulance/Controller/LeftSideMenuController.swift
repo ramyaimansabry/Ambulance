@@ -150,7 +150,8 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
             
             break
         case 4:
-            
+              self.homeController?.ReferFriends()
+              self.hide()
             break
         case 5:
              self.homeController?.ShowSettingController()

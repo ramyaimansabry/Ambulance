@@ -52,6 +52,7 @@ class MedicalInfoTwo: UIViewController {
             UserDefaults.standard.synchronize()
             let homeController = HomeVC()
             let HomeNavigationController = UINavigationController(rootViewController: homeController)
+            HomeNavigationController.navigationController?.isNavigationBarHidden = true
             self.present(HomeNavigationController, animated: true, completion: nil)
         })
     }

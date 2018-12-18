@@ -11,7 +11,7 @@ class EditProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        
+        self.navigationController?.isNavigationBarHidden = true
         setupViews()
         LoadUserInfo()
         AddtextfieldDelegete()

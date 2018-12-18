@@ -12,6 +12,7 @@ class ChanagePasswordController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
+        self.navigationController?.isNavigationBarHidden = true
         setupViews()
  
     }

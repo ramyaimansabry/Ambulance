@@ -17,13 +17,11 @@ class SettingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        
+        self.navigationController?.isNavigationBarHidden = true
         setupViews()
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "koko"
-        self.navigationController?.navigationBar.barTintColor = UIColor.red
+    
     }
     
     // MARK :-  Main Methods
