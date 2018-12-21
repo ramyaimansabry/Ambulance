@@ -438,13 +438,13 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             UserDefaults.standard.synchronize()
             UserDefaults.standard.set(false, forKey: "AddMedicalInfo")
             UserDefaults.standard.synchronize()
+
+            let AddNewviewController = LoginSplashScreen()
+            present(AddNewviewController, animated: true, completion: nil)
         }catch let logError{
             print(logError)
+            SCLAlertView().showError("Error", subTitle: logError.localizedDescription)
         }
-        
-        let AddNewviewController = LoginSplashScreen()
-        present(AddNewviewController, animated: true, completion: nil)
-        
     }
     
     func SetupLoadingActivity(){
