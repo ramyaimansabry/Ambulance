@@ -54,6 +54,8 @@ class SignInController: UIViewController,UITextFieldDelegate {
            self.dismissRingIndecator()
             UserDefaults.standard.set(true, forKey: "IsLoggedIn")
             UserDefaults.standard.synchronize()
+            UserDefaults.standard.set(true, forKey: "AddMedicalInfo")
+            UserDefaults.standard.synchronize()
             let homeController = HomeVC()
             let HomeNavigationController = UINavigationController(rootViewController: homeController)
             HomeNavigationController.navigationController?.isNavigationBarHidden = true

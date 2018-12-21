@@ -436,6 +436,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
             try Auth.auth().signOut()
             UserDefaults.standard.set(false, forKey: "IsLoggedIn")
             UserDefaults.standard.synchronize()
+            UserDefaults.standard.set(false, forKey: "AddMedicalInfo")
+            UserDefaults.standard.synchronize()
         }catch let logError{
             print(logError)
         }

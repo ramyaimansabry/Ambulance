@@ -71,6 +71,11 @@ class SignUpController: UIViewController,UITextFieldDelegate {
                 }
                self.dismissRingIndecator()
                 // succeed ..
+                print("Saved user successfully into Firebase db")
+                UserDefaults.standard.set(true, forKey: "IsLoggedIn")
+                UserDefaults.standard.synchronize()
+                UserDefaults.standard.set(false, forKey: "AddMedicalInfo")
+                UserDefaults.standard.synchronize()
                 let new = MedicalInformation()
                 self.navigationController?.pushViewController(new, animated: true)
             })

@@ -19,14 +19,26 @@ class StartScreen: UINavigationController {
         
         // if user not logged in
          if isLoggedIn() {
-          let homeController = HomeVC()
-           viewControllers = [homeController]
+            if isAddedMedicalInfo(){
+                let homeController = HomeVC()
+                viewControllers = [homeController]
+            }
+            else{
+                 perform(#selector(showMedicalInfo), with: nil, afterDelay: 0.01)
+            }
         }
+       
        
         else {                                                            // 0.01
             perform(#selector(showLoginComponent), with: nil, afterDelay: 0.01)
         }
     }
+    
+    @objc func showMedicalInfo(){
+        let controller = MedicalInformation()
+        present(controller, animated: true, completion: nil)
+    }
+    
     
     @objc func showLoginComponent(){
         let controller = LoginSplashScreen()
@@ -35,6 +47,14 @@ class StartScreen: UINavigationController {
     
     fileprivate func isLoggedIn() -> Bool {
         if UserDefaults.standard.bool(forKey: "IsLoggedIn"){
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    fileprivate func isAddedMedicalInfo() -> Bool {
+        if  UserDefaults.standard.bool(forKey: "AddMedicalInfo") {
             return true
         }
         else {

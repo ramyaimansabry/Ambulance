@@ -48,8 +48,8 @@ class MedicalInformation: UIViewController,UITextViewDelegate ,UIPickerViewDeleg
             
             // succeed ..
             self.dismissRingIndecator()
-            print("Saved user successfully into Firebase db")
-            UserDefaults.standard.set(true, forKey: "IsLoggedIn")
+          
+            UserDefaults.standard.set(true, forKey: "AddMedicalInfo")
             UserDefaults.standard.synchronize()
             let homeController = HomeVC()
             let HomeNavigationController = UINavigationController(rootViewController: homeController)
@@ -220,7 +220,7 @@ class MedicalInformation: UIViewController,UITextViewDelegate ,UIPickerViewDeleg
         stackView4.addArrangedSubview(scrollView)
         stackView4.addArrangedSubview(SaveButtonn)
         
-        stackView4.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 10, right: 0))
+        stackView4.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 10, right: 0))
         
    
         stackView1.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,size: CGSize(width: 0, height: stackView4.frame.height/6))
