@@ -18,7 +18,7 @@ class LoginSplashScreen: UIViewController{
         present(AddNewviewController, animated: true, completion: nil)
     }
     @objc func SignUpButtonAction(sender: UIButton!) {
-        let SignUp = SignUpController()
+       let SignUp = SignUpController()
         let SignUpNavigationController = UINavigationController(rootViewController: SignUp)
         self.present(SignUpNavigationController, animated: true, completion: nil)
 

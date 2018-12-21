@@ -47,3 +47,46 @@ extension UIView {
     }
 }
 
+extension String
+{
+    /// EZSE: Converts String to Double
+    public func toDouble() -> Double?
+    {
+        if let num = NumberFormatter().number(from: self) {
+            return num.doubleValue
+        } else {
+            return nil
+        }
+    }
+}
+
+
+extension UIViewController {
+    func openShareDilog(`with` viewController : UIViewController) {
+        let text = "Try now #Ambulance app - the app that help you requesting ambulance in emergency!"
+        
+        // set up activity view controller
+        let textToShare = [text]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop]
+        
+        viewController.present(activityViewController, animated: true, completion: nil)
+        
+    }
+}
+
+extension String {
+    func applyPatternOnNumbers(pattern: String, replacmentCharacter: Character) -> String {
+        var pureNumber = self.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
+        for index in 0 ..< pattern.count {
+            guard index < pureNumber.count else { return pureNumber }
+            let stringIndex = String.Index(encodedOffset: index)
+            let patternCharacter = pattern[stringIndex]
+            guard patternCharacter != replacmentCharacter else { continue }
+            pureNumber.insert(patternCharacter, at: stringIndex)
+        }
+        return pureNumber
+    }
+}

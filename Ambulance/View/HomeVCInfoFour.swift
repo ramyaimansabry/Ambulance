@@ -22,6 +22,8 @@ class HomeVCInfoFour: NSObject {
         swipeDown.direction = .down
         self.ViewFour.addGestureRecognizer(swipeDown)
         CallButton.addTarget(self, action: #selector(CallButtonTapped), for: .touchUpInside)
+        FinishedButton.addTarget(self, action: #selector(FinishedButtonTapped), for: .touchUpInside)
+
     }
     
     func show(){
@@ -38,7 +40,7 @@ class HomeVCInfoFour: NSObject {
             
             UIView.animate(withDuration: 0.5, animations: {
                 self.ViewFour.alpha = 1
-                self.ViewFour.anchor(top: window.bottomAnchor, leading: window.leadingAnchor, bottom: nil, trailing: window.trailingAnchor, padding: .init(top: -70, left: 20, bottom: 0, right: 20),size: CGSize(width: 0, height: 250))
+                self.ViewFour.anchor(top: window.bottomAnchor, leading: window.leadingAnchor, bottom: nil, trailing: window.trailingAnchor, padding: .init(top: -70, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 250))
             })
         }
     }
@@ -54,17 +56,18 @@ class HomeVCInfoFour: NSObject {
     
     
     @objc func CallButtonTapped(){
-      print("Call Button Tapped")
         homeController?.callAcceptedDriver()
-       
+    }
+    @objc func FinishedButtonTapped(){
+      homeController?.finishRequest()
     }
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizer.Direction.up {
             let window = UIApplication.shared.keyWindow!
             UIView.animate(withDuration: 0.3, animations: {
                 let y = window.frame.height-250-self.ViewFour.safeAreaInsets.bottom
-                let x = window.frame.width-self.ViewFour.frame.width-20
-                self.ViewFour.frame = CGRect(x: x, y: y, width: window.frame.width-40, height: 250)
+                let x = window.frame.width-self.ViewFour.frame.width
+                self.ViewFour.frame = CGRect(x: x, y: y, width: window.frame.width, height: 320)
             })
             
         }
@@ -72,14 +75,16 @@ class HomeVCInfoFour: NSObject {
             let window = UIApplication.shared.keyWindow!
             UIView.animate(withDuration: 0.3, animations: {
                 let y = window.frame.height-self.ViewFour.safeAreaInsets.bottom-70
-                let x = window.frame.width-self.ViewFour.frame.width-20
-                self.ViewFour.frame = CGRect(x: x, y: y, width: window.frame.width-40, height: 250)
+                let x = window.frame.width-self.ViewFour.frame.width
+                self.ViewFour.frame = CGRect(x: x, y: y, width: window.frame.width, height: 320)
             })
             
         }
     }
     func setupConstrains(){
-        [TitleLabel,IconImage,CallButton,lineView1].forEach { ViewFour.addSubview($0) }
+        [TitleLabel,IconImage,stackView5,lineView1].forEach { ViewFour.addSubview($0) }
+        stackView5.addArrangedSubview(FinishedButton)
+        stackView5.addArrangedSubview(CallButton)
         
         lineView1.anchor(top: ViewFour.topAnchor, leading: ViewFour.leadingAnchor, bottom: nil, trailing: ViewFour.trailingAnchor, padding: .init(top: 8, left: 15, bottom: 0, right: 15),size: CGSize(width: 0, height: 5))
         
@@ -92,10 +97,11 @@ class HomeVCInfoFour: NSObject {
         TitleLabel.centerXAnchor.constraint(equalTo: self.ViewFour.centerXAnchor).isActive = true
         
         
-        CallButton.anchor(top: TitleLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 30, left: 0, bottom: 0, right: 0),size: CGSize(width: 150, height: 50))
-        CallButton.centerXAnchor.constraint(equalTo: self.ViewFour.centerXAnchor).isActive = true
+        stackView5.anchor(top: TitleLabel.bottomAnchor, leading: ViewFour.leadingAnchor, bottom: ViewFour.safeAreaLayoutGuide.bottomAnchor, trailing: ViewFour.trailingAnchor, padding: .init(top: 30, left: 30, bottom: 20, right: 30),size: CGSize(width: 0, height: 45))
+        stackView5.centerXAnchor.constraint(equalTo: self.ViewFour.centerXAnchor).isActive = true
         
-       
+        FinishedButton.anchor(top: stackView5.topAnchor, leading: nil, bottom: stackView5.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+        CallButton.anchor(top: stackView5.topAnchor, leading: nil, bottom: stackView5.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
         
     }
     
@@ -120,16 +126,27 @@ class HomeVCInfoFour: NSObject {
     let CallButton: UIButton = {
         let button = UIButton.init(type: .system)
         button.setTitle("Call Paramedic", for: .normal)
-      //  button.setImage(UIImage(named: "CallICON"), for: .normal)
         button.contentHorizontalAlignment = .center
-        button.frame.size = CGSize(width: 25, height: 25)
+        button.frame.size = CGSize(width: 150, height: 25)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.layer.cornerRadius = 5
         button.backgroundColor = UIColor.red
         button.setTitleColor(UIColor.white, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
-        
-        
+        return button
+    }()
+    let FinishedButton: UIButton = {
+        let button = UIButton.init(type: .system)
+        button.setTitle("Finish Request", for: .normal)
+        button.contentHorizontalAlignment = .center
+        button.frame.size = CGSize(width: 150, height: 25)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.layer.cornerRadius = 5
+        button.backgroundColor = UIColor.white
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.red.cgColor
+        button.setTitleColor(UIColor.red, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     let lineView1: UIView = {
@@ -137,5 +154,13 @@ class HomeVCInfoFour: NSObject {
         line.backgroundColor = UIColor.gray
         line.layer.cornerRadius = 10
         return line
+    }()
+    let stackView5: UIStackView = {
+        let sv = UIStackView()
+        sv.axis  = NSLayoutConstraint.Axis.horizontal
+        sv.distribution  = UIStackView.Distribution.fillEqually
+        sv.alignment = UIStackView.Alignment.center
+        sv.spacing  = 20
+        return sv
     }()
 }

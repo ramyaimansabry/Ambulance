@@ -17,7 +17,8 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         SVProgressHUD.setForegroundColor(UIColor.red)
 
         setupConstrains()
-       SetupComponentDelegetes()
+        SetupComponentDelegetes()
+        ShowVisibleButton()
     }
     func SetupComponentDelegetes(){
         NameTextField.delegate = self
@@ -40,7 +41,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
          checkEmptyFields()
     }
     
-    func AddNewuser(){
+    @objc func AddNewuser(){
         guard let name = NameTextField.text,let email = EmailTextField.text, let password = PasswordTextField.text, let phone = PhoneTextField.text, let lastName = lastNameTextField.text  else {
             print("Form is not valid")
             return
@@ -70,7 +71,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
                 }
                self.dismissRingIndecator()
                 // succeed ..
-                let new = MedicalInfoOne()
+                let new = MedicalInformation()
                 self.navigationController?.pushViewController(new, animated: true)
             })
         }
@@ -111,9 +112,16 @@ class SignUpController: UIViewController,UITextFieldDelegate {
               SCLAlertView().showError("Error", subTitle: "Write Valid Phone Number!")
             return
         }
-
-       AddNewuser()
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Agree", target: self, selector: #selector(AddNewuser))
+        alertView.addButton("disagree") {    }
+        alertView.showWarning("Warning", subTitle: "All your information saved in external database, that can be viewed by the admin, Agree?")
     }
+    
     func dismissRingIndecator(){
         DispatchQueue.main.async {
             SVProgressHUD.dismiss()
@@ -121,57 +129,88 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    
+    
+    //     MARK :- eye button on textfield
+    /**********************************************************************************************/
+    func ShowVisibleButton(){
+        view.addSubview(rightButtonToggle)
+        rightButtonToggle.anchor(top: nil, leading: nil, bottom: nil, trailing: PasswordTextField.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 15), size: CGSize(width: 25, height: 25))
+        rightButtonToggle.centerYAnchor.constraint(equalTo: self.PasswordTextField.centerYAnchor).isActive = true
+        
+    }
+    let rightButtonToggle: UIButton = {
+        let rightButton  = UIButton(type: .custom)
+        rightButton.frame = CGRect(x:0, y:0, width: 25, height: 25)
+        rightButton.setBackgroundImage(UIImage(named: "invisibleICON"), for: .normal)
+        rightButton.setBackgroundImage(UIImage(named: "visibleICON"), for: .selected)
+        rightButton.isSelected = false
+        rightButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 30)
+        rightButton.addTarget(self, action: #selector(PasswordTogglekButtonAction), for: .touchUpInside)
+        return rightButton
+    }()
+    
+    var secure = true
+    @objc func PasswordTogglekButtonAction(){
+        if(secure == false) {
+            PasswordTextField.isSecureTextEntry = false
+            ConfirmPasswordTextField.isSecureTextEntry = false
+            rightButtonToggle.isSelected = true
+        } else {
+            PasswordTextField.isSecureTextEntry = true
+             ConfirmPasswordTextField.isSecureTextEntry = true
+            rightButtonToggle.isSelected = false
+        }
+        secure = !secure
+    }
+
+    
     //   MARK :- Constrains
     /**********************************************************************************************/
     private func setupConstrains(){
-        
         view.addSubview(backButton)
-        view.addSubview(stackView2)
         view.addSubview(stackView1)
         view.addSubview(stackView3)
         view.addSubview(stackView4)
         view.addSubview(stackView5)
-        
-        
-        backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 30, bottom: 0, right: 0),size: CGSize(width: 35, height: 35))
-        
-        
-        stackView4.anchor(top: backButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 20, right: 0))
-        
-       
-        
-         stackView3.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor,padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: stackView4.frame.height/3) )
-        
-        
-        stackView2.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30))
-        
+        view.addSubview(scrollView)
         
         stackView5.addArrangedSubview(NameTextField)
          stackView5.addArrangedSubview(lastNameTextField)
-        
-        
+
         stackView1.addArrangedSubview(titleLabel)
         stackView1.addArrangedSubview(subTitleLabel)
-        
         
         stackView3.addArrangedSubview(LogInLabel)
         stackView3.addArrangedSubview(IconImage)
         stackView3.addArrangedSubview(stackView1)
         
         stackView4.addArrangedSubview(stackView3)
-        stackView4.addArrangedSubview(stackView2)
+        stackView4.addArrangedSubview(scrollView)
         stackView4.addArrangedSubview(SignUpButton)
         
-        
         stackView2.addArrangedSubview(stackView5)
-       // stackView2.addArrangedSubview(lasrNameTextField)
         stackView2.addArrangedSubview(EmailTextField)
         stackView2.addArrangedSubview(PhoneTextField)
         stackView2.addArrangedSubview(PasswordTextField)
         stackView2.addArrangedSubview(ConfirmPasswordTextField)
         
+        backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 30, bottom: 0, right: 0),size: CGSize(width: 35, height: 35))
         
-       
+       //   IconImage.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,size: CGSize(width: 60, height: 60))
+        
+        
+        stackView4.anchor(top: backButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 20, right: 0))
+        
+            stackView3.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor,padding: .init(top: 0, left: 0, bottom: 0, right: 0) )
+        
+        
+          scrollView.anchor(top: stackView3.bottomAnchor, leading: stackView4.leadingAnchor, bottom: SignUpButton.topAnchor, trailing: stackView4.trailingAnchor, padding: .init(top: 15, left: 20, bottom: 15, right: 20))
+         scrollView.addSubview(stackView2)
+      
+        
+        stackView2.anchor(top: scrollView.topAnchor, leading: scrollView.leadingAnchor, bottom: scrollView.bottomAnchor, trailing: scrollView.trailingAnchor)
+        stackView2.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1.0).isActive = true
         
          NameTextField.anchor(top: stackView5.topAnchor, leading: nil, bottom: stackView5.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
          lastNameTextField.anchor(top: stackView5.topAnchor, leading: nil, bottom: stackView5.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
@@ -183,11 +222,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         PasswordTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
          ConfirmPasswordTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         
-        
-  
         SignUpButton.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
-
-        
     }
     
     
@@ -213,7 +248,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     let stackView3: UIStackView = {
         let sv = UIStackView()
         sv.axis  = NSLayoutConstraint.Axis.vertical
-        sv.distribution  = UIStackView.Distribution.fill
+        sv.distribution  = UIStackView.Distribution.equalSpacing
         sv.alignment = UIStackView.Alignment.center
         sv.spacing   = 20.0
         return sv
@@ -221,12 +256,19 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     let stackView4: UIStackView = {
         let sv = UIStackView()
         sv.axis  = NSLayoutConstraint.Axis.vertical
-        sv.distribution  = UIStackView.Distribution.equalCentering
+        sv.distribution  = UIStackView.Distribution.equalSpacing
         sv.alignment = UIStackView.Alignment.center
         sv.spacing  = 30
         return sv
     }()
-    
+    let scrollView: UIScrollView = {
+        let v = UIScrollView()
+        v.backgroundColor = UIColor.white
+        v.isScrollEnabled = true
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.contentSize.height = 2000
+        return v
+    }()
     let stackView5: UIStackView = {
         let sv = UIStackView()
         sv.axis  = NSLayoutConstraint.Axis.horizontal
@@ -235,12 +277,11 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         sv.spacing  = 20
         return sv
     }()
-    
     let LogInLabel : UILabel = {
         var label = UILabel()
         label.text = "Signup"
         label.tintColor = UIColor.black
-        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.font = UIFont.boldSystemFont(ofSize: 27)
         label.backgroundColor = UIColor.white
          label.numberOfLines = 0
         label.textAlignment = .center
@@ -276,11 +317,12 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.lineColor = UIColor.lightGray
         tx.selectedTitleColor = UIColor.red
         tx.selectedLineColor = UIColor.red
+        tx.isSecureTextEntry = true
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
-        tx.clearButtonMode = UITextField.ViewMode.whileEditing;
+        tx.clearButtonMode = UITextField.ViewMode.never
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
@@ -295,11 +337,12 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.lineColor = UIColor.lightGray
         tx.selectedTitleColor = UIColor.red
         tx.selectedLineColor = UIColor.red
+         tx.isSecureTextEntry = true
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
         tx.returnKeyType = UIReturnKeyType.done
-        tx.clearButtonMode = UITextField.ViewMode.whileEditing;
+        tx.clearButtonMode = UITextField.ViewMode.never
         tx.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return tx
     }()
@@ -363,8 +406,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     let titleLabel : UILabel = {
         var label = UILabel()
         label.text = "Welcome Aboard!"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        //   label.backgroundColor = UIColor.gray
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
          label.numberOfLines = 0
         label.textColor = UIColor.gray
@@ -373,8 +415,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     let subTitleLabel : UILabel = {
         var label = UILabel()
         label.text = "Signup with Ambulance in simple steps"
-        label.font = UIFont.systemFont(ofSize: 16)
-        //   label.backgroundColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.gray
          label.numberOfLines = 0
         label.textAlignment = .center
@@ -416,16 +457,3 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     
 }
 
-extension String {
-    func applyPatternOnNumbers(pattern: String, replacmentCharacter: Character) -> String {
-        var pureNumber = self.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
-        for index in 0 ..< pattern.count {
-            guard index < pureNumber.count else { return pureNumber }
-            let stringIndex = String.Index(encodedOffset: index)
-            let patternCharacter = pattern[stringIndex]
-            guard patternCharacter != replacmentCharacter else { continue }
-            pureNumber.insert(patternCharacter, at: stringIndex)
-        }
-        return pureNumber
-    }
-}

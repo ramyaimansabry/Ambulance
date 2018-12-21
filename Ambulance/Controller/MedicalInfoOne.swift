@@ -34,7 +34,9 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
     //   MARK :-  Main Methods
     /**********************************************************************************************/
     @objc func SignUpButtonAction(sender: UIButton!) {
-        checkEmptyFields()
+      //  checkEmptyFields()
+        let more = MedicalInfoTwo()
+        self.navigationController?.pushViewController(more, animated: true)
     }
     
     
@@ -233,7 +235,7 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
     let stackView1: UIStackView = {
         let sv = UIStackView()
         sv.axis  = NSLayoutConstraint.Axis.vertical
-        sv.distribution  = UIStackView.Distribution.equalSpacing
+        sv.distribution  = UIStackView.Distribution.fillEqually
         sv.alignment = UIStackView.Alignment.center
         sv.spacing   = 2.0
         return sv
@@ -373,6 +375,7 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         var label = UILabel()
         label.text = "Medical Information"
         label.tintColor = UIColor.black
+          label.numberOfLines = 0
         label.font = UIFont.boldSystemFont(ofSize: 30)
         //  label.font = UIFont (name: "Rockwell-Bold", size: 30)
         label.backgroundColor = UIColor.white
@@ -381,10 +384,9 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
     }()
     let titleLabel : UILabel = {
         var label = UILabel()
-        label.text = "We need some of your medical information \n in order to help you in emergency!"
-        label.numberOfLines = 2
+        label.text = "We need some of your medical information in order to help you in emergency!"
+        label.numberOfLines = 0
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        //   label.backgroundColor = UIColor.gray
         label.textAlignment = .center
         label.textColor = UIColor.gray
         return label
@@ -393,7 +395,7 @@ class MedicalInfoOne: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSo
         var label = UILabel()
         label.text = "Please fill all info required.."
         label.font = UIFont.systemFont(ofSize: 16)
-        //   label.backgroundColor = UIColor.gray
+        label.numberOfLines = 0
         label.textColor = UIColor.gray
         label.textAlignment = .center
         return label

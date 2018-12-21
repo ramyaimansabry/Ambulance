@@ -24,6 +24,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     var isInEmergency: Bool = false
     var ResponserID = ""
     var centerLocation: CLLocationCoordinate2D?
+    var isRequestFinished: Bool = true
     
     func SetupNavBar(){
           self.navigationController?.isNavigationBarHidden = true
@@ -48,7 +49,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
          mapSetup()
          checkLocationServices()
          setupConstrains()
+        MyLocationButtonAction()
         
+       
        
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -105,8 +108,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
               self.isInEmergency = false
             return
         }
-        
-        //  self.isInEmergency = true
+         isRequestFinished = false
         
         let Longitude: String = String(EmergencyLocation.longitude)
         let Latitude: String = String(EmergencyLocation.latitude)
@@ -138,12 +140,14 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         let ref = Database.database().reference().child("waiting Emergencies").child(userID).child("AcceptedBy")
         
         ref.observe(.value, with: { (snapshot) in
+             if !snapshot.exists() { return }
             let answers: String = snapshot.value as! String
             
             
             _ = Timer.scheduledTimer(withTimeInterval: 15, repeats: false) {
                 (_) in
-                if !self.checkRequestTime(){
+                if !self.checkRequestTime() && self.isRequestFinished == false{
+                   
                      print("Time out")
                      ref.removeAllObservers()
                     self.handleTimeOut()
@@ -162,37 +166,41 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
                 let ref2 = Database.database().reference().child("drivers").child(self.ResponserID).child("Phone")
                 ref2.observe(.value, with: { (snapshot) in
+                     if !snapshot.exists() { return }
                     self.driverPhoneNumber = snapshot.value as! String
                     print(self.driverPhoneNumber)
-                   // ref2.removeAllObservers()
+                    ref2.removeAllObservers()
                 }, withCancel: nil)
                 
                 
                         DispatchQueue.main.async {
                             self.stopAnimating()
                             self.fourthView.show()
+                            
                            // ref.removeAllObservers()
                         }
+                
                      self.readResponserinformation()
+                ref.removeAllObservers()
                   }
         }, withCancel: nil)
     }
 
     
-    let DriverLocation33 = Location()
+   
 
     func readResponserinformation(){
-        
-         let userID = (Auth.auth().currentUser?.uid)!
+       
+        let userID = (Auth.auth().currentUser?.uid)!
         let ref2 = Database.database().reference().child("waiting Emergencies").child(userID).child("DriverLongitude")
        // ref2.keepSynced(true)
         ref2.observe(.value, with: { (snapshot) in
             if !snapshot.exists() { return }
-            print("**********************")
-            print(snapshot)
-            print("**********************")
-            
-            
+     
+            if self.isRequestFinished {
+                ref2.removeAllObservers()
+                return
+            }
             guard let Dlongitude: String = snapshot.value as? String else {
                 print("Errorrrrrr")
                 return
@@ -238,12 +246,28 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         let userID = (Auth.auth().currentUser?.uid)!
         let ref2 = Database.database().reference().child("waiting Emergencies").child(userID)
         ref2.removeValue()
+        ref2.removeAllObservers()
     }
+   
     
     func callAcceptedDriver(){
         guard let number = URL(string: "tel://\(driverPhoneNumber)") else { return }
         UIApplication.shared.open(number)
          print("Call Driver Function Called", number)
+    }
+    func finishRequest(){
+        let userID = (Auth.auth().currentUser?.uid)!
+        let ref2 = Database.database().reference().child("waiting Emergencies").child(userID)
+        ref2.removeValue()
+        ref2.removeAllObservers()
+        
+        isRequestFinished = true
+        isInEmergency = false
+        fourthView.hide()
+        setViewToDefault()
+        mapView.clear()
+        MyLocationButtonAction()
+        
     }
     @objc func MenuButtonAction(){
         // menu stuff
@@ -296,19 +320,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
 
     }
     
-    func share(message: String, link: String) {
-        if let link = NSURL(string: link) {
-            let objectsToShare = [message,link] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
-        }
-    }
+
     func ReferFriends(){
-  
-        
-        share(message: "Try now #Ambulance app - the app that help you requesting ambulance in emergency!", link: "")
-        
-        
+        self.openShareDilog(with: self)
     }
     @objc func backButtonAction(){
         setViewToDefault()
@@ -378,11 +392,10 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     @objc func MyLocationButtonAction(){
         locationManager.startUpdatingLocation()
         guard let Lat = UserDefaults.standard.value(forKey: "LAT") as? CLLocationDegrees else{
-            SCLAlertView().showError("Error", subTitle: "Cant get your location!")
+           // SCLAlertView().showError("Error", subTitle: "Cant get your location!")
             return
         }
         guard let Long = UserDefaults.standard.value(forKey: "LON") as? CLLocationDegrees else{
-            SCLAlertView().showError("Error", subTitle: "Cant get your location!")
             return
         }
          let sourceCoordinate = CLLocation(latitude: Lat, longitude: Long)
@@ -719,17 +732,3 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     }()
     
 }
-extension String
-{
-    /// EZSE: Converts String to Double
-    public func toDouble() -> Double?
-    {
-        if let num = NumberFormatter().number(from: self) {
-            return num.doubleValue
-        } else {
-            return nil
-        }
-    }
-}
-
-

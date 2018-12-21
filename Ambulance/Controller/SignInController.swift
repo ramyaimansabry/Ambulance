@@ -116,15 +116,8 @@ class SignInController: UIViewController,UITextFieldDelegate {
         view.addSubview(stackView3)
         view.addSubview(stackView4)
         
-        backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 30, bottom: 0, right: 0),size: CGSize(width: 35, height: 35))
-        
-        
-         stackView4.anchor(top: backButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 20, right: 0))
-        
-        
         stackView3.addArrangedSubview(EmailTextField)
         stackView3.addArrangedSubview(PasswordTextField)
-     //   stackView3.addArrangedSubview(SignInButton)
         
         stackView2.addArrangedSubview(LogInLabel)
         stackView2.addArrangedSubview(IconImage)
@@ -133,10 +126,15 @@ class SignInController: UIViewController,UITextFieldDelegate {
         stackView1.addArrangedSubview(titleLabel)
         stackView1.addArrangedSubview(subTitleLabel)
         
-        
         stackView4.addArrangedSubview(stackView2)
         stackView4.addArrangedSubview(stackView3)
         stackView4.addArrangedSubview(SignInButton)
+        
+        backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 30, bottom: 0, right: 0),size: CGSize(width: 35, height: 35))
+        
+        
+        stackView4.anchor(top: backButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 20, right: 0))
+        
         
           stackView3.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 0))
         
@@ -226,7 +224,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
     let titleLabel : UILabel = {
         var label = UILabel()
         label.text = "Welcome Back!"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         //   label.backgroundColor = UIColor.gray
         label.textAlignment = .center
          label.numberOfLines = 0
@@ -236,7 +234,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
     let subTitleLabel : UILabel = {
         var label = UILabel()
         label.text = "Login to continue using Ambulance"
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 14)
         //   label.backgroundColor = UIColor.gray
          label.numberOfLines = 0
         label.textColor = UIColor.gray
@@ -256,8 +254,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
         label.text = "Signin"
          label.numberOfLines = 0
         label.tintColor = UIColor.black
-        label.font = UIFont.boldSystemFont(ofSize: 30)
-        //  label.font = UIFont (name: "Rockwell-Bold", size: 30)
+        label.font = UIFont.boldSystemFont(ofSize: 27)
         label.backgroundColor = UIColor.white
         label.textAlignment = .center
         return label

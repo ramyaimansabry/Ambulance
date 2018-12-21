@@ -29,9 +29,9 @@
 		2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D19433421B2FB130054556C /* MedicalInfoOne.swift */; };
 		2D41C53021B4664C0073BF90 /* HomeVCViewInfoOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D41C52F21B4664C0073BF90 /* HomeVCViewInfoOne.swift */; };
 		2D41C53221B48DF90073BF90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D41C53121B48DF90073BF90 /* Assets.xcassets */; };
+		2D59CC6F21CD5E8700E6217B /* MedicalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59CC6E21CD5E8700E6217B /* MedicalInformation.swift */; };
 		2DAFFE8B21C2F93F00D53962 /* DarkStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DAFFE8A21C2F93F00D53962 /* DarkStyle.json */; };
 		2DAFFE8D21C2FFF300D53962 /* LightStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DAFFE8C21C2FFF300D53962 /* LightStyle.json */; };
-		2DAFFE8F21C3F4D100D53962 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFFE8E21C3F4D100D53962 /* Location.swift */; };
 		5D56D64A1B8BDDEF2D2C2CFC /* Pods_Ambulance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12960EC0FA51D63CDD32103C /* Pods_Ambulance.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,9 +62,9 @@
 		2D1A211E21C6C3C000E8EA48 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2D41C52F21B4664C0073BF90 /* HomeVCViewInfoOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCViewInfoOne.swift; sourceTree = "<group>"; };
 		2D41C53121B48DF90073BF90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2D59CC6E21CD5E8700E6217B /* MedicalInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalInformation.swift; sourceTree = "<group>"; };
 		2DAFFE8A21C2F93F00D53962 /* DarkStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DarkStyle.json; sourceTree = "<group>"; };
 		2DAFFE8C21C2FFF300D53962 /* LightStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LightStyle.json; sourceTree = "<group>"; };
-		2DAFFE8E21C3F4D100D53962 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		F2BFF1C54A7C2788AC60CAE2 /* Pods-Ambulance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ambulance.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance.release.xcconfig"; sourceTree = "<group>"; };
 		F897BDC490A1D6BE3F9DA40C /* Pods-Ambulance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ambulance.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				2D04CFE821BD2A1E008BFA9F /* MenuRow.swift */,
-				2DAFFE8E21C3F4D100D53962 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,6 +163,7 @@
 				2D04CFF021BED844008BFA9F /* EditProfileController.swift */,
 				2D04CFF221BFD7C9008BFA9F /* ChanagePasswordController.swift */,
 				2D04CFEC21BD4C51008BFA9F /* EditMedicalInfoController.swift */,
+				2D59CC6E21CD5E8700E6217B /* MedicalInformation.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -368,11 +368,11 @@
 				2D19432F21AEB8330054556C /* HomeVC.swift in Sources */,
 				2D04CFF121BED844008BFA9F /* EditProfileController.swift in Sources */,
 				2D04CFF321BFD7C9008BFA9F /* ChanagePasswordController.swift in Sources */,
+				2D59CC6F21CD5E8700E6217B /* MedicalInformation.swift in Sources */,
 				2D04CFE621BC4DEE008BFA9F /* LeftSideMenuController.swift in Sources */,
 				2D0D834621B328DB00968724 /* MedicalInfoTwo.swift in Sources */,
 				2D19433521B2FB130054556C /* MedicalInfoOne.swift in Sources */,
 				2D04CFDE21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift in Sources */,
-				2DAFFE8F21C3F4D100D53962 /* Location.swift in Sources */,
 				2D04CFED21BD4C51008BFA9F /* EditMedicalInfoController.swift in Sources */,
 				2D19432D21AEB7EA0054556C /* SignUpController.swift in Sources */,
 				2D04CFE021BC02A4008BFA9F /* HomeCVViewInfoThree.swift in Sources */,

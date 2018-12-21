@@ -187,24 +187,27 @@ class MedicalInfoTwo: UIViewController {
         label.backgroundColor = UIColor.white
         label.textColor = UIColor.darkGray
         label.textAlignment = .center
+        label.numberOfLines = 0
         return label
     }()
     let SecandQuestionLabel : UILabel = {
         var label = UILabel()
-        label.text = "Do you had any surgery before?"
+        label.text = "Have you did any surgery before?"
         label.tintColor = UIColor.black
         label.textColor = UIColor.darkGray
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.backgroundColor = UIColor.white
         label.textAlignment = .center
+        label.numberOfLines = 0
         return label
     }()
     let ThirdQuestionLabel : UILabel = {
         var label = UILabel()
         label.text = "Any notes about your overall health condition?"
         label.tintColor = UIColor.black
+        label.numberOfLines = 0
         label.backgroundColor = UIColor.white
-         label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = UIColor.darkGray
         label.textAlignment = .center
         return label
@@ -248,6 +251,7 @@ class MedicalInfoTwo: UIViewController {
     let LogInLabel : UILabel = {
         var label = UILabel()
         label.text = "Medical Information"
+        label.numberOfLines = 0
         label.tintColor = UIColor.black
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.backgroundColor = UIColor.white
