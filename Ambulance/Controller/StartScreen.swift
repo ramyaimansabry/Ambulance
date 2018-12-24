@@ -27,10 +27,13 @@ class StartScreen: UINavigationController {
                  perform(#selector(showMedicalInfo), with: nil, afterDelay: 0.01)
             }
         }
-       
-       
-        else {                                                            // 0.01
-            perform(#selector(showLoginComponent), with: nil, afterDelay: 0.01)
+        else {
+            if isFirstLogin() {
+               perform(#selector(showLoginComponent), with: nil, afterDelay: 0.01)
+            }
+            else{
+                 perform(#selector(showOnBoardingScreens), with: nil, afterDelay: 0.01)
+            }
         }
     }
     
@@ -42,6 +45,11 @@ class StartScreen: UINavigationController {
     
     @objc func showLoginComponent(){
         let controller = LoginSplashScreen()
+        present(controller, animated: true, completion: nil)
+    }
+    
+    @objc func showOnBoardingScreens(){
+        let controller = OnBoardingScreens()
         present(controller, animated: true, completion: nil)
     }
     
@@ -61,6 +69,15 @@ class StartScreen: UINavigationController {
             return false
         }
     }
- 
+    fileprivate func isFirstLogin() -> Bool {
+        if UserDefaults.standard.bool(forKey: "FirstLoginDone") {
+        return true
+       }
+        else{
+           return false
+         }
+   }
+    
+    
 }
 

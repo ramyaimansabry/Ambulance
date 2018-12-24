@@ -76,6 +76,8 @@ class SignUpController: UIViewController,UITextFieldDelegate {
                 UserDefaults.standard.synchronize()
                 UserDefaults.standard.set(false, forKey: "AddMedicalInfo")
                 UserDefaults.standard.synchronize()
+                UserDefaults.standard.set(true, forKey: "FirstLogin")
+                UserDefaults.standard.synchronize()
                 let new = MedicalInformation()
                 self.navigationController?.pushViewController(new, animated: true)
             })
