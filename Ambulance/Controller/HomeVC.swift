@@ -37,7 +37,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
         SetupNavBar()
         
-        SVProgressHUD.setForegroundColor(UIColor.red)
+        SVProgressHUD.setForegroundColor(UIColor.newRed())
         SVProgressHUD.setBackgroundColor(UIColor.clear)
         
         // if user not logged in
@@ -449,7 +449,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     
     func SetupLoadingActivity(){
         NVActivityIndicatorView.DEFAULT_TYPE = .ballScaleRippleMultiple
-        NVActivityIndicatorView.DEFAULT_COLOR = UIColor.red
+        NVActivityIndicatorView.DEFAULT_COLOR = UIColor.newRed()
         NVActivityIndicatorView.DEFAULT_BLOCKER_SIZE = CGSize(width: 250, height: 250)
     }
     
@@ -499,7 +499,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         case .authorizedWhenInUse:
             // do gps current location work
             locationManager.startUpdatingLocation()
-            
+        
             break
         case .denied:
             SCLAlertView().showError("Error", subTitle: "Location denied!, Check location permission")
@@ -528,7 +528,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         mapView.delegate = self
         mapView.isHidden = false
         mapView.settings.myLocationButton = false
-        MyLocationButtonAction()
  
     }
     
@@ -634,7 +633,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         let path = GMSPath(fromEncodedPath: polyStr)
         let polyline = GMSPolyline(path: path)
         polyline.strokeWidth = 4.0
-        polyline.strokeColor = UIColor.red
+        polyline.strokeColor = UIColor.newRed()
         polyline.map = mapView // Your map view
     }
 
@@ -692,7 +691,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         button.setTitle("Request Ambulance", for: .normal)
         button.frame.size = CGSize(width: 80, height: 100)
         button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor.red
+        button.backgroundColor = UIColor.newRed()
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage(named: ""), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit

@@ -10,7 +10,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-         SVProgressHUD.setForegroundColor(UIColor.red)
+         SVProgressHUD.setForegroundColor(UIColor.newRed())
         setupViews()
         ShowVisibleButton()
         SetupComponentDelegetes()
@@ -149,6 +149,9 @@ class SignInController: UIViewController,UITextFieldDelegate {
         
   SignInButton.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
         
+        
+        IconImage.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,size: CGSize(width: 100, height: 100))
+        
     }
     
     
@@ -216,7 +219,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
         button.setTitle("log In", for: .normal)
         button.frame.size = CGSize(width: 80, height: 100)
         button.layer.cornerRadius = 5
-        button.backgroundColor = UIColor.red
+        button.backgroundColor = UIColor.newRed()
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage(named: ""), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
@@ -227,7 +230,6 @@ class SignInController: UIViewController,UITextFieldDelegate {
         var label = UILabel()
         label.text = "Welcome Back!"
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        //   label.backgroundColor = UIColor.gray
         label.textAlignment = .center
          label.numberOfLines = 0
         label.textColor = UIColor.gray
@@ -245,7 +247,7 @@ class SignInController: UIViewController,UITextFieldDelegate {
     }()
     let IconImage : UIImageView = {
         var image = UIImageView()
-        image.image = UIImage(named: "ambulance")
+        image.image = UIImage(named: "MainAppICON")
         image.layer.cornerRadius = 1
         image.layer.masksToBounds = true
         image.contentMode = .scaleAspectFit
@@ -268,11 +270,11 @@ class SignInController: UIViewController,UITextFieldDelegate {
         tx.title = "Email"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.emailAddress
@@ -287,11 +289,11 @@ class SignInController: UIViewController,UITextFieldDelegate {
         tx.title = "Password"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default

@@ -128,7 +128,7 @@ class OnBoardingScreens: UIViewController,UICollectionViewDataSource,UICollectio
         let pc = UIPageControl()
         pc.pageIndicatorTintColor = UIColor.lightGray
         pc.numberOfPages = 1
-        pc.currentPageIndicatorTintColor = UIColor.red
+        pc.currentPageIndicatorTintColor = UIColor.newRed()
         pc.isUserInteractionEnabled = false
         return pc
     }()
@@ -137,7 +137,7 @@ class OnBoardingScreens: UIViewController,UICollectionViewDataSource,UICollectio
         button.setTitle("Get Started", for: .normal)
         button.frame.size = CGSize(width: 80, height: 100)
         button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor.red
+        button.backgroundColor = UIColor.newRed()
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage(named: ""), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit

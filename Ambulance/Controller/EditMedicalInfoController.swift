@@ -523,11 +523,11 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         tx.title = "Date of Birth"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
@@ -542,11 +542,11 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         tx.title = "Weight"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.numberPad
@@ -561,11 +561,11 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         tx.title = "Height"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.numberPad
@@ -580,11 +580,11 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         tx.title = "Blood Type"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
@@ -599,11 +599,11 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         tx.title = "Sex"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
@@ -620,7 +620,7 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         button.layer.cornerRadius = 5
         button.backgroundColor = UIColor.white
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.red.cgColor
+        button.layer.borderColor = UIColor.newRed().cgColor
         button.setTitleColor(UIColor.red, for: .normal)
         button.addTarget(self, action: #selector(CancelButtonAction), for: .touchUpInside)
         return button
@@ -630,7 +630,7 @@ class EditMedicalInfoController: UIViewController,UITextViewDelegate ,UIPickerVi
         button.setTitle("Save", for: .normal)
         //     button.frame.size = CGSize(width: 100, height: 40)
         button.layer.cornerRadius = 5
-        button.backgroundColor = UIColor.red
+        button.backgroundColor = UIColor.newRed()
         button.setTitleColor(UIColor.white, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.isEnabled = false

@@ -304,7 +304,7 @@ class EditProfileController: UIViewController {
         button.layer.cornerRadius = 5
         button.backgroundColor = UIColor.white
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.red.cgColor
+        button.layer.borderColor = UIColor.newRed().cgColor
         button.setTitleColor(UIColor.red, for: .normal)
         button.addTarget(self, action: #selector(CancelButtonAction), for: .touchUpInside)
         return button
@@ -315,7 +315,7 @@ class EditProfileController: UIViewController {
         //     button.frame.size = CGSize(width: 100, height: 40)
         button.layer.cornerRadius = 5
         button.isEnabled = false
-        button.backgroundColor = UIColor.red
+        button.backgroundColor = UIColor.newRed()
         button.setTitleColor(UIColor.white, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(SaveButtonAction), for: .touchUpInside)
@@ -336,11 +336,11 @@ class EditProfileController: UIViewController {
         tx.title = "Email"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.emailAddress
@@ -356,11 +356,11 @@ class EditProfileController: UIViewController {
         tx.title = "Phone"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.numberPad
@@ -376,11 +376,11 @@ class EditProfileController: UIViewController {
         tx.title = "First Name"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
@@ -396,11 +396,11 @@ class EditProfileController: UIViewController {
         tx.title = "Last Name"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default

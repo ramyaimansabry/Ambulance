@@ -77,7 +77,5 @@ class StartScreen: UINavigationController {
            return false
          }
    }
-    
-    
 }
 

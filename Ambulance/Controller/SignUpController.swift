@@ -14,7 +14,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
          self.navigationController?.isNavigationBarHidden = true
-        SVProgressHUD.setForegroundColor(UIColor.red)
+        SVProgressHUD.setForegroundColor(UIColor.newRed())
 
         setupConstrains()
         SetupComponentDelegetes()
@@ -230,6 +230,9 @@ class SignUpController: UIViewController,UITextFieldDelegate {
          ConfirmPasswordTextField.anchor(top: nil, leading: stackView2.leadingAnchor, bottom: nil, trailing: stackView2.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 0))
         
         SignUpButton.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
+        
+        IconImage.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,size: CGSize(width: 100, height: 100))
+
     }
     
     
@@ -300,11 +303,11 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.title = "Email"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.emailAddress
@@ -319,11 +322,11 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.title = "Password"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.isSecureTextEntry = true
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
@@ -339,11 +342,11 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.title = "Confirm Password"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
          tx.isSecureTextEntry = true
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
@@ -359,11 +362,11 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.title = "Phone"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.numberPad
@@ -378,11 +381,11 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.title = "First Name"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
@@ -397,11 +400,11 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         tx.title = "Last Name"
         tx.lineHeight = 1.0
         tx.selectedLineHeight = 2.0
-        tx.tintColor = UIColor.red // the color of the blinking cursor
+        tx.tintColor = UIColor.newRed() // the color of the blinking cursor
         tx.textColor = UIColor.black
         tx.lineColor = UIColor.lightGray
-        tx.selectedTitleColor = UIColor.red
-        tx.selectedLineColor = UIColor.red
+        tx.selectedTitleColor = UIColor.newRed()
+        tx.selectedLineColor = UIColor.newRed()
         tx.font = UIFont(name: "FontAwesome", size: 15)
         tx.autocorrectionType = UITextAutocorrectionType.no
         tx.keyboardType = UIKeyboardType.default
@@ -430,7 +433,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
     }()
     let IconImage : UIImageView = {
         var image = UIImageView()
-        image.image = UIImage(named: "ambulance")
+        image.image = UIImage(named: "MainAppICON")
         image.layer.cornerRadius = 1
         image.layer.masksToBounds = true
         image.contentMode = .scaleAspectFit
@@ -453,7 +456,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         button.setTitle("Sign up", for: .normal)
         button.frame.size = CGSize(width: 80, height: 50)
         button.layer.cornerRadius = 5
-        button.backgroundColor = UIColor.red
+        button.backgroundColor = UIColor.newRed()
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIImage(named: ""), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit

@@ -43,7 +43,7 @@ class LoginSplashScreen: UIViewController{
         TitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         TitleLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         
-        IconImage.anchor(top: nil, leading: view.leadingAnchor, bottom: TitleLabel.topAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 15, bottom: 50, right: 15),size: CGSize(width: 110, height: 110))
+        IconImage.anchor(top: nil, leading: view.leadingAnchor, bottom: TitleLabel.topAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 15, bottom: 50, right: 15),size: CGSize(width: 100, height: 100))
         
     }
     
@@ -61,7 +61,7 @@ class LoginSplashScreen: UIViewController{
     }()
     let IconImage : UIImageView = {
         var image = UIImageView()
-        image.image = UIImage(named: "ambulance")
+        image.image = UIImage(named: "MainAppICON")
         image.layer.cornerRadius = 1
         image.layer.masksToBounds = true
         image.contentMode = .scaleAspectFit
@@ -74,8 +74,8 @@ class LoginSplashScreen: UIViewController{
         button.layer.cornerRadius = 5
         button.backgroundColor = UIColor.white
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.red.cgColor
-        button.setTitleColor(UIColor.red, for: .normal)
+        button.layer.borderColor = UIColor.newRed().cgColor
+        button.setTitleColor(UIColor.newRed(), for: .normal)
         button.setBackgroundImage(UIImage(named: ""), for: .normal)
         button.addTarget(self, action: #selector(SignInButtonAction), for: .touchUpInside)
         return button
@@ -87,8 +87,8 @@ class LoginSplashScreen: UIViewController{
         button.layer.cornerRadius = 5
         button.backgroundColor = UIColor.white
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.red.cgColor
-        button.setTitleColor(UIColor.red, for: .normal)
+        button.layer.borderColor = UIColor.newRed().cgColor
+        button.setTitleColor(UIColor.newRed(), for: .normal)
         button.setBackgroundImage(UIImage(named: ""), for: .normal)
         button.addTarget(self, action: #selector(SignUpButtonAction), for: .touchUpInside)
         return button
