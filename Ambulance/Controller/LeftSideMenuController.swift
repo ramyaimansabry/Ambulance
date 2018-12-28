@@ -33,10 +33,13 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
     let Row5 = Row(title: "Call 123", imageName: "PhoneCallICON")
     let Row6 = Row(title: "Refer your friends", imageName: "ShareICON")
     let Row7 = Row(title: "Medical information", imageName: "MedicalInfo2ICON")
+    let Row8 = Row(title: "Privacy policy", imageName: "MedicalInfo2ICON")
+
     rows.append(Row1)
     rows.append(Row7)
     rows.append(Row5)
     rows.append(Row6)
+    rows.append(Row8)
     rows.append(Row3)
     }
     func show(){
@@ -145,6 +148,10 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
               self.hide()
             break
         case 4:
+            self.hide()
+            self.homeController?.showPrivacyPolicy()
+            break
+        case 5:
             self.hide()
             self.homeController?.logMeOut()
             break

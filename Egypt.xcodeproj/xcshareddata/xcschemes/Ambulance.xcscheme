@@ -17,7 +17,7 @@
                BlueprintIdentifier = "2D19430B21AEB51A0054556C"
                BuildableName = "Ambulance.app"
                BlueprintName = "Ambulance"
-               ReferencedContainer = "container:Ambulance.xcodeproj">
+               ReferencedContainer = "container:Egypt.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "2D19430B21AEB51A0054556C"
             BuildableName = "Ambulance.app"
             BlueprintName = "Ambulance"
-            ReferencedContainer = "container:Ambulance.xcodeproj">
+            ReferencedContainer = "container:Egypt.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "2D19430B21AEB51A0054556C"
             BuildableName = "Ambulance.app"
             BlueprintName = "Ambulance"
-            ReferencedContainer = "container:Ambulance.xcodeproj">
+            ReferencedContainer = "container:Egypt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "2D19430B21AEB51A0054556C"
             BuildableName = "Ambulance.app"
             BlueprintName = "Ambulance"
-            ReferencedContainer = "container:Ambulance.xcodeproj">
+            ReferencedContainer = "container:Egypt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

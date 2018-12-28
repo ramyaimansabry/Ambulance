@@ -56,7 +56,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         if isInEmergency {
             fourthView.show()
         }
@@ -318,6 +317,11 @@ class HomeVC: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate, NV
         guard let number = URL(string: "tel://123") else { return }
         UIApplication.shared.open(number)
 
+    }
+    func showPrivacyPolicy(){
+        if let url = URL(string: "https://www.freeprivacypolicy.com/privacy/view/f62a5df902493617d295ff0c3dfedefb") {
+            UIApplication.shared.open(url, options: [:])
+        }
     }
     
 
