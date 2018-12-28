@@ -33,7 +33,7 @@ class LeftSideMenuController: NSObject,UICollectionViewDataSource,UICollectionVi
     let Row5 = Row(title: "Call 123", imageName: "PhoneCallICON")
     let Row6 = Row(title: "Refer your friends", imageName: "ShareICON")
     let Row7 = Row(title: "Medical information", imageName: "MedicalInfo2ICON")
-    let Row8 = Row(title: "Privacy policy", imageName: "MedicalInfo2ICON")
+    let Row8 = Row(title: "Privacy policy", imageName: "PrivacyICON")
 
     rows.append(Row1)
     rows.append(Row7)
