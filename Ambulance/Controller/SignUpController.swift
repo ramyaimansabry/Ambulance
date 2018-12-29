@@ -19,6 +19,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         setupConstrains()
         SetupComponentDelegetes()
         ShowVisibleButton()
+        HandleTermslabel()
     }
     func SetupComponentDelegetes(){
         NameTextField.delegate = self
@@ -170,7 +171,39 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         }
         secure = !secure
     }
-
+  
+    func HandleTermslabel(){
+        TermsLabel.text = "By signing up you agree to our Terms & Conditions and Privacy Policy"
+        let text = (TermsLabel.text)!
+        let underlineAttriString = NSMutableAttributedString(string: text)
+        let range1 = (text as NSString).range(of: "Terms & Conditions")
+        underlineAttriString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range1)
+        let range2 = (text as NSString).range(of: "Privacy Policy")
+        underlineAttriString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range2)
+        TermsLabel.attributedText = underlineAttriString
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapLabel(_:)))
+        TermsLabel.addGestureRecognizer(tap)
+        TermsLabel.isUserInteractionEnabled = true
+    }
+    
+    @objc func tapLabel(_ sender: UITapGestureRecognizer) {
+        let text = (TermsLabel.text)!
+        let termsRange = (text as NSString).range(of: "Terms & Conditions")
+        let privacyRange = (text as NSString).range(of: "Privacy Policy")
+        
+        if sender.didTapAttributedTextInLabel(label: TermsLabel, inRange: termsRange) {
+            if let url = URL(string: "https://www.websitepolicies.com/policies/view/4DqVouJR") {
+                UIApplication.shared.open(url, options: [:])
+            }
+        } else if sender.didTapAttributedTextInLabel(label: TermsLabel, inRange: privacyRange) {
+            if let url = URL(string: "https://www.freeprivacypolicy.com/privacy/view/f62a5df902493617d295ff0c3dfedefb") {
+                UIApplication.shared.open(url, options: [:])
+            }
+        } else {
+            print("Tapped none")
+        }
+    }
     
     //   MARK :- Constrains
     /**********************************************************************************************/
@@ -194,7 +227,11 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         
         stackView4.addArrangedSubview(stackView3)
         stackView4.addArrangedSubview(scrollView)
+        stackView4.addArrangedSubview(TermsLabel)
         stackView4.addArrangedSubview(SignUpButton)
+        
+        
+        
         
         stackView2.addArrangedSubview(stackView5)
         stackView2.addArrangedSubview(EmailTextField)
@@ -212,7 +249,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
             stackView3.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor,padding: .init(top: 0, left: 0, bottom: 0, right: 0) )
         
         
-          scrollView.anchor(top: stackView3.bottomAnchor, leading: stackView4.leadingAnchor, bottom: SignUpButton.topAnchor, trailing: stackView4.trailingAnchor, padding: .init(top: 15, left: 20, bottom: 15, right: 20))
+          scrollView.anchor(top: stackView3.bottomAnchor, leading: stackView4.leadingAnchor, bottom: TermsLabel.topAnchor, trailing: stackView4.trailingAnchor, padding: .init(top: 15, left: 20, bottom: 10, right: 20))
          scrollView.addSubview(stackView2)
       
         
@@ -232,6 +269,10 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         SignUpButton.anchor(top: nil, leading: stackView4.leadingAnchor, bottom: nil, trailing: stackView4.trailingAnchor, padding: .init(top: 0, left: 30, bottom: 0, right: 30),size: CGSize(width: 0, height: 50))
         
         IconImage.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,size: CGSize(width: 100, height: 100))
+        
+        
+      
+        
 
     }
     
@@ -287,6 +328,7 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         sv.spacing  = 20
         return sv
     }()
+   
     let LogInLabel : UILabel = {
         var label = UILabel()
         label.text = "Signup"
@@ -463,7 +505,14 @@ class SignUpController: UIViewController,UITextFieldDelegate {
         button.addTarget(self, action: #selector(SignUpButtonAction), for: .touchUpInside)
         return button
     }()
-    
-    
+   
+    let TermsLabel: UILabel = {
+        let titleL = UILabel()
+        titleL.numberOfLines = 0
+        titleL.font = UIFont.systemFont(ofSize: 13)
+        titleL.textColor = UIColor.black
+        titleL.textAlignment = .center
+        return titleL
+    }()
 }
 

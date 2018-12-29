@@ -34,6 +34,7 @@
 		2D59CC7721D4069400E6217B /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59CC7621D4069400E6217B /* UIViewController.swift */; };
 		2D59CC7921D406D500E6217B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59CC7821D406D500E6217B /* String.swift */; };
 		2D59CC7B21D4073000E6217B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59CC7A21D4073000E6217B /* UIColor.swift */; };
+		2D59CC7F21D8039700E6217B /* UITapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59CC7E21D8039700E6217B /* UITapGestureRecognizer.swift */; };
 		2DAFFE8B21C2F93F00D53962 /* DarkStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DAFFE8A21C2F93F00D53962 /* DarkStyle.json */; };
 		2DAFFE8D21C2FFF300D53962 /* LightStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DAFFE8C21C2FFF300D53962 /* LightStyle.json */; };
 		5D56D64A1B8BDDEF2D2C2CFC /* Pods_Ambulance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12960EC0FA51D63CDD32103C /* Pods_Ambulance.framework */; };
@@ -71,6 +72,7 @@
 		2D59CC7621D4069400E6217B /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		2D59CC7821D406D500E6217B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		2D59CC7A21D4073000E6217B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		2D59CC7E21D8039700E6217B /* UITapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITapGestureRecognizer.swift; sourceTree = "<group>"; };
 		2DAFFE8A21C2F93F00D53962 /* DarkStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DarkStyle.json; sourceTree = "<group>"; };
 		2DAFFE8C21C2FFF300D53962 /* LightStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LightStyle.json; sourceTree = "<group>"; };
 		F2BFF1C54A7C2788AC60CAE2 /* Pods-Ambulance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ambulance.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ambulance/Pods-Ambulance.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				2D59CC7621D4069400E6217B /* UIViewController.swift */,
 				2D59CC7821D406D500E6217B /* String.swift */,
 				2D59CC7A21D4073000E6217B /* UIColor.swift */,
+				2D59CC7E21D8039700E6217B /* UITapGestureRecognizer.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				2D04CFDE21BAEDAE008BFA9F /* HomeVCViewInfoTwo.swift in Sources */,
 				2D59CC7721D4069400E6217B /* UIViewController.swift in Sources */,
 				2D04CFED21BD4C51008BFA9F /* EditMedicalInfoController.swift in Sources */,
+				2D59CC7F21D8039700E6217B /* UITapGestureRecognizer.swift in Sources */,
 				2D19432D21AEB7EA0054556C /* SignUpController.swift in Sources */,
 				2D04CFE021BC02A4008BFA9F /* HomeCVViewInfoThree.swift in Sources */,
 				2D19431021AEB51B0054556C /* AppDelegate.swift in Sources */,
